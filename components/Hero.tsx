@@ -1,214 +1,245 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   ArrowRight,
   ShieldCheck,
   Calculator,
-  Award,
-  Layers,
-  Sparkles,
+  ChevronLeft,
+  ChevronRight,
   PhoneCall,
   CheckCircle,
+  Layers,
 } from "lucide-react";
 
+const SLIDES = [
+  {
+    id: 1,
+    tag: "35+ Years of Construction Legacy",
+    title: "Your Trusted Partner for Quality Paving Work",
+    subtitle:
+      "Masakorala Paving offers durable, high-density CS1-graded paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
+    primaryCta: { text: "Calculate Project BOQ", href: "#calculator", icon: Calculator },
+    secondaryCta: { text: "Explore Pavers", href: "#products", icon: Layers },
+    badge: "SLS 1425 & ISO 9001:2015 Certified",
+    image: "/images/hero.jpg",
+  },
+  {
+    id: 2,
+    tag: "CS1 Industrial Heavy Traffic Rating",
+    title: "Heavy-Duty Interlock Blocks Engineered for 55+ MPa",
+    subtitle:
+      "Formulated with washed crushed granite and OPC 52.5N cement to withstand 40-ton laden container trucks, port logistics, and high-frequency commercial haulage.",
+    primaryCta: { text: "View Heavy-Duty 80mm", href: "#products", icon: Layers },
+    secondaryCta: { text: "Estimate Material", href: "#calculator", icon: Calculator },
+    badge: "55.0 MPa Compressive Destruction Tested",
+    image: "/images/uni-paver.jpg",
+  },
+  {
+    id: 3,
+    tag: "Eco-Permeable & Architectural Textures",
+    title: "Eco Grass Grids & Washed Sparkling Stone Finishes",
+    subtitle:
+      "Sustainable urban drainage systems (SuDS) that recharge natural groundwater tables combined with non-slip washed quartz aggregate paving for luxury beachfront resorts.",
+    primaryCta: { text: "Explore Eco Pavers", href: "#products", icon: Layers },
+    secondaryCta: { text: "Instant Estimate", href: "#calculator", icon: Calculator },
+    badge: "100% UV-Stable Synthetic Mineral Pigments",
+    image: "/images/grass-paver.jpg",
+  },
+];
+
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 8000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = SLIDES[currentSlide];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+  };
+
   return (
-    <section className="hero-section">
-      {/* Background Graphic & Photographic Imagery */}
-      <div className="hero-media-wrapper">
-        <Image
-          src="/images/hero.jpg"
-          alt="Luxury architectural villa paved with Masakorala interlocking pavers at dusk"
-          fill
-          priority
-          className="hero-bg-img"
-          sizes="100vw"
-        />
-        <div className="hero-gradient-overlay" />
+    <section className="hero-slider-section">
+      {/* Background Image with Dynamic Transitions */}
+      <div className="hero-bg-container">
+        {SLIDES.map((s, idx) => (
+          <div
+            key={s.id}
+            className={`hero-slide-media ${idx === currentSlide ? "active" : ""}`}
+          >
+            <Image
+              src={s.image}
+              alt={s.title}
+              fill
+              priority={idx === 0}
+              className="hero-slide-img"
+              sizes="100vw"
+            />
+          </div>
+        ))}
+        <div className="hero-overlay" />
       </div>
 
-      <div className="container hero-container">
-        <div className="hero-content">
-          {/* Top Pill */}
+      <div className="container hero-content-container">
+        <div className="hero-slide-content">
           <div className="hero-pill-badge">
             <span className="pill-dot animate-pulse-glow" />
-            <span className="pill-text">
-              CS1 Grade Interlocking Pavers & Infrastructure Systems
-            </span>
-            <span className="pill-tag">SLS 1425</span>
+            <span className="pill-text">{slide.tag}</span>
+            <span className="pill-tag">{slide.badge}</span>
           </div>
 
-          {/* Main Title */}
-          <h1 className="hero-title">
-            Engineered For Decades.
-            <br />
-            <span className="hero-title-highlight">Designed For Distinction.</span>
-          </h1>
+          <h1 className="hero-slider-title">{slide.title}</h1>
 
-          {/* Description */}
-          <p className="hero-subtitle">
-            Masakorala Holdings manufactures Sri Lanka&apos;s most resilient heavy-duty
-            interlocking pavers, permeable eco-grass blocks, and architectural washed stone.
-            Formulated to exceed 50 MPa compressive strength for container yards, commercial
-            plazas, and luxury estates.
-          </p>
+          <p className="hero-slider-desc">{slide.subtitle}</p>
 
-          {/* CTA Group */}
-          <div className="hero-cta-group">
-            <a href="#calculator" className="btn-primary hero-btn-main">
-              <Calculator size={18} />
-              <span>Instant Paving Calculator</span>
+          <div className="hero-actions-row">
+            <a href={slide.primaryCta.href} className="btn-primary hero-main-btn">
+              <slide.primaryCta.icon size={18} />
+              <span>{slide.primaryCta.text}</span>
               <ArrowRight size={18} />
             </a>
 
-            <a href="#products" className="btn-outline-light hero-btn-sec">
-              <Layers size={18} />
-              <span>Explore 2026 Collection</span>
+            <a href={slide.secondaryCta.href} className="btn-outline-light hero-sec-btn">
+              <slide.secondaryCta.icon size={18} />
+              <span>{slide.secondaryCta.text}</span>
             </a>
 
-            <a
-              href="tel:+94706972703"
-              className="btn-outline-light hero-btn-phone"
-              title="Call Technical Sales Direct"
-            >
-              <PhoneCall size={18} />
-              <span>+94 70 697 2703</span>
+            <a href="tel:+94706972703" className="hero-hotline-pill">
+              <PhoneCall size={16} />
+              <span>(+94) 70 697 2703</span>
             </a>
           </div>
 
-          {/* Key Advantages Bullet Chips */}
-          <div className="hero-trust-chips">
-            <div className="trust-chip">
-              <CheckCircle size={15} className="chip-icon" />
-              <span>50+ MPa Concrete Strength</span>
-            </div>
-            <div className="trust-chip">
-              <CheckCircle size={15} className="chip-icon" />
-              <span>Hydraulic High-Density Compaction</span>
-            </div>
-            <div className="trust-chip">
-              <CheckCircle size={15} className="chip-icon" />
-              <span>Zero-Efflorescence Color Fastness</span>
-            </div>
-            <div className="trust-chip">
-              <CheckCircle size={15} className="chip-icon" />
-              <span>Islandwide Site Delivery</span>
-            </div>
+          {/* Key Advantages Chips */}
+          <div className="hero-chips-row">
+            <span className="h-chip">
+              <CheckCircle size={14} className="text-emerald" /> 55+ MPa Load Bearing
+            </span>
+            <span className="h-chip">
+              <CheckCircle size={14} className="text-emerald" /> In-House SLS Lab Rigor
+            </span>
+            <span className="h-chip">
+              <CheckCircle size={14} className="text-emerald" /> Turnkey Laying & Leveling
+            </span>
+            <span className="h-chip">
+              <CheckCircle size={14} className="text-emerald" /> Crane-Truck Delivery
+            </span>
           </div>
         </div>
 
-        {/* Live Metrics Showcase Card */}
-        <div className="hero-metrics-grid">
-          <div className="hero-metric-card glass-panel-dark">
-            <div className="metric-header">
-              <span className="metric-number">35+</span>
-              <span className="metric-symbol">Years</span>
-            </div>
-            <div className="metric-title">Manufacturing Heritage</div>
-            <p className="metric-desc">
-              Pioneering precast paving excellence in Sri Lanka since 1991.
-            </p>
+        {/* Carousel Slide Indicators & Navigation Arrows */}
+        <div className="hero-controls-bar">
+          <div className="slide-dots">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setCurrentSlide(i)}
+                className={`slide-dot ${i === currentSlide ? "active" : ""}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
           </div>
 
-          <div className="hero-metric-card glass-panel-dark">
-            <div className="metric-header">
-              <span className="metric-number">14M+</span>
-              <span className="metric-symbol">Sq.Ft</span>
-            </div>
-            <div className="metric-title">Paved Across Sri Lanka</div>
-            <p className="metric-desc">
-              From expressway interchanges to five-star resort beachfronts.
-            </p>
-          </div>
-
-          <div className="hero-metric-card glass-panel-dark">
-            <div className="metric-header">
-              <span className="metric-number">55+</span>
-              <span className="metric-symbol">MPa</span>
-            </div>
-            <div className="metric-title">Heavy-Duty Rating</div>
-            <p className="metric-desc">
-              Engineered to endure 40-ton container trucks and industrial traffic.
-            </p>
-          </div>
-
-          <div className="hero-metric-card glass-panel-dark">
-            <div className="metric-header">
-              <span className="metric-number">100%</span>
-              <span className="metric-symbol">SLS</span>
-            </div>
-            <div className="metric-title">Certified Batch Rigor</div>
-            <p className="metric-desc">
-              SLS 1425 verified and ISO 9001:2015 precision quality audit.
-            </p>
+          <div className="slide-arrows">
+            <button
+              type="button"
+              onClick={prevSlide}
+              className="slider-arrow-btn"
+              aria-label="Previous Slide"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              onClick={nextSlide}
+              className="slider-arrow-btn"
+              aria-label="Next Slide"
+            >
+              <ChevronRight size={22} />
+            </button>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .hero-section {
+        .hero-slider-section {
           position: relative;
-          min-height: 92vh;
+          min-height: 85vh;
           display: flex;
           align-items: center;
-          padding: 80px 0 60px;
+          padding: 90px 0 60px;
           overflow: hidden;
           background: #0c0e12;
           color: #ffffff;
         }
 
-        .hero-media-wrapper {
+        .hero-bg-container {
           position: absolute;
           inset: 0;
           z-index: 1;
         }
 
-        .hero-bg-img {
-          object-fit: cover;
-          object-position: center 30%;
-          filter: brightness(0.72) contrast(1.08);
-          transform: scale(1.02);
-          transition: transform 10s ease;
+        .hero-slide-media {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .hero-gradient-overlay {
+        .hero-slide-media.active {
+          opacity: 1;
+        }
+
+        .hero-slide-img {
+          object-fit: cover;
+          object-position: center;
+          filter: brightness(0.68) contrast(1.05);
+        }
+
+        .hero-overlay {
           position: absolute;
           inset: 0;
           background: linear-gradient(
             180deg,
             rgba(12, 14, 18, 0.82) 0%,
-            rgba(12, 14, 18, 0.6) 40%,
+            rgba(12, 14, 18, 0.55) 50%,
             rgba(12, 14, 18, 0.95) 100%
-          ),
-          radial-gradient(
-            circle at 20% 40%,
-            rgba(24, 152, 66, 0.18) 0%,
-            transparent 60%
           );
+          z-index: 2;
         }
 
-        .hero-container {
+        .hero-content-container {
           position: relative;
-          z-index: 2;
+          z-index: 3;
           display: flex;
           flex-direction: column;
-          gap: 56px;
+          gap: 48px;
         }
 
-        .hero-content {
+        .hero-slide-content {
           max-width: 860px;
+          animation: fadeIn 0.4s ease;
         }
 
-        /* Pill Badge */
         .hero-pill-badge {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.12);
           backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           padding: 6px 14px;
           border-radius: var(--radius-full);
           margin-bottom: 24px;
@@ -222,50 +253,41 @@ export default function Hero() {
         }
 
         .pill-text {
-          font-size: 0.82rem;
+          font-size: 0.84rem;
           font-weight: 600;
           color: #f1f5f9;
-          letter-spacing: 0.02em;
         }
 
         .pill-tag {
           background: var(--primary-green);
           color: #ffffff;
-          font-size: 0.7rem;
+          font-size: 0.72rem;
           font-weight: 700;
-          padding: 2px 7px;
+          padding: 3px 8px;
           border-radius: var(--radius-full);
         }
 
-        /* Typography */
-        .hero-title {
+        .hero-slider-title {
           font-family: var(--font-heading);
-          font-size: 3.8rem;
+          font-size: 3.5rem;
           font-weight: 800;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
-          margin-bottom: 24px;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+          line-height: 1.15;
+          letter-spacing: -0.025em;
+          color: #ffffff;
+          margin-bottom: 22px;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
-        .hero-title-highlight {
-          background: linear-gradient(135deg, #4ade80 0%, #22c55e 50%, #86efac 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          display: inline-block;
-        }
-
-        .hero-subtitle {
-          font-size: 1.2rem;
+        .hero-slider-desc {
+          font-size: 1.15rem;
           line-height: 1.7;
-          color: #cbd5e1;
-          max-width: 720px;
-          margin-bottom: 36px;
+          color: #e2e8f0;
+          max-width: 740px;
+          margin-bottom: 34px;
           text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         }
 
-        /* CTA */
-        .hero-cta-group {
+        .hero-actions-row {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
@@ -273,35 +295,42 @@ export default function Hero() {
           margin-bottom: 32px;
         }
 
-        .hero-btn-main {
-          padding: 16px 30px;
-          font-size: 1.05rem;
+        .hero-main-btn {
+          padding: 16px 28px;
+          font-size: 1.02rem;
         }
 
-        .hero-btn-sec {
+        .hero-sec-btn {
           padding: 16px 26px;
         }
 
-        .hero-btn-phone {
-          padding: 16px 22px;
-          border-color: rgba(74, 222, 128, 0.4);
+        .hero-hotline-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 15px 22px;
+          border-radius: var(--radius-md);
+          background: rgba(24, 152, 66, 0.15);
+          border: 1px solid rgba(74, 222, 128, 0.4);
           color: #4ade80;
+          font-weight: 700;
+          font-size: 0.95rem;
+          transition: all 0.2s ease;
         }
 
-        .hero-btn-phone:hover {
-          background: rgba(74, 222, 128, 0.15);
+        .hero-hotline-pill:hover {
+          background: var(--primary-green);
           color: #ffffff;
         }
 
-        /* Trust Chips */
-        .hero-trust-chips {
+        .hero-chips-row {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
-          gap: 16px 24px;
+          gap: 18px 24px;
         }
 
-        .trust-chip {
+        .h-chip {
           display: inline-flex;
           align-items: center;
           gap: 8px;
@@ -310,83 +339,82 @@ export default function Hero() {
           font-weight: 500;
         }
 
-        .chip-icon {
+        .text-emerald {
           color: #4ade80;
         }
 
-        /* Metrics Grid */
-        .hero-metrics-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
-        }
-
-        .hero-metric-card {
-          padding: 24px;
-          border-radius: var(--radius-lg);
-          transition: transform 0.25s ease, border-color 0.25s ease;
-        }
-
-        .hero-metric-card:hover {
-          transform: translateY(-4px);
-          border-color: rgba(74, 222, 128, 0.4);
-        }
-
-        .metric-header {
+        /* Controls Bar */
+        .hero-controls-bar {
           display: flex;
-          align-items: baseline;
-          gap: 4px;
-          margin-bottom: 6px;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 18px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .metric-number {
-          font-family: var(--font-heading);
-          font-size: 2.4rem;
-          font-weight: 800;
+        .slide-dots {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .slide-dot {
+          width: 32px;
+          height: 6px;
+          border-radius: 3px;
+          background: rgba(255, 255, 255, 0.3);
+          transition: all 0.25s ease;
+        }
+
+        .slide-dot.active {
+          width: 50px;
+          background: #4ade80;
+        }
+
+        .slide-arrows {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .slider-arrow-btn {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(255, 255, 255, 0.25);
           color: #ffffff;
-          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
         }
 
-        .metric-symbol {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #4ade80;
-        }
-
-        .metric-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #f1f5f9;
-          margin-bottom: 6px;
-        }
-
-        .metric-desc {
-          font-size: 0.78rem;
-          color: #94a3b8;
-          line-height: 1.45;
+        .slider-arrow-btn:hover {
+          background: var(--primary-green);
+          border-color: var(--primary-green);
+          transform: scale(1.05);
         }
 
         @media (max-width: 1024px) {
-          .hero-metrics-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .hero-title {
-            font-size: 3rem;
+          .hero-slider-title {
+            font-size: 2.8rem;
           }
         }
 
         @media (max-width: 640px) {
-          .hero-title {
-            font-size: 2.3rem;
+          .hero-slider-title {
+            font-size: 2.1rem;
           }
-          .hero-subtitle {
-            font-size: 1rem;
+          .hero-slider-desc {
+            font-size: 0.98rem;
           }
-          .hero-metrics-grid {
-            grid-template-columns: 1fr;
+          .hero-actions-row {
+            flex-direction: column;
+            align-items: stretch;
           }
-          .hero-btn-main, .hero-btn-sec, .hero-btn-phone {
-            width: 100%;
+          .hero-main-btn, .hero-sec-btn, .hero-hotline-pill {
+            justify-content: center;
           }
         }
       `}</style>

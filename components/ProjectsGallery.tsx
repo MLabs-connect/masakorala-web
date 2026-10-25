@@ -7,7 +7,7 @@ import {
   MapPin,
   Calendar,
   Layers,
-  ArrowUpRight,
+  ArrowRight,
   Maximize2,
   CheckCircle,
 } from "lucide-react";
@@ -15,68 +15,94 @@ import {
 interface ProjectItem {
   id: string;
   title: string;
-  category: "industrial" | "residential" | "hospitality" | "infrastructure";
+  category: "industrial" | "commercial" | "infrastructure" | "residential";
   categoryLabel: string;
   location: string;
   area: string;
   paverType: string;
   year: string;
   image: string;
-  highlight: string;
+  excerpt: string;
 }
 
 const PROJECTS: ProjectItem[] = [
   {
-    id: "colombo-port",
-    title: "Colombo Port Logistics Cargo Terminus",
+    id: "phoenix-warehouse",
+    title: "Phoenix Warehouse & Logistics Hub: High-Strength Paving",
     category: "industrial",
     categoryLabel: "Industrial Logistics",
-    location: "Colombo Port Maritime Corridor",
-    area: "220,000 Sq.Ft",
-    paverType: "80mm Heavy-Duty Uni Pavers (55 MPa)",
+    location: "Biyagama / Industrial Export Zone",
+    area: "20,000 Sq.Ft",
+    paverType: "80mm Heavy-Duty Uni Interlock (55 MPa)",
     year: "2024",
     image: "/images/uni-paver.jpg",
-    highlight:
-      "Subjected to continuous 45-ton reach stackers and laden container chassis trailers with zero rutting or block displacement.",
+    excerpt:
+      "Successfully delivered 20,000 square feet of heavy-duty interlocking paving on compacted quarry dust bed, engineered to withstand high-capacity container forklift movements without surface settlement.",
   },
   {
-    id: "bentota-villa",
-    title: "The Waterfront Sanctuary Villa & Estates",
-    category: "residential",
-    categoryLabel: "Luxury Residential",
-    location: "Bentota & Mirissa Coastal Belt",
-    area: "48,000 Sq.Ft",
-    paverType: "Washed Eliana & Rhombus 3D Pavers",
-    year: "2025",
+    id: "colombo-port-city",
+    title: "Colombo Port City: Waterfront Retail & Promenade Paving",
+    category: "commercial",
+    categoryLabel: "Commercial Landmark",
+    location: "Port City Commercial Gateway, Colombo",
+    area: "35,000 Sq.Ft",
+    paverType: "Customized Washed Eliana & Directional Pavers",
+    year: "2024",
     image: "/images/hero.jpg",
-    highlight:
-      "Exquisite natural granite sparkle texture reflecting coastal evening sunlight with non-slip barefoot safety.",
+    excerpt:
+      "Part of the world-class Port City investment zone for luxury dining, retail shops, and lifestyle spaces. Precision aesthetics combined with high skid-resistance for pedestrian safety.",
   },
   {
-    id: "brandix-eco",
-    title: "Brandix Eco-Tech Green Manufacturing Campus",
+    id: "keells-katugastota",
+    title: "Keells Supermarket Commercial Car Park – Katugasthota",
+    category: "commercial",
+    categoryLabel: "Retail Forecourt",
+    location: "Katugasthota, Central Province",
+    area: "14,000 Sq.Ft",
+    paverType: "80mm UNI Interlock Blocks",
+    year: "2023",
+    image: "/images/uni-paver.jpg",
+    excerpt:
+      "High-traffic commercial car park paved with 80mm heavy-duty interlock blocks laid over compacted quarry dust base to support continuous customer vehicle turnover.",
+  },
+  {
+    id: "keells-pallekele",
+    title: "Keells Supermarket Logistics Forecourt – Pallekele",
+    category: "commercial",
+    categoryLabel: "Retail & Parking",
+    location: "Pallekele, Kandy District",
+    area: "12,500 Sq.Ft",
+    paverType: "80mm UNI Interlock + Border Kerbs",
+    year: "2023",
+    image: "/images/uni-paver.jpg",
+    excerpt:
+      "Customer car park and rear delivery dock paved with reinforced interlock units, eliminating surface water stagnation and ensuring smooth truck turnaround.",
+  },
+  {
+    id: "brandix-green-campus",
+    title: "Brandix Eco-Tech Apparel Park – Sustainable Ground Paving",
     category: "infrastructure",
     categoryLabel: "Eco Infrastructure",
-    location: "Pannala Industrial Export Zone",
+    location: "Pannala Export Zone",
     area: "85,000 Sq.Ft",
     paverType: "Eco-Grass Permeable Cellular Blocks",
-    year: "2023",
+    year: "2025",
     image: "/images/grass-paver.jpg",
-    highlight:
-      "Recharging over 1.2 million liters of stormwater annually into natural groundwater tables, earning LEED Platinum credits.",
+    excerpt:
+      "Permeable cellular grass block installation recharging over 1.2 million liters of annual rainfall back to subterranean water aquifers, earning LEED Platinum sustainability points.",
   },
   {
-    id: "expressway-toll",
+    id: "central-expressway",
     title: "Central Expressway Interchange Toll Plazas",
     category: "infrastructure",
-    categoryLabel: "National Highways",
-    location: "Kurunegala Interchange Plazas",
+    categoryLabel: "National Highway",
+    location: "Kurunegala Central Interchange",
     area: "65,000 Sq.Ft",
-    paverType: "Heavy-Duty Interlocking Blocks 80mm",
+    paverType: "Heavy-Duty Interlock Blocks 80mm (CS1 Grade)",
     year: "2022",
     image: "/images/uni-paver.jpg",
-    highlight:
-      "High-shear interlocking pattern engineered to withstand sudden braking forces of commercial buses and haulage trucks.",
+    excerpt:
+      "High-shear interlocking pattern engineered under Road Development Authority (RDA) supervision to withstand heavy braking forces of interprovincial transport buses and haulage trailers.",
   },
 ];
 
@@ -96,14 +122,14 @@ export default function ProjectsGallery() {
           <div>
             <div className="section-tag">
               <Building size={14} />
-              <span>Proven Landmark Portfolio</span>
+              <span>Our Latest Projects</span>
             </div>
             <h2 className="section-title">
-              Infrastructure Shaped by Masakorala Engineering
+              Crafting Lasting Impressions Through Innovative Paving
             </h2>
             <p className="section-desc">
-              Over 14 million square feet installed across Sri Lanka&apos;s leading ports,
-              industrial zones, five-star resorts, and premier residential communities.
+              From landmark port infrastructure and logistics warehouses to supermarket
+              commercial car parks and residential enclaves across Sri Lanka.
             </p>
           </div>
 
@@ -114,21 +140,21 @@ export default function ProjectsGallery() {
               onClick={() => setFilter("all")}
               className={`filter-btn ${filter === "all" ? "active" : ""}`}
             >
-              All Projects
+              All Projects ({PROJECTS.length})
             </button>
             <button
               type="button"
               onClick={() => setFilter("industrial")}
               className={`filter-btn ${filter === "industrial" ? "active" : ""}`}
             >
-              Industrial & Ports
+              Industrial & Warehouses
             </button>
             <button
               type="button"
-              onClick={() => setFilter("residential")}
-              className={`filter-btn ${filter === "residential" ? "active" : ""}`}
+              onClick={() => setFilter("commercial")}
+              className={`filter-btn ${filter === "commercial" ? "active" : ""}`}
             >
-              Luxury Estates
+              Commercial & Supermarkets
             </button>
             <button
               type="button"
@@ -149,7 +175,7 @@ export default function ProjectsGallery() {
                   src={project.image}
                   alt={project.title}
                   width={600}
-                  height={420}
+                  height={380}
                   className="project-img"
                 />
                 <span className="project-cat-badge">{project.categoryLabel}</span>
@@ -169,11 +195,25 @@ export default function ProjectsGallery() {
                 </div>
 
                 <h3 className="project-title">{project.title}</h3>
-                <p className="project-highlight">{project.highlight}</p>
+                <p className="project-excerpt">{project.excerpt}</p>
 
-                <div className="project-spec-pill">
-                  <Layers size={14} className="text-emerald" />
-                  <span>{project.paverType}</span>
+                <div className="project-footer-row">
+                  <div className="project-spec-pill">
+                    <Layers size={14} className="text-emerald" />
+                    <span>{project.paverType}</span>
+                  </div>
+
+                  <a
+                    href={`https://wa.me/94706972703?text=${encodeURIComponent(
+                      `Inquiry regarding your work on ${project.title} (${project.location}). We have a similar project.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="view-project-link"
+                  >
+                    <span>Inquire Similar Site</span>
+                    <ArrowRight size={14} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -193,7 +233,7 @@ export default function ProjectsGallery() {
           align-items: flex-end;
           flex-wrap: wrap;
           gap: 28px;
-          margin-bottom: 50px;
+          margin-bottom: 48px;
         }
 
         .project-filter-group {
@@ -228,8 +268,8 @@ export default function ProjectsGallery() {
         /* Grid */
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 36px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
         }
 
         .project-card {
@@ -238,6 +278,8 @@ export default function ProjectsGallery() {
           border: 1px solid var(--surface-border);
           overflow: hidden;
           box-shadow: var(--shadow-sm);
+          display: flex;
+          flex-direction: column;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
@@ -248,7 +290,7 @@ export default function ProjectsGallery() {
 
         .project-media {
           position: relative;
-          height: 320px;
+          height: 240px;
           background: #14171d;
           overflow: hidden;
         }
@@ -261,13 +303,13 @@ export default function ProjectsGallery() {
         }
 
         .project-card:hover .project-img {
-          transform: scale(1.04);
+          transform: scale(1.05);
         }
 
         .project-cat-badge {
           position: absolute;
-          top: 16px;
-          left: 16px;
+          top: 14px;
+          left: 14px;
           background: rgba(12, 14, 18, 0.85);
           color: #4ade80;
           font-size: 0.72rem;
@@ -281,28 +323,30 @@ export default function ProjectsGallery() {
 
         .project-area-badge {
           position: absolute;
-          bottom: 16px;
-          right: 16px;
+          bottom: 14px;
+          right: 14px;
           background: var(--primary-green);
           color: #ffffff;
-          font-size: 0.78rem;
+          font-size: 0.76rem;
           font-weight: 700;
-          padding: 5px 12px;
+          padding: 4px 10px;
           border-radius: var(--radius-sm);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .project-content {
-          padding: 28px;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
         }
 
         .project-loc-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           color: var(--stone-mid);
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         }
 
         .loc-item,
@@ -318,39 +362,65 @@ export default function ProjectsGallery() {
 
         .project-title {
           font-family: var(--font-heading);
-          font-size: 1.35rem;
+          font-size: 1.15rem;
           font-weight: 700;
           color: var(--brand-black);
-          line-height: 1.3;
+          line-height: 1.35;
           margin-bottom: 10px;
         }
 
-        .project-highlight {
-          font-size: 0.88rem;
+        .project-excerpt {
+          font-size: 0.85rem;
           color: var(--text-muted);
-          line-height: 1.55;
-          margin-bottom: 18px;
+          line-height: 1.5;
+          margin-bottom: 20px;
+          flex-grow: 1;
+        }
+
+        .project-footer-row {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          padding-top: 16px;
+          border-top: 1px solid var(--surface-border);
         }
 
         .project-spec-pill {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
           background: var(--surface-offwhite);
           border: 1px solid var(--surface-border);
-          padding: 6px 14px;
+          padding: 5px 12px;
           border-radius: var(--radius-full);
-          font-size: 0.78rem;
+          font-size: 0.74rem;
           font-weight: 600;
           color: var(--stone-dark);
         }
 
-        @media (max-width: 992px) {
+        .view-project-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: var(--primary-green-dark);
+          transition: gap 0.2s ease;
+        }
+
+        .view-project-link:hover {
+          gap: 10px;
+        }
+
+        @media (max-width: 1200px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 768px) {
           .projects-grid {
             grid-template-columns: 1fr;
-          }
-          .project-media {
-            height: 260px;
           }
         }
       `}</style>

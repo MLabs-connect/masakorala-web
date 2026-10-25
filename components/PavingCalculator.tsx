@@ -14,7 +14,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-interface PaverConfig {
+export interface PaverConfig {
   id: string;
   name: string;
   thickness: string;
@@ -23,54 +23,62 @@ interface PaverConfig {
   idealFor: string;
 }
 
-const PAVER_OPTIONS: PaverConfig[] = [
+export const PAVER_OPTIONS: PaverConfig[] = [
   {
     id: "uni-80",
-    name: "Uni Paver 80mm (Heavy Traffic)",
+    name: "Uni Paver 80mm [Semi Rough]",
     thickness: "80mm",
     unitsPerSqFt: 3.7,
     estPricePerBlock: 78,
-    idealFor: "Warehouses, Container Yards, Commercial Car Parks",
+    idealFor: "Heavy Cargo, Container Yards, Warehouses, Freight Terminals",
   },
   {
     id: "uni-60",
-    name: "Uni Paver 60mm (Standard)",
+    name: "Uni Paver 60mm [Smooth]",
     thickness: "60mm",
     unitsPerSqFt: 3.7,
     estPricePerBlock: 64,
-    idealFor: "Residential Driveways, Light Commercial",
+    idealFor: "Residential Driveways, Commercial Forecourts, Shopping Centers",
   },
   {
     id: "washed-eliana",
-    name: "Washed Eliana 60mm (Textured)",
+    name: "Washed Eliana 60mm [Textured]",
     thickness: "60mm",
     unitsPerSqFt: 9.0,
     estPricePerBlock: 38,
-    idealFor: "Luxury Walkways, Pool Decks, Villa Entrances",
+    idealFor: "Luxury Walkways, Pool Decks, Villa Entrances, Hotel Verandahs",
   },
   {
     id: "arrow-60",
-    name: "Arrow Paver 60mm (Smooth)",
+    name: "Arrow Paver 60mm [Smooth]",
     thickness: "60mm",
     unitsPerSqFt: 3.5,
     estPricePerBlock: 68,
-    idealFor: "Retail Forecourts, Modern Compounds",
+    idealFor: "Directional Forecourts, Office Compounds, Modern Estates",
   },
   {
     id: "grass-80",
-    name: "Eco Grass Paver 80mm (Permeable)",
+    name: "Grass Paver 80mm [Permeable]",
     thickness: "80mm",
     unitsPerSqFt: 0.58,
     estPricePerBlock: 340,
-    idealFor: "Green Parking, Eco Resorts, Fire Lanes",
+    idealFor: "Eco-Resorts, Grass Parking, Fire Truck Access Lanes",
   },
   {
     id: "rhombus-60",
-    name: "Rhombus 3D Paver 60mm",
+    name: "Rhombus Paver 60mm [3D Geometric]",
     thickness: "60mm",
     unitsPerSqFt: 2.25,
     estPricePerBlock: 95,
-    idealFor: "Architectural Courtyards, Designer Plazas",
+    idealFor: "3D Isometric Plazas, Courtyards, Architectural Promenades",
+  },
+  {
+    id: "wing-60",
+    name: "Wing Paving 60mm [Smooth]",
+    thickness: "60mm",
+    unitsPerSqFt: 3.4,
+    estPricePerBlock: 72,
+    idealFor: "Contoured Driveways, Pedestrian Malls, Villa Courtyards",
   },
 ];
 
@@ -104,7 +112,7 @@ export default function PavingCalculator() {
   const rawBlockCount = validArea * currentPaver.unitsPerSqFt;
   const totalBlocks = Math.ceil(rawBlockCount * wastageMultiplier);
 
-  // Pallet estimates (average 400 blocks per pallet for standard, or 50 for grass blocks)
+  // Pallet estimates
   const blocksPerPallet = currentPaver.id === "grass-80" ? 50 : 400;
   const palletCount = Math.ceil(totalBlocks / blocksPerPallet);
 
@@ -126,14 +134,14 @@ export default function PavingCalculator() {
     setWidthInput(w);
   };
 
-  // WhatsApp Message Payload
+  // WhatsApp Message Payload matching company hotline
   const generateWhatsAppMessage = () => {
     const text = `*New Paving Project Inquiry - Masakorala Holdings*
 -----------------------------------------
 - *Project Area:* ${validArea.toFixed(0)} Sq.Ft (${(validArea / 10.7639).toFixed(1)} Sq.M)
 - *Selected Paver:* ${currentPaver.name} (${currentPaver.thickness})
 - *Estimated Blocks:* ${totalBlocks.toLocaleString()} Units (includes ${includeWastage ? "5% cutting allowance" : "no cutting allowance"})
-- *Estimated Pallets:* ~${palletCount} Pallets
+- *Estimated Pallets:* ~${palletCount} Pallets (Crane Truck Delivery)
 - *Quarry Sand Bedding:* ${includeSandBed ? `${sandCubes} Cubes required` : "Excluded"}
 - *Turnkey Laying Service:* ${includeLayingService ? "Required" : "Not Required"}
 - *Estimated Budget:* LKR ${totalEstimatedCost.toLocaleString()} (Approx)
@@ -412,7 +420,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                 </div>
                 <div>
                   <div className="m-val">~{palletCount}</div>
-                  <div className="m-unit">Pallets (Transport Estimate)</div>
+                  <div className="m-unit">Pallets (Crane Truck Transport)</div>
                 </div>
               </div>
 
@@ -932,10 +940,6 @@ Please provide an official quotation, delivery timeframe to our site, and sample
 
         .text-emerald-500 {
           color: #10b981;
-        }
-
-        .w-100 {
-          width: 100%;
         }
 
         @media (max-width: 992px) {

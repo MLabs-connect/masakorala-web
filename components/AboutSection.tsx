@@ -12,6 +12,7 @@ import {
   Layers,
   ArrowRight,
   Sparkles,
+  Award,
 } from "lucide-react";
 
 export default function AboutSection() {
@@ -24,7 +25,7 @@ export default function AboutSection() {
             <div className="about-image-card">
               <Image
                 src="/images/uni-paver.jpg"
-                alt="Masakorala heavy duty 80mm interlocking paving blocks undergoing compressive load test"
+                alt="Masakorala CS1-graded heavy duty interlocking paving blocks"
                 width={700}
                 height={550}
                 className="about-main-img"
@@ -33,7 +34,7 @@ export default function AboutSection() {
                 <Factory size={22} className="text-emerald" />
                 <div>
                   <strong>Pannala & Kurunegala Mega Plants</strong>
-                  <span>Over 45,000 Sq.Ft Daily Production Capacity</span>
+                  <span>Automated German Vibro-Press Bays & Internal Testing Lab</span>
                 </div>
               </div>
             </div>
@@ -41,13 +42,13 @@ export default function AboutSection() {
             {/* Sub Highlights Banner */}
             <div className="about-cert-card">
               <div className="cert-stat-item">
-                <span className="cert-stat-num">100%</span>
-                <span className="cert-stat-sub">Batch Tested Under SLS 1425</span>
+                <span className="cert-stat-num">CS1</span>
+                <span className="cert-stat-sub">Highest Specialty Grading</span>
               </div>
               <div className="cert-stat-divider" />
               <div className="cert-stat-item">
-                <span className="cert-stat-num">±1mm</span>
-                <span className="cert-stat-sub">Precision Mold Tolerance</span>
+                <span className="cert-stat-num">35+</span>
+                <span className="cert-stat-sub">Years Industry Heritage</span>
               </div>
               <div className="cert-stat-divider" />
               <div className="cert-stat-item">
@@ -59,85 +60,54 @@ export default function AboutSection() {
 
           {/* Right Column: Narrative & Technical Advantage */}
           <div className="about-content-col">
-            <div className="section-tag">
-              <ShieldCheck size={14} />
-              <span>35+ Years Industry Legacy</span>
-            </div>
-
-            <h2 className="section-title">
-              Sri Lanka&apos;s Benchmark in High-Density Concrete Paving & Infrastructure
+            <span className="about-subtitle-tag">About Us</span>
+            <h2 className="about-headline">
+              Masakorala Paving
             </h2>
+            <h3 className="about-sub-years">Since 1991 | Over 35 Years of Engineering Trust</h3>
 
-            <p className="section-desc">
-              At <strong>Masakorala Holdings</strong>, we combine German-engineered
-              vibro-compaction technology with high-grade washed quarry granite and OPC 52.5N
-              Portland cement to deliver interlocking pavers that withstand the test of time,
-              monsoon weather, and continuous heavy container haulage.
+            <p className="about-lead-para">
+              At <strong>Masakorala Paving</strong>, we are proud to be Sri Lanka&apos;s CS1-graded
+              paving manufacturer — a premier recognition that reflects our unwavering dedication
+              to quality, structural integrity, and long-term value. With over 35 years of
+              experience, we have become the trusted manufacturing partner for the nation&apos;s
+              leading infrastructure developers, ports, apparel park conglomerates, and landmark
+              commercial estates.
             </p>
 
-            {/* Feature Points Grid */}
-            <div className="about-features-grid">
-              <div className="about-feature-item">
-                <div className="feature-icon-wrapper">
-                  <Cpu size={20} />
-                </div>
-                <div>
-                  <h3 className="feature-item-title">Fully Automated Vibro-Compaction</h3>
-                  <p className="feature-item-desc">
-                    Hydraulic multi-frequency compaction ensures uniform density throughout the block,
-                    eliminating internal air voids and ensuring water absorption below 6%.
-                  </p>
-                </div>
-              </div>
+            <p className="about-sub-para">
+              From the compressive density of our aggregates to the laser-guided precision of our
+              molds, every detail matters. That is why we are <strong>SLS 1425</strong> and{" "}
+              <strong>ISO 9001:2015</strong> certified, operating our own in-house computerized
+              laboratories to verify compressive strength, water absorption (&lt;4.8%), and skid
+              resistance on every batch.
+            </p>
 
-              <div className="about-feature-item">
-                <div className="feature-icon-wrapper">
-                  <Sparkles size={20} />
-                </div>
-                <div>
-                  <h3 className="feature-item-title">UV-Stable German Mineral Pigments</h3>
-                  <p className="feature-item-desc">
-                    Integrated synthetic iron-oxide pigments ensure lifetime colorfastness without
-                    fading under extreme tropical sunlight and heavy tropical rainfall.
-                  </p>
-                </div>
+            <div className="about-services-box">
+              <div className="service-bullet">
+                <CheckCircle2 size={18} className="text-emerald" />
+                <span>
+                  <strong>Turnkey Supply & Laying Services:</strong> Beyond manufacturing, our certified
+                  teams provide sub-grade compaction, screeding, laying, and plate vibration finishing across Sri Lanka.
+                </span>
               </div>
-
-              <div className="about-feature-item">
-                <div className="feature-icon-wrapper">
-                  <Truck size={20} />
-                </div>
-                <div>
-                  <h3 className="feature-item-title">Integrated Crane-Truck Fleet</h3>
-                  <p className="feature-item-desc">
-                    Safe, palletized delivery with hydraulic boom cranes straight to your site anywhere
-                    across Sri Lanka, minimizing transit damage and offloading downtime.
-                  </p>
-                </div>
-              </div>
-
-              <div className="about-feature-item">
-                <div className="feature-icon-wrapper">
-                  <Leaf size={20} />
-                </div>
-                <div>
-                  <h3 className="feature-item-title">Sustainable Urban Drainage (SuDS)</h3>
-                  <p className="feature-item-desc">
-                    Pioneers in permeable eco-grass and hollow paving systems that recharge groundwater
-                    tables and eliminate driveway flash-flooding.
-                  </p>
-                </div>
+              <div className="service-bullet">
+                <CheckCircle2 size={18} className="text-emerald" />
+                <span>
+                  <strong>Hydraulic Crane Offloading Fleet:</strong> Direct site delivery with boom cranes
+                  minimizing handling breakage and installation delays.
+                </span>
               </div>
             </div>
 
-            {/* Action Row */}
+            {/* Action Buttons */}
             <div className="about-action-row">
-              <a href="#quality" className="btn-primary">
-                <span>View Quality & Testing Standards</span>
+              <a href="#products" className="btn-primary">
+                <span>View Products Catalog</span>
                 <ArrowRight size={16} />
               </a>
               <a href="#calculator" className="btn-secondary">
-                <span>Calculate Your Project BOQ</span>
+                <span>Calculate Your Site BOQ</span>
               </a>
             </div>
           </div>
@@ -231,8 +201,8 @@ export default function AboutSection() {
         .cert-stat-num {
           font-family: var(--font-heading);
           font-size: 1.6rem;
-          font-weight: 700;
-          color: var(--brand-black);
+          font-weight: 800;
+          color: var(--primary-green-dark);
           line-height: 1.1;
         }
 
@@ -255,43 +225,64 @@ export default function AboutSection() {
           flex-direction: column;
         }
 
-        .about-features-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 20px;
-          margin: 32px 0;
-        }
-
-        .about-feature-item {
-          display: flex;
-          gap: 16px;
-          align-items: flex-start;
-        }
-
-        .feature-icon-wrapper {
-          width: 44px;
-          height: 44px;
-          background: var(--primary-green-subtle);
-          color: var(--primary-green-dark);
-          border-radius: var(--radius-md);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          border: 1px solid rgba(24, 152, 66, 0.2);
-        }
-
-        .feature-item-title {
-          font-size: 1.02rem;
+        .about-subtitle-tag {
+          font-size: 0.85rem;
           font-weight: 700;
-          color: var(--brand-black);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--stone-mid);
+          margin-bottom: 6px;
+        }
+
+        .about-headline {
+          font-family: var(--font-heading);
+          font-size: 2.8rem;
+          font-weight: 800;
+          color: var(--primary-green);
+          line-height: 1.15;
           margin-bottom: 4px;
         }
 
-        .feature-item-desc {
-          font-size: 0.88rem;
+        .about-sub-years {
+          font-family: var(--font-heading);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--brand-black);
+          margin-bottom: 18px;
+        }
+
+        .about-lead-para {
+          font-size: 1rem;
+          color: var(--stone-dark);
+          line-height: 1.7;
+          margin-bottom: 14px;
+        }
+
+        .about-sub-para {
+          font-size: 0.92rem;
           color: var(--text-muted);
-          line-height: 1.55;
+          line-height: 1.65;
+          margin-bottom: 24px;
+        }
+
+        .about-services-box {
+          background: var(--surface-offwhite);
+          border-left: 3px solid var(--primary-green);
+          border-radius: var(--radius-sm);
+          padding: 16px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 28px;
+        }
+
+        .service-bullet {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 0.86rem;
+          color: var(--stone-dark);
+          line-height: 1.5;
         }
 
         .about-action-row {
@@ -299,13 +290,15 @@ export default function AboutSection() {
           align-items: center;
           flex-wrap: wrap;
           gap: 16px;
-          margin-top: 8px;
         }
 
         @media (max-width: 1024px) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 48px;
+          }
+          .about-headline {
+            font-size: 2.3rem;
           }
         }
 

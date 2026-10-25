@@ -6,6 +6,7 @@ import ProductCatalog from "@/components/ProductCatalog";
 import PavingCalculator from "@/components/PavingCalculator";
 import QualityProcess from "@/components/QualityProcess";
 import ProjectsGallery from "@/components/ProjectsGallery";
+import CSRSection from "@/components/CSRSection";
 import SustainabilitySection from "@/components/SustainabilitySection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
@@ -24,6 +25,7 @@ export default function Home() {
         <PavingCalculator />
         <QualityProcess />
         <ProjectsGallery />
+        <CSRSection />
         <SustainabilitySection />
         <BlogSection />
         <ContactSection />
