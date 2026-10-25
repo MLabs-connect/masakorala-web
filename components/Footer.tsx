@@ -11,6 +11,7 @@ import {
   MessageCircle,
   Bell,
   CheckCircle2,
+  Check,
 } from "lucide-react";
 
 export default function Footer() {
@@ -31,7 +32,7 @@ export default function Footer() {
 
   return (
     <>
-      {/* High-Impact CTA Banner: Contact Us For Enquiries (Inspired by reference site) */}
+      {/* High-Impact CTA Banner: Contact Us For Enquiries */}
       <section className="enquiry-cta-banner">
         <div className="container">
           <div className="enquiry-banner-box">
@@ -58,7 +59,7 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Main Footer matching Senarath Group layout but with Masakorala Holdings Branding */}
+      {/* Main Footer with Symmetrical 4-Column Layout */}
       <footer className="site-footer">
         <div className="container">
           <div className="footer-main-grid">
@@ -68,9 +69,9 @@ export default function Footer() {
                 <Logo variant="light" />
               </div>
               <p className="footer-company-desc">
-                With 35+ years of excellence, Masakorala Group specializes in real estate,
-                heavy-duty paving, ready-mix concrete, and civil construction through its
-                subsidiaries, ensuring certified quality and sustainable innovation across Sri Lanka.
+                With 35+ years of excellence, Masakorala Holdings specializes in
+                heavy-duty interlocking paving, washed architectural stone, and eco-permeable
+                concrete solutions, ensuring certified quality and sustainable innovation across Sri Lanka.
               </p>
 
               {/* Newsletter Subscription */}
@@ -99,17 +100,17 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 2: Contact Info */}
+            {/* Column 2: Direct Contact Info */}
             <div className="footer-col">
               <h4 className="footer-col-title">Contact Info</h4>
               <div className="footer-contact-list">
                 <div className="contact-item">
                   <MapPin size={16} className="text-emerald icon-flex" />
-                  <p>Masakorala Group, Head Office, 123/10 Negombo Road, Kurunegala</p>
+                  <p>Head Office: 123/10 Negombo Road, Kurunegala</p>
                 </div>
                 <div className="contact-item">
                   <MapPin size={16} className="text-emerald icon-flex" />
-                  <p>Pannala Mega Plant: No. 925, Maddumamulla Estate, Thalammehera, Pannala</p>
+                  <p>Pannala Mega Plant: No. 925, Maddumamulla Estate, Pannala</p>
                 </div>
                 <div className="contact-item">
                   <Phone size={16} className="text-emerald icon-flex" />
@@ -166,7 +167,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 3: Quick Links */}
+            {/* Column 3: Quick Navigation Links */}
             <div className="footer-col">
               <h4 className="footer-col-title">Quick Links</h4>
               <ul className="footer-links-list">
@@ -174,6 +175,7 @@ export default function Footer() {
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#products">Products Catalog</a></li>
                 <li><a href="#calculator">Paving BOQ Calculator</a></li>
+                <li><a href="#quality">Quality & Testing Standards</a></li>
                 <li><a href="#projects">Projects Portfolio</a></li>
                 <li><a href="#csr">CSR Initiatives</a></li>
                 <li><a href="#blogs">Technical Blog</a></li>
@@ -181,21 +183,36 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Column 4: Subsidiaries */}
+            {/* Column 4: Quality Rigor & Plant Facilities */}
             <div className="footer-col">
-              <h4 className="footer-col-title">Subsidiaries</h4>
-              <ul className="footer-links-list">
-                <li><a href="#">Masakorala Group</a></li>
-                <li><a href="#products">Masakorala Paving</a></li>
-                <li><a href="#">Masakorala Ready Mix</a></li>
-                <li><a href="#">Masakorala Constructions</a></li>
-                <li><a href="#">Masakorala Real Estate</a></li>
-              </ul>
+              <h4 className="footer-col-title">Standards & Plants</h4>
+              <div className="footer-standards-list">
+                <div className="std-item">
+                  <ShieldCheck size={16} className="text-emerald" />
+                  <span>SLS 1425 Specification for Concrete Paving</span>
+                </div>
+                <div className="std-item">
+                  <ShieldCheck size={16} className="text-emerald" />
+                  <span>ISO 9001:2015 Quality Management Certified</span>
+                </div>
+                <div className="std-item">
+                  <ShieldCheck size={16} className="text-emerald" />
+                  <span>CIDA CS1 Highest Construction Grading</span>
+                </div>
+                <div className="std-item">
+                  <Check size={15} className="text-emerald" />
+                  <span>In-House 2000 kN Destruction Load Frame</span>
+                </div>
+                <div className="std-item">
+                  <Check size={15} className="text-emerald" />
+                  <span>Boom Crane Direct Islandwide Delivery</span>
+                </div>
+              </div>
 
               <div className="cert-strip-footer">
-                <span className="cert-mini-badge">SLS 1425 Certified</span>
+                <span className="cert-mini-badge">SLS 1425</span>
                 <span className="cert-mini-badge">ISO 9001:2015</span>
-                <span className="cert-mini-badge">CIDA CS1 Rated</span>
+                <span className="cert-mini-badge">CIDA CS1</span>
               </div>
             </div>
           </div>
@@ -205,7 +222,7 @@ export default function Footer() {
         <div className="footer-bottom-bar">
           <div className="container footer-bottom-container">
             <p className="copyright-text">
-              © Copyright 2026 Masakorala Group of Companies. All Rights Reserved.
+              © Copyright 2026 Masakorala Holdings (Pvt) Ltd. All Rights Reserved.
             </p>
             <button
               type="button"
@@ -275,7 +292,7 @@ export default function Footer() {
 
         .footer-main-grid {
           display: grid;
-          grid-template-columns: 1.35fr 1.15fr 0.9fr 1fr;
+          grid-template-columns: 1.35fr 1.15fr 0.9fr 1.1fr;
           gap: 40px;
           margin-bottom: 56px;
         }
@@ -438,11 +455,27 @@ export default function Footer() {
           transform: translateX(3px);
         }
 
+        /* Standards List */
+        .footer-standards-list {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-bottom: 18px;
+        }
+
+        .std-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 0.8rem;
+          color: #cbd5e1;
+          line-height: 1.4;
+        }
+
         .cert-strip-footer {
           display: flex;
           flex-wrap: wrap;
           gap: 6px;
-          margin-top: 20px;
         }
 
         .cert-mini-badge {
