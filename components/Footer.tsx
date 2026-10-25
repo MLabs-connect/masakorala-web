@@ -177,7 +177,6 @@ export default function Footer() {
                 <li><a href="#calculator">Paving BOQ Calculator</a></li>
                 <li><a href="#quality">Quality & Testing Standards</a></li>
                 <li><a href="#projects">Projects Portfolio</a></li>
-                <li><a href="#csr">CSR Initiatives</a></li>
                 <li><a href="#blogs">Technical Blog</a></li>
                 <li><a href="#contact">Contact Us</a></li>
               </ul>

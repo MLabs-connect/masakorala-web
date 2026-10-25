@@ -8,19 +8,110 @@ import {
   MessageCircle,
   Menu,
   X,
-  ArrowRight,
   ShieldCheck,
 } from "lucide-react";
+
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  isCalc?: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { id: "home", label: "Home", href: "#home" },
+  { id: "about", label: "About Us", href: "#about" },
+  { id: "products", label: "Products", href: "#products" },
+  { id: "calculator", label: "Calculator", href: "#calculator", isCalc: true },
+  { id: "projects", label: "Projects", href: "#projects" },
+  { id: "blogs", label: "Blogs", href: "#blogs" },
+  { id: "contact", label: "Contact Us", href: "#contact" },
+];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("home");
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+    href: string
+  ) => {
+    e.preventDefault();
+    setActiveSection(id);
+    setMobileMenuOpen(false);
+
+    if (href === "#home" || href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.history.pushState) {
+        window.history.pushState(null, "", " ");
+      }
+      return;
+    }
+
+    const target = document.querySelector(href);
+    if (target) {
+      const headerHeight = 90;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      if (window.history.pushState) {
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // If scrolled near bottom of page, highlight contact
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 120
+      ) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (window.scrollY < 200) {
+        setActiveSection("home");
+        return;
+      }
+
+      const sectionIds = [
+        "contact",
+        "blogs",
+        "projects",
+        "calculator",
+        "products",
+        "about",
+        "home",
+      ];
+
+      const scrollTarget = window.scrollY + 180;
+
+      for (const secId of sectionIds) {
+        const el = document.getElementById(secId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollTarget >= top && scrollTarget < top + height) {
+            setActiveSection(secId);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -55,38 +146,31 @@ export default function Header() {
       {/* Main Navigation Bar */}
       <nav className="header-main-nav">
         <div className="container nav-container">
-          <a href="#" className="nav-brand">
+          <a
+            href="#home"
+            className="nav-brand"
+            onClick={(e) => handleNavClick(e, "home", "#home")}
+          >
             <Logo variant="dark" />
           </a>
 
-          {/* Desktop Navigation Links - Centered & Aligned */}
+          {/* Desktop Navigation Links - Centered & Aligned with Dynamic Indicator */}
           <ul className="nav-links">
-            <li>
-              <a href="#" className="nav-link active">Home</a>
-            </li>
-            <li>
-              <a href="#about" className="nav-link">About Us</a>
-            </li>
-            <li>
-              <a href="#products" className="nav-link">Products</a>
-            </li>
-            <li>
-              <a href="#calculator" className="nav-link highlight-calc">
-                <span>Calculator</span>
-              </a>
-            </li>
-            <li>
-              <a href="#projects" className="nav-link">Projects</a>
-            </li>
-            <li>
-              <a href="#csr" className="nav-link">CSR & Green</a>
-            </li>
-            <li>
-              <a href="#blogs" className="nav-link">Blogs</a>
-            </li>
-            <li>
-              <a href="#contact" className="nav-link">Contact Us</a>
-            </li>
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <li key={item.id}>
+                  <a
+                    href={item.href}
+                    className={`nav-link ${isActive ? "active" : ""} ${item.isCalc ? "highlight-calc" : ""
+                      }`}
+                    onClick={(e) => handleNavClick(e, item.id, item.href)}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           {/* CTA & Mobile Toggle */}
@@ -97,7 +181,6 @@ export default function Header() {
               rel="noopener noreferrer"
               className="btn-primary header-wa-btn"
             >
-              <MessageCircle size={16} />
               <span>Get Quotation</span>
             </a>
 
@@ -119,16 +202,20 @@ export default function Header() {
         <div className="mobile-drawer glass-panel">
           <div className="mobile-drawer-inner">
             <div className="mobile-nav-list">
-              <a href="#" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Home</a>
-              <a href="#about" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>About Us</a>
-              <a href="#products" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Products Catalog</a>
-              <a href="#calculator" className="mobile-nav-item highlight" onClick={() => setMobileMenuOpen(false)}>
-                🧮 Material BOQ & Cost Calculator
-              </a>
-              <a href="#projects" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Projects Portfolio</a>
-              <a href="#csr" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Community & CSR</a>
-              <a href="#blogs" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Technical Blogs</a>
-              <a href="#contact" className="mobile-nav-item" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    className={`mobile-nav-item ${isActive ? "active" : ""} ${item.isCalc ? "highlight" : ""
+                      }`}
+                    onClick={(e) => handleNavClick(e, item.id, item.href)}
+                  >
+                    {item.isCalc ? `🧮 ${item.label}` : item.label}
+                  </a>
+                );
+              })}
             </div>
 
             <div className="mobile-drawer-footer">
@@ -251,16 +338,12 @@ export default function Header() {
           font-weight: 600;
           color: var(--brand-black);
           transition: color 0.2s ease;
-          padding-bottom: 4px;
+          padding-bottom: 6px;
           position: relative;
+          cursor: pointer;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-          color: var(--primary-green);
-        }
-
-        .nav-link.active::after {
+        .nav-link::after {
           content: "";
           position: absolute;
           bottom: -4px;
@@ -269,6 +352,21 @@ export default function Header() {
           height: 2px;
           background: var(--primary-green);
           border-radius: 2px;
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover {
+          color: var(--primary-green);
+        }
+
+        .nav-link.active {
+          color: var(--primary-green);
+        }
+
+        .nav-link.active::after {
+          transform: scaleX(1);
         }
 
         .highlight-calc {
@@ -334,6 +432,14 @@ export default function Header() {
           color: var(--brand-black);
           padding: 10px 0;
           border-bottom: 1px solid var(--surface-border);
+          transition: all 0.2s ease;
+        }
+
+        .mobile-nav-item.active {
+          color: var(--primary-green);
+          font-weight: 700;
+          border-left: 3px solid var(--primary-green);
+          padding-left: 10px;
         }
 
         .mobile-nav-item.highlight {

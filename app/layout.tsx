@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     "Pannala",
   ],
   icons: {
-    icon: "/logo.svg",
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Masakorala Holdings | Engineered Paving Excellence",
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.png" type="image/png" />
         <meta name="theme-color" content="#189842" />
       </head>
       <body>{children}</body>

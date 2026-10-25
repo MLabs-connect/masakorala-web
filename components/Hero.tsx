@@ -5,10 +5,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   ShieldCheck,
-  Calculator,
-  ChevronLeft,
-  ChevronRight,
-  PhoneCall,
   CheckCircle,
   Layers,
 } from "lucide-react";
@@ -20,8 +16,6 @@ const SLIDES = [
     title: "Your Trusted Partner for Quality Paving Work",
     subtitle:
       "Masakorala Paving offers durable, high-density CS1-graded paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
-    primaryCta: { text: "Calculate Project BOQ", href: "#calculator", icon: Calculator },
-    secondaryCta: { text: "Explore Pavers", href: "#products", icon: Layers },
     badge: "SLS 1425 & ISO 9001:2015 Certified",
     image: "/images/hero.jpg",
   },
@@ -31,8 +25,6 @@ const SLIDES = [
     title: "Heavy-Duty Interlock Blocks Engineered for 55+ MPa",
     subtitle:
       "Formulated with washed crushed granite and OPC 52.5N cement to withstand 40-ton laden container trucks, port logistics, and high-frequency commercial haulage.",
-    primaryCta: { text: "View Heavy-Duty 80mm", href: "#products", icon: Layers },
-    secondaryCta: { text: "Estimate Material", href: "#calculator", icon: Calculator },
     badge: "55.0 MPa Compressive Destruction Tested",
     image: "/images/uni-paver.jpg",
   },
@@ -42,8 +34,6 @@ const SLIDES = [
     title: "Eco Grass Grids & Washed Sparkling Stone Finishes",
     subtitle:
       "Sustainable urban drainage systems (SuDS) that recharge natural groundwater tables combined with non-slip washed quartz aggregate paving for luxury beachfront resorts.",
-    primaryCta: { text: "Explore Eco Pavers", href: "#products", icon: Layers },
-    secondaryCta: { text: "Instant Estimate", href: "#calculator", icon: Calculator },
     badge: "100% UV-Stable Synthetic Mineral Pigments",
     image: "/images/grass-paver.jpg",
   },
@@ -61,16 +51,8 @@ export default function Hero() {
 
   const slide = SLIDES[currentSlide];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  };
-
   return (
-    <section className="hero-slider-section">
+    <section id="home" className="hero-slider-section">
       {/* Background Image with Dynamic Transitions */}
       <div className="hero-bg-container">
         {SLIDES.map((s, idx) => (
@@ -104,20 +86,10 @@ export default function Hero() {
           <p className="hero-slider-desc">{slide.subtitle}</p>
 
           <div className="hero-actions-row">
-            <a href={slide.primaryCta.href} className="btn-primary hero-main-btn">
-              <slide.primaryCta.icon size={18} />
-              <span>{slide.primaryCta.text}</span>
+            <a href="#products" className="btn-primary hero-main-btn">
+              <Layers size={18} />
+              <span>Explore Pavers</span>
               <ArrowRight size={18} />
-            </a>
-
-            <a href={slide.secondaryCta.href} className="btn-outline-light hero-sec-btn">
-              <slide.secondaryCta.icon size={18} />
-              <span>{slide.secondaryCta.text}</span>
-            </a>
-
-            <a href="tel:+94706972703" className="hero-hotline-pill">
-              <PhoneCall size={16} />
-              <span>(+94) 70 697 2703</span>
             </a>
           </div>
 
@@ -138,7 +110,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Carousel Slide Indicators & Navigation Arrows */}
+        {/* Carousel Slide Indicators */}
         <div className="hero-controls-bar">
           <div className="slide-dots">
             {SLIDES.map((_, i) => (
@@ -150,25 +122,6 @@ export default function Hero() {
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
-          </div>
-
-          <div className="slide-arrows">
-            <button
-              type="button"
-              onClick={prevSlide}
-              className="slider-arrow-btn"
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft size={22} />
-            </button>
-            <button
-              type="button"
-              onClick={nextSlide}
-              className="slider-arrow-btn"
-              aria-label="Next Slide"
-            >
-              <ChevronRight size={22} />
-            </button>
           </div>
         </div>
       </div>
@@ -300,29 +253,6 @@ export default function Hero() {
           font-size: 1.02rem;
         }
 
-        .hero-sec-btn {
-          padding: 16px 26px;
-        }
-
-        .hero-hotline-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 15px 22px;
-          border-radius: var(--radius-md);
-          background: rgba(24, 152, 66, 0.15);
-          border: 1px solid rgba(74, 222, 128, 0.4);
-          color: #4ade80;
-          font-weight: 700;
-          font-size: 0.95rem;
-          transition: all 0.2s ease;
-        }
-
-        .hero-hotline-pill:hover {
-          background: var(--primary-green);
-          color: #ffffff;
-        }
-
         .hero-chips-row {
           display: flex;
           align-items: center;
@@ -346,7 +276,6 @@ export default function Hero() {
         /* Controls Bar */
         .hero-controls-bar {
           display: flex;
-          justify-content: space-between;
           align-items: center;
           padding-top: 18px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -371,31 +300,6 @@ export default function Hero() {
           background: #4ade80;
         }
 
-        .slide-arrows {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .slider-arrow-btn {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s ease;
-        }
-
-        .slider-arrow-btn:hover {
-          background: var(--primary-green);
-          border-color: var(--primary-green);
-          transform: scale(1.05);
-        }
-
         @media (max-width: 1024px) {
           .hero-slider-title {
             font-size: 2.8rem;
@@ -413,7 +317,7 @@ export default function Hero() {
             flex-direction: column;
             align-items: stretch;
           }
-          .hero-main-btn, .hero-sec-btn, .hero-hotline-pill {
+          .hero-main-btn {
             justify-content: center;
           }
         }

@@ -6,12 +6,9 @@ import ProductCatalog from "@/components/ProductCatalog";
 import PavingCalculator from "@/components/PavingCalculator";
 import QualityProcess from "@/components/QualityProcess";
 import ProjectsGallery from "@/components/ProjectsGallery";
-import CSRSection from "@/components/CSRSection";
-import SustainabilitySection from "@/components/SustainabilitySection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import FloatingActions from "@/components/FloatingActions";
 
 export default function Home() {
   return (
@@ -25,13 +22,10 @@ export default function Home() {
         <PavingCalculator />
         <QualityProcess />
         <ProjectsGallery />
-        <CSRSection />
-        <SustainabilitySection />
         <BlogSection />
         <ContactSection />
       </main>
       <Footer />
-      <FloatingActions />
     </div>
   );
 }
