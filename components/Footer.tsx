@@ -1,34 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Image from "next/image";
 import Logo from "./Logo";
 import {
   Phone,
   Mail,
   MapPin,
   ShieldCheck,
-  ArrowUp,
-  MessageCircle,
-  Bell,
-  CheckCircle2,
   Check,
 } from "lucide-react";
 
 export default function Footer() {
-  const [subscribed, setSubscribed] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
-    }
-  };
 
   return (
     <>
@@ -36,22 +19,18 @@ export default function Footer() {
       <section className="enquiry-cta-banner">
         <div className="container">
           <div className="enquiry-banner-box">
-            <h2 className="enquiry-title">Contact Us For Enquiries & Immediate Quotations</h2>
+            <h2 className="enquiry-title">Contact Us</h2>
             <p className="enquiry-sub">
               Our civil materials team is available to assist you with site measurements,
               batch testing certificates, and direct factory discounts.
             </p>
             <div className="enquiry-actions">
-              <a href="#contact" className="btn-primary enquiry-btn">
-                <span>Send Site Details</span>
-              </a>
               <a
                 href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary enquiry-btn-wa"
+                className="enquiry-btn-wa"
               >
-                <MessageCircle size={18} className="text-emerald" />
                 <span>WhatsApp: (+94) 70 697 2703</span>
               </a>
             </div>
@@ -73,31 +52,6 @@ export default function Footer() {
                 heavy-duty interlocking paving, washed architectural stone, and eco-permeable
                 concrete solutions, ensuring certified quality and sustainable innovation across Sri Lanka.
               </p>
-
-              {/* Newsletter Subscription */}
-              <div className="newsletter-wrapper">
-                <span className="newsletter-label">Subscribe to Our Newsletter:</span>
-                {subscribed ? (
-                  <div className="subscribe-success">
-                    <CheckCircle2 size={16} className="text-emerald" />
-                    <span>Thank you for subscribing!</span>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubscribe} className="newsletter-form">
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email address"
-                      className="newsletter-input"
-                    />
-                    <button type="submit" className="newsletter-btn" aria-label="Subscribe">
-                      <Bell size={16} />
-                    </button>
-                  </form>
-                )}
-              </div>
             </div>
 
             {/* Column 2: Direct Contact Info */}
@@ -173,10 +127,9 @@ export default function Footer() {
               <ul className="footer-links-list">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#products">Products Catalog</a></li>
-                <li><a href="#calculator">Paving BOQ Calculator</a></li>
-                <li><a href="#quality">Quality & Testing Standards</a></li>
-                <li><a href="#projects">Projects Portfolio</a></li>
+                <li><a href="#products">Catalog</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#projects">Our Projects</a></li>
                 <li><a href="#reviews">Client Reviews</a></li>
                 <li><a href="#contact">Contact Us</a></li>
               </ul>
@@ -223,15 +176,16 @@ export default function Footer() {
             <p className="copyright-text">
               © Copyright 2026 Masakorala Holdings (Pvt) Ltd. All Rights Reserved.
             </p>
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="footer-back-to-top"
-              aria-label="Back to Top"
-            >
-              <span>Back to Top</span>
-              <ArrowUp size={14} />
-            </button>
+            <div className="crafted-by-wrapper">
+              <span className="crafted-text">Crafted by</span>
+              <Image
+                src="/company-logo.png"
+                alt="Company Logo"
+                width={80}
+                height={26}
+                className="crafted-logo"
+              />
+            </div>
           </div>
         </div>
       </footer>
@@ -279,7 +233,26 @@ export default function Footer() {
         }
 
         .enquiry-btn-wa {
-          padding: 14px 24px;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 32px;
+          background: #25d366;
+          color: #ffffff;
+          border: 1px solid #25d366;
+          border-radius: var(--radius-full);
+          font-size: 0.95rem;
+          font-weight: 700;
+          text-decoration: none;
+          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+          transition: all 0.25s ease;
+        }
+
+        .enquiry-btn-wa:hover {
+          background: #20ba59;
+          border-color: #20ba59;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
         }
 
         /* Site Footer */
@@ -504,24 +477,32 @@ export default function Footer() {
           gap: 12px;
         }
 
-        .footer-back-to-top {
+        .crafted-by-wrapper {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          color: #94a3b8;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          padding: 6px 14px;
-          border-radius: var(--radius-full);
-          font-size: 0.74rem;
-          font-weight: 600;
-          transition: all 0.2s ease;
+          gap: 8px;
         }
 
-        .footer-back-to-top:hover {
-          background: var(--primary-green);
-          color: #ffffff;
-          border-color: var(--primary-green);
+        .crafted-text {
+          font-size: 0.76rem;
+          color: #94a3b8;
+          font-weight: 500;
+        }
+
+        :global(.crafted-logo) {
+          object-fit: contain !important;
+          height: auto !important;
+          max-height: 24px !important;
+          width: auto !important;
+          display: inline-block;
+          vertical-align: middle;
+          opacity: 0.85;
+          transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .crafted-by-wrapper:hover :global(.crafted-logo) {
+          opacity: 1;
+          transform: scale(1.05);
         }
 
         @media (max-width: 1024px) {
