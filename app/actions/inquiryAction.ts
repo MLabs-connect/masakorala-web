@@ -1,7 +1,6 @@
 "use server";
 
 import { validateInquiryPayload } from "@/lib/validations";
-import { getSession } from "@/lib/auth";
 
 export interface ServerActionResponse {
   success: boolean;
@@ -46,13 +45,8 @@ export async function submitProjectInquiry(
     }
 
     // 3. Optional: Verify user session if this was a privileged operation
-    // const session = await getSession();
-    // if (!session) { return { success: false, message: "Unauthorized" }; }
-
-    const { name, phone, location, areaSqFt, paverType } = validation.data;
-
-    // 4. In a real application, persist safely with parameterized query:
-    // await db.insert(inquiries).values({ name, phone, location, areaSqFt, paverType });
+    // In a real application, persist safely with parameterized query:
+    // await db.insert(inquiries).values(validation.data);
     const referenceNumber = `MK-${Date.now().toString().slice(-6)}`;
 
     // Return sanitized public result

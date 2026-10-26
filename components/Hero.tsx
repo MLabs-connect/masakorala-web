@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   ArrowRight,
-  ShieldCheck,
   CheckCircle,
   Layers,
 } from "lucide-react";
@@ -67,6 +66,7 @@ export default function Hero() {
               priority={idx === 0}
               className="hero-slide-img"
               sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center" }}
             />
           </div>
         ))}
@@ -155,10 +155,12 @@ export default function Hero() {
           opacity: 1;
         }
 
-        .hero-slide-img {
-          object-fit: cover;
-          object-position: center;
+        :global(.hero-slide-img) {
+          object-fit: cover !important;
+          object-position: center center !important;
           filter: brightness(0.68) contrast(1.05);
+          width: 100% !important;
+          height: 100% !important;
         }
 
         .hero-overlay {
@@ -189,13 +191,16 @@ export default function Hero() {
         .hero-pill-badge {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
+          flex-wrap: wrap;
+          gap: 8px 10px;
           background: rgba(255, 255, 255, 0.12);
           backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           padding: 6px 14px;
           border-radius: var(--radius-full);
-          margin-bottom: 24px;
+          margin-bottom: 22px;
+          max-width: 100%;
         }
 
         .pill-dot {
@@ -203,6 +208,7 @@ export default function Hero() {
           height: 8px;
           background: #22c55e;
           border-radius: 50%;
+          flex-shrink: 0;
         }
 
         .pill-text {
@@ -222,17 +228,19 @@ export default function Hero() {
 
         .hero-slider-title {
           font-family: var(--font-heading);
-          font-size: 3.5rem;
+          font-size: 3.25rem;
           font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: -0.025em;
+          line-height: 1.22;
+          letter-spacing: -0.01em;
           color: #ffffff;
           margin-bottom: 22px;
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+          word-break: normal;
+          overflow-wrap: break-word;
         }
 
         .hero-slider-desc {
-          font-size: 1.15rem;
+          font-size: 1.12rem;
           line-height: 1.7;
           color: #e2e8f0;
           max-width: 740px;
@@ -257,16 +265,22 @@ export default function Hero() {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
-          gap: 18px 24px;
+          gap: 12px 16px;
         }
 
         .h-chip {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-size: 0.85rem;
-          color: #e2e8f0;
+          font-size: 0.84rem;
+          color: #f1f5f9;
           font-weight: 500;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          padding: 6px 14px;
+          border-radius: var(--radius-full);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
 
         .text-emerald {
@@ -307,18 +321,43 @@ export default function Hero() {
         }
 
         @media (max-width: 640px) {
+          .hero-slider-section {
+            min-height: auto;
+            padding: 60px 0 40px;
+          }
           .hero-slider-title {
             font-size: 2.1rem;
           }
           .hero-slider-desc {
             font-size: 0.98rem;
+            margin-bottom: 24px;
           }
           .hero-actions-row {
             flex-direction: column;
             align-items: stretch;
+            gap: 12px;
           }
           .hero-main-btn {
             justify-content: center;
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-slider-title {
+            font-size: 1.85rem;
+          }
+          .hero-chips-row {
+            gap: 10px 14px;
+          }
+          .h-chip {
+            font-size: 0.78rem;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .hero-slider-title {
+            font-size: 1.65rem;
           }
         }
       `}</style>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Logo from "./Logo";
 import {
   Phone,
@@ -9,6 +10,7 @@ import {
   Menu,
   X,
   ShieldCheck,
+  ChevronRight,
 } from "lucide-react";
 
 interface NavItem {
@@ -29,6 +31,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export default function Header() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -44,7 +47,7 @@ export default function Header() {
 
     if (href === "#home" || href === "#") {
       if (window.location.pathname !== "/") {
-        window.location.href = "/";
+        router.push("/");
         return;
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,7 +72,7 @@ export default function Header() {
         window.history.pushState(null, "", href);
       }
     } else {
-      window.location.href = `/${href}`;
+      router.push(`/${href}`);
     }
   };
 
@@ -119,6 +122,35 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Handle ESC and auto-close when resizing to desktop
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    const handleResize = () => {
+      if (window.innerWidth > 1024) setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -192,21 +224,57 @@ export default function Header() {
 
             <button
               type="button"
-              className="mobile-toggle"
+              className={`mobile-toggle ${mobileMenuOpen ? "is-active" : ""}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle navigation menu"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer Navigation with Fullscreen Backdrop */}
       {mobileMenuOpen && (
-        <div className="mobile-drawer glass-panel">
-          <div className="mobile-drawer-inner">
+        <div
+          className="mobile-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
+        >
+          <div
+            className="mobile-drawer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drawer Top Header with Logo & Close Button */}
+            <div className="drawer-header">
+              <div
+                className="drawer-brand"
+                onClick={(e) => {
+                  handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "home", "#home");
+                }}
+              >
+                <Logo variant="dark" height={38} />
+              </div>
+              <button
+                type="button"
+                className="drawer-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close navigation menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Cert badge pill */}
+            <div className="drawer-trust-banner">
+              <ShieldCheck size={15} className="text-emerald" />
+              <span>SLS 1425 & CS1 Grade Certified</span>
+            </div>
+
+            {/* Nav list */}
             <div className="mobile-nav-list">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;
@@ -214,28 +282,36 @@ export default function Header() {
                   <a
                     key={item.id}
                     href={item.href}
-                    className={`mobile-nav-item ${isActive ? "active" : ""} ${item.isCalc ? "highlight" : ""
-                      }`}
+                    className={`mobile-nav-item ${isActive ? "active" : ""}`}
                     onClick={(e) => handleNavClick(e, item.id, item.href)}
                   >
-                    {item.isCalc ? `🧮 ${item.label}` : item.label}
+                    <span className="nav-item-title">{item.label}</span>
+                    <ChevronRight size={16} className="nav-item-chevron" />
                   </a>
                 );
               })}
             </div>
 
+            {/* Drawer Bottom Actions */}
             <div className="mobile-drawer-footer">
               <a
-                href="https://wa.me/94706972703"
+                href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary w-100"
+                className="mobile-wa-btn"
               >
-                <MessageCircle size={18} /> WhatsApp Technical Desk
+                <MessageCircle size={18} />
+                <span>WhatsApp: (+94) 70 697 2703</span>
               </a>
+
+              <a href="tel:+94706972703" className="mobile-call-link">
+                <Phone size={15} />
+                <span>Call Plant Direct: (+94) 70 697 2703</span>
+              </a>
+
               <div className="mobile-factory-info">
                 <span>Pannala & Kurunegala Plants</span>
-                <a href="tel:+94706972703">(+94) 70 697 2703</a>
+                <span>Islandwide Delivery</span>
               </div>
             </div>
           </div>
@@ -246,7 +322,7 @@ export default function Header() {
         .site-header {
           position: sticky;
           top: 0;
-          z-index: 1000;
+          z-index: 1200;
           background: #ffffff;
           transition: all 0.3s ease;
           border-bottom: 1px solid var(--surface-border);
@@ -407,83 +483,242 @@ export default function Header() {
 
         .mobile-toggle {
           display: none;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          background: #f8fafc;
+          border: 1px solid var(--surface-border);
+          border-radius: 12px;
           color: var(--brand-black);
-          padding: 6px;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
-        /* Mobile Drawer */
-        .mobile-drawer {
+        .mobile-toggle:hover {
+          background: var(--primary-green-subtle);
+          border-color: rgba(24, 152, 66, 0.3);
+          color: var(--primary-green-dark);
+          transform: translateY(-1px);
+        }
+
+        .mobile-toggle.is-active {
+          background: var(--primary-green);
+          border-color: var(--primary-green);
+          color: #ffffff;
+        }
+
+        /* Mobile Backdrop Overlay */
+        .mobile-backdrop {
           position: fixed;
-          top: 96px;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          inset: 0;
+          background: rgba(12, 14, 18, 0.65);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          z-index: 1100;
+          display: flex;
+          justify-content: flex-end;
+          animation: fadeInBackdrop 0.22s ease-out forwards;
+        }
+
+        @keyframes fadeInBackdrop {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        /* Mobile Drawer Container */
+        .mobile-drawer {
+          width: min(340px, 86vw);
+          height: 100%;
           background: #ffffff;
-          padding: 24px;
-          z-index: 999;
+          box-shadow: -10px 0 35px rgba(0, 0, 0, 0.22);
+          display: flex;
+          flex-direction: column;
+          padding: 22px 20px 24px;
           overflow-y: auto;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+          -webkit-overflow-scrolling: touch;
+          animation: drawerSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes drawerSlideIn {
+          from {
+            transform: translateX(100%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        .drawer-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 16px;
+          border-bottom: 1px solid var(--surface-border);
+          margin-bottom: 14px;
+        }
+
+        .drawer-brand {
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .drawer-close-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          background: #f1f5f9;
+          color: var(--brand-black);
+          border: 1px solid var(--surface-border);
+          transition: all 0.2s ease;
+          cursor: pointer;
+        }
+
+        .drawer-close-btn:hover {
+          background: #fee2e2;
+          color: #ef4444;
+          border-color: #fca5a5;
+        }
+
+        .drawer-trust-banner {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: var(--primary-green-subtle);
+          border: 1px solid rgba(24, 152, 66, 0.2);
+          padding: 8px 12px;
+          border-radius: 10px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: var(--primary-green-dark);
+          margin-bottom: 18px;
         }
 
         .mobile-nav-list {
           display: flex;
           flex-direction: column;
-          gap: 14px;
+          gap: 8px;
+          flex: 1;
           margin-bottom: 24px;
         }
 
         .mobile-nav-item {
-          font-size: 1.05rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 14px;
+          border-radius: 12px;
+          font-size: 0.95rem;
           font-weight: 600;
           color: var(--brand-black);
-          padding: 10px 0;
-          border-bottom: 1px solid var(--surface-border);
-          transition: all 0.2s ease;
+          background: transparent;
+          transition: all 0.18s ease;
+          border: 1px solid transparent;
+        }
+
+        .mobile-nav-item:hover {
+          background: #f8fafc;
+          border-color: var(--surface-border);
+          color: var(--primary-green-dark);
         }
 
         .mobile-nav-item.active {
-          color: var(--primary-green);
+          background: var(--primary-green-subtle);
+          border-color: rgba(24, 152, 66, 0.25);
+          color: var(--primary-green-dark);
           font-weight: 700;
-          border-left: 3px solid var(--primary-green);
-          padding-left: 10px;
         }
 
-        .mobile-nav-item.highlight {
+        .nav-item-title {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .nav-item-chevron {
+          color: #94a3b8;
+          transition: transform 0.2s ease;
+        }
+
+        .mobile-nav-item:hover .nav-item-chevron,
+        .mobile-nav-item.active .nav-item-chevron {
           color: var(--primary-green-dark);
-          background: var(--primary-green-subtle);
-          padding: 12px 16px;
-          border-radius: var(--radius-md);
-          border: none;
+          transform: translateX(3px);
         }
 
         .mobile-drawer-footer {
           display: flex;
           flex-direction: column;
           gap: 12px;
+          padding-top: 18px;
+          border-top: 1px solid var(--surface-border);
+        }
+
+        .mobile-wa-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 13px 18px;
+          background: #25d366;
+          color: #ffffff;
+          font-size: 0.9rem;
+          font-weight: 700;
+          border-radius: 12px;
+          text-decoration: none;
+          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+          transition: all 0.2s ease;
+        }
+
+        .mobile-wa-btn:hover {
+          background: #20ba59;
+          transform: translateY(-2px);
+        }
+
+        .mobile-call-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 11px 16px;
+          background: #f8fafc;
+          border: 1px solid var(--surface-border);
+          border-radius: 12px;
+          font-size: 0.84rem;
+          font-weight: 600;
+          color: var(--stone-dark);
+          transition: all 0.2s ease;
+        }
+
+        .mobile-call-link:hover {
+          border-color: var(--primary-green);
+          color: var(--primary-green-dark);
         }
 
         .mobile-factory-info {
           display: flex;
           justify-content: space-between;
-          font-size: 0.8rem;
-          color: var(--stone-mid);
+          font-size: 0.72rem;
+          color: #94a3b8;
+          padding: 0 4px;
         }
 
-        .mobile-factory-info a {
-          color: var(--primary-green-dark);
-          font-weight: 700;
-        }
-
-        .w-100 {
-          width: 100%;
-        }
-
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
           .nav-links {
             display: none;
           }
           .mobile-toggle {
-            display: block;
+            display: inline-flex;
           }
         }
 
@@ -491,12 +726,34 @@ export default function Header() {
           .top-cert-badge {
             display: none;
           }
+          .top-bar-container {
+            justify-content: center;
+          }
           .top-actions-right {
             width: 100%;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 14px;
           }
           .header-wa-btn {
             display: none;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-label {
+            display: none;
+          }
+          .top-actions-right {
+            gap: 10px;
+          }
+          .top-contact-link {
+            font-size: 0.76rem;
+          }
+          .header-main-nav {
+            padding: 10px 0;
+          }
+          .nav-brand :global(.logo-container img) {
+            height: 38px !important;
           }
         }
       `}</style>

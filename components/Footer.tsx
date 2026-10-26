@@ -524,6 +524,18 @@ export default function Footer() {
             font-size: 1.7rem;
           }
         }
+
+        @media (max-width: 480px) {
+          .enquiry-btn-wa {
+            width: 100%;
+            justify-content: center;
+            padding: 13px 20px;
+            font-size: 0.88rem;
+          }
+          .copyright-text {
+            font-size: 0.74rem;
+          }
+        }
       `}</style>
     </>
   );

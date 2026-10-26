@@ -1095,16 +1095,41 @@ export default function ProductCatalog() {
           .section-title {
             font-size: 2rem;
           }
+          .filter-nav-pills {
+            gap: 6px;
+            margin-top: 18px;
+          }
+          .filter-pill {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+          }
+          .modal-overlay {
+            padding: 12px;
+          }
           .modal-card {
-            padding: 24px 20px;
-            border-radius: 20px;
+            padding: 24px 18px;
+            border-radius: 18px;
+            max-height: 94vh;
+          }
+          .modal-close-btn {
+            top: 16px;
+            right: 16px;
+            width: 34px;
+            height: 34px;
           }
           .modal-title {
-            font-size: 1.45rem;
+            font-size: 1.35rem;
           }
           .specs-table-row {
             grid-template-columns: 1fr;
             gap: 4px;
+            padding: 10px 14px;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .section-title {
+            font-size: 1.7rem;
           }
         }
       `}</style>

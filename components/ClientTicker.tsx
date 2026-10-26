@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Award, ShieldCheck, CheckCircle2, Building2 } from "lucide-react";
+import { ShieldCheck, Building2 } from "lucide-react";
 
 const CLIENTS = [
   { name: "Road Development Authority (RDA)", category: "National Highways" },
@@ -158,6 +158,38 @@ export default function ClientTicker() {
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 640px) {
+          .ticker-section {
+            padding: 18px 0 24px;
+          }
+
+          .ticker-top-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+          }
+
+          .cert-badges-inline {
+            gap: 6px;
+          }
+
+          .cert-pill {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+          }
+
+          .client-badge {
+            padding: 8px 14px;
+            gap: 8px;
+            margin-right: 12px;
+          }
+
+          .client-name {
+            font-size: 0.82rem;
+          }
         }
       `}</style>
     </section>

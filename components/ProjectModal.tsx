@@ -21,10 +21,13 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
 
+  const [prevProject, setPrevProject] = useState<ProjectItem | null>(project);
+
   // Reset photo index when project changes
-  useEffect(() => {
+  if (project !== prevProject) {
+    setPrevProject(project);
     setActivePhotoIndex(0);
-  }, [project]);
+  }
 
   // Handle ESC key to close
   useEffect(() => {
@@ -555,6 +558,36 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           .specs-meta-grid {
             grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .modal-window {
+            margin: 10px;
+            max-height: 95vh;
+            border-radius: 18px;
+          }
+
+          .modal-top-bar {
+            padding: 14px 16px;
+          }
+
+          .modal-heading {
+            font-size: 1.2rem;
+          }
+
+          .modal-body-grid {
+            padding: 16px;
+            gap: 18px;
+          }
+
+          .main-photo-wrapper {
+            height: 210px;
+          }
+
+          .photo-nav-arrow {
+            width: 36px;
+            height: 36px;
           }
         }
       `}</style>

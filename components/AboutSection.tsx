@@ -23,6 +23,7 @@ export default function AboutSection() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="about-main-img"
                 priority
+                style={{ objectFit: "cover", objectPosition: "center" }}
               />
             </div>
           </div>

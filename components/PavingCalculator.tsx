@@ -396,12 +396,13 @@ export default function PavingCalculator() {
 
         /* Controls Card */
         .calc-controls-card {
-          background: var(--surface-offwhite);
+          background: #ffffff;
           border: 1px solid var(--surface-border);
           border-radius: var(--radius-xl);
           padding: 32px;
           display: flex;
           flex-direction: column;
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
         }
 
         .calc-step-group {
@@ -485,27 +486,32 @@ export default function PavingCalculator() {
 
         .calc-input {
           width: 100%;
-          padding: 14px 18px;
+          padding: 13px 80px 13px 16px;
           font-size: 1.25rem;
           font-weight: 700;
           color: var(--brand-black);
-          background: #ffffff;
+          background: #f8fafc;
           border: 2px solid var(--surface-border);
           border-radius: var(--radius-md);
           outline: none;
-          transition: border-color 0.2s ease;
+          transition: border-color 0.2s ease, background 0.2s ease;
         }
 
         .calc-input:focus {
           border-color: var(--primary-green);
+          background: #ffffff;
         }
 
         .input-unit {
           position: absolute;
-          right: 18px;
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--stone-mid);
+          right: 14px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: var(--primary-green-dark);
+          background: var(--primary-green-subtle);
+          border: 1px solid rgba(24, 152, 66, 0.2);
+          padding: 4px 10px;
+          border-radius: 6px;
           pointer-events: none;
         }
 
@@ -768,26 +774,71 @@ export default function PavingCalculator() {
         @media (max-width: 992px) {
           .calc-grid {
             grid-template-columns: 1fr;
-            gap: 28px;
+            gap: 24px;
           }
         }
 
         @media (max-width: 640px) {
-          .paver-selection-grid {
-            grid-template-columns: 1fr;
+          .section-title {
+            font-size: 2rem;
           }
           .calc-controls-card {
-            padding: 20px;
+            padding: 22px 18px;
+            border-radius: 18px;
           }
           .calc-results-card {
-            padding: 24px 20px;
+            padding: 22px 18px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #0e1726 0%, #0c0e12 100%);
+            border: 1px solid rgba(24, 152, 66, 0.3);
+          }
+          .unit-toggle-row {
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+          }
+          .toggle-pill,
+          .method-pill {
+            width: 100%;
+            display: flex;
+          }
+          .pill-btn,
+          .sub-pill {
+            flex: 1;
+            text-align: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            padding: 7px 10px;
+          }
+          .calc-input {
+            font-size: 1.1rem;
+            padding: 12px 72px 12px 14px;
+          }
+          .paver-selection-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          .paver-option-card {
+            padding: 12px 14px;
+            border-radius: 12px;
+          }
+          .results-title {
+            font-size: 1.4rem;
+          }
+          .result-metric-box {
+            padding: 16px 14px;
+            border-radius: 12px;
+            gap: 14px;
           }
           .metric-value {
             font-size: 1.65rem;
           }
           .result-profile-specs {
             grid-template-columns: 1fr;
-            gap: 10px;
+            gap: 8px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
           }
           .profile-spec-divider {
             display: none;
