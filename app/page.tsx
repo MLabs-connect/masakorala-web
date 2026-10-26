@@ -4,7 +4,6 @@ import ClientTicker from "@/components/ClientTicker";
 import AboutSection from "@/components/AboutSection";
 import ProductCatalog from "@/components/ProductCatalog";
 import PavingCalculator from "@/components/PavingCalculator";
-import QualityProcess from "@/components/QualityProcess";
 import ProjectsGallery from "@/components/ProjectsGallery";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
@@ -20,7 +19,6 @@ export default function Home() {
         <AboutSection />
         <ProductCatalog />
         <PavingCalculator />
-        <QualityProcess />
         <ProjectsGallery />
         <BlogSection />
         <ContactSection />

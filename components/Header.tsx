@@ -43,6 +43,10 @@ export default function Header() {
     setMobileMenuOpen(false);
 
     if (href === "#home" || href === "#") {
+      if (window.location.pathname !== "/") {
+        window.location.href = "/";
+        return;
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (window.history.pushState) {
         window.history.pushState(null, "", " ");
@@ -64,6 +68,8 @@ export default function Header() {
       if (window.history.pushState) {
         window.history.pushState(null, "", href);
       }
+    } else {
+      window.location.href = `/${href}`;
     }
   };
 

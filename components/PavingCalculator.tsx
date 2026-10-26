@@ -2,9 +2,7 @@
 
 import React, { useState } from "react";
 import {
-  Calculator,
   Boxes,
-  Ruler,
   Sparkles,
   CircleDollarSign,
   Info,
@@ -119,7 +117,6 @@ export default function PavingCalculator() {
         {/* Header */}
         <div className="calc-header text-center">
           <div className="section-tag">
-            <Calculator size={14} className="text-emerald" />
             <span>Material Estimator</span>
           </div>
           <h2 className="section-title">
@@ -245,9 +242,8 @@ export default function PavingCalculator() {
                     key={paver.id}
                     type="button"
                     onClick={() => setSelectedPaverId(paver.id)}
-                    className={`paver-option-card ${
-                      selectedPaverId === paver.id ? "selected" : ""
-                    }`}
+                    className={`paver-option-card ${selectedPaverId === paver.id ? "selected" : ""
+                      }`}
                   >
                     <div className="paver-card-top">
                       <strong className="paver-opt-name">{paver.name}</strong>

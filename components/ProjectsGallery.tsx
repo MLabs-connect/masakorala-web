@@ -2,174 +2,56 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  Building,
   MapPin,
   Calendar,
   Layers,
   ArrowRight,
   Maximize2,
-  CheckCircle,
 } from "lucide-react";
-
-interface ProjectItem {
-  id: string;
-  title: string;
-  category: "industrial" | "commercial" | "infrastructure" | "residential";
-  categoryLabel: string;
-  location: string;
-  area: string;
-  paverType: string;
-  year: string;
-  image: string;
-  excerpt: string;
-}
-
-const PROJECTS: ProjectItem[] = [
-  {
-    id: "phoenix-warehouse",
-    title: "Phoenix Warehouse & Logistics Hub: High-Strength Paving",
-    category: "industrial",
-    categoryLabel: "Industrial Logistics",
-    location: "Biyagama / Industrial Export Zone",
-    area: "20,000 Sq.Ft",
-    paverType: "80mm Heavy-Duty Uni Interlock (55 MPa)",
-    year: "2024",
-    image: "/images/uni-paver.jpg",
-    excerpt:
-      "Successfully delivered 20,000 square feet of heavy-duty interlocking paving on compacted quarry dust bed, engineered to withstand high-capacity container forklift movements without surface settlement.",
-  },
-  {
-    id: "colombo-port-city",
-    title: "Colombo Port City: Waterfront Retail & Promenade Paving",
-    category: "commercial",
-    categoryLabel: "Commercial Landmark",
-    location: "Port City Commercial Gateway, Colombo",
-    area: "35,000 Sq.Ft",
-    paverType: "Customized Washed Eliana & Directional Pavers",
-    year: "2024",
-    image: "/images/hero.jpg",
-    excerpt:
-      "Part of the world-class Port City investment zone for luxury dining, retail shops, and lifestyle spaces. Precision aesthetics combined with high skid-resistance for pedestrian safety.",
-  },
-  {
-    id: "keells-katugastota",
-    title: "Keells Supermarket Commercial Car Park – Katugasthota",
-    category: "commercial",
-    categoryLabel: "Retail Forecourt",
-    location: "Katugasthota, Central Province",
-    area: "14,000 Sq.Ft",
-    paverType: "80mm UNI Interlock Blocks",
-    year: "2023",
-    image: "/images/uni-paver.jpg",
-    excerpt:
-      "High-traffic commercial car park paved with 80mm heavy-duty interlock blocks laid over compacted quarry dust base to support continuous customer vehicle turnover.",
-  },
-  {
-    id: "keells-pallekele",
-    title: "Keells Supermarket Logistics Forecourt – Pallekele",
-    category: "commercial",
-    categoryLabel: "Retail & Parking",
-    location: "Pallekele, Kandy District",
-    area: "12,500 Sq.Ft",
-    paverType: "80mm UNI Interlock + Border Kerbs",
-    year: "2023",
-    image: "/images/uni-paver.jpg",
-    excerpt:
-      "Customer car park and rear delivery dock paved with reinforced interlock units, eliminating surface water stagnation and ensuring smooth truck turnaround.",
-  },
-  {
-    id: "brandix-green-campus",
-    title: "Brandix Eco-Tech Apparel Park – Sustainable Ground Paving",
-    category: "infrastructure",
-    categoryLabel: "Eco Infrastructure",
-    location: "Pannala Export Zone",
-    area: "85,000 Sq.Ft",
-    paverType: "Eco-Grass Permeable Cellular Blocks",
-    year: "2025",
-    image: "/images/grass-paver.jpg",
-    excerpt:
-      "Permeable cellular grass block installation recharging over 1.2 million liters of annual rainfall back to subterranean water aquifers, earning LEED Platinum sustainability points.",
-  },
-  {
-    id: "central-expressway",
-    title: "Central Expressway Interchange Toll Plazas",
-    category: "infrastructure",
-    categoryLabel: "National Highway",
-    location: "Kurunegala Central Interchange",
-    area: "65,000 Sq.Ft",
-    paverType: "Heavy-Duty Interlock Blocks 80mm (CS1 Grade)",
-    year: "2022",
-    image: "/images/uni-paver.jpg",
-    excerpt:
-      "High-shear interlocking pattern engineered under Road Development Authority (RDA) supervision to withstand heavy braking forces of interprovincial transport buses and haulage trailers.",
-  },
-];
+import { ALL_PROJECTS, ProjectItem } from "@/data/projectsData";
+import ProjectModal from "@/components/ProjectModal";
 
 export default function ProjectsGallery() {
-  const [filter, setFilter] = useState<string>("all");
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
-  const filteredProjects =
-    filter === "all"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === filter);
+  // Default to showing only 3 project cards
+  const displayedProjects = ALL_PROJECTS.slice(0, 3);
 
   return (
     <section id="projects" className="section-padding projects-section">
       <div className="container">
-        {/* Header */}
-        <div className="projects-header-row">
-          <div>
-            <div className="section-tag">
-              <Building size={14} />
-              <span>Our Latest Projects</span>
-            </div>
-            <h2 className="section-title">
-              Crafting Lasting Impressions Through Innovative Paving
-            </h2>
-            <p className="section-desc">
-              From landmark port infrastructure and logistics warehouses to supermarket
-              commercial car parks and residential enclaves across Sri Lanka.
-            </p>
+        {/* Centered Header */}
+        <div className="projects-header-centered">
+          <div className="section-tag">
+            <span>Our Latest Projects</span>
           </div>
-
-          {/* Filter Pills */}
-          <div className="project-filter-group">
-            <button
-              type="button"
-              onClick={() => setFilter("all")}
-              className={`filter-btn ${filter === "all" ? "active" : ""}`}
-            >
-              All Projects ({PROJECTS.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setFilter("industrial")}
-              className={`filter-btn ${filter === "industrial" ? "active" : ""}`}
-            >
-              Industrial & Warehouses
-            </button>
-            <button
-              type="button"
-              onClick={() => setFilter("commercial")}
-              className={`filter-btn ${filter === "commercial" ? "active" : ""}`}
-            >
-              Commercial & Supermarkets
-            </button>
-            <button
-              type="button"
-              onClick={() => setFilter("infrastructure")}
-              className={`filter-btn ${filter === "infrastructure" ? "active" : ""}`}
-            >
-              Highways & Eco
-            </button>
-          </div>
+          <h2 className="section-title">
+            Crafting Lasting Impressions Through Innovative Paving
+          </h2>
+          <p className="section-desc">
+            From landmark port infrastructure and logistics warehouses to supermarket
+            commercial car parks and residential enclaves across Sri Lanka.
+          </p>
         </div>
 
-        {/* Gallery Grid */}
+        {/* 3-Card Project Grid */}
         <div className="projects-grid">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="project-card">
+          {displayedProjects.map((project) => (
+            <div
+              key={project.id}
+              className="project-card"
+              onClick={() => setSelectedProject(project)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedProject(project);
+                }
+              }}
+            >
               <div className="project-media">
                 <Image
                   src={project.image}
@@ -178,8 +60,11 @@ export default function ProjectsGallery() {
                   height={380}
                   className="project-img"
                 />
-                <span className="project-cat-badge">{project.categoryLabel}</span>
                 <span className="project-area-badge">{project.area}</span>
+                <div className="media-overlay-hint">
+                  <Maximize2 size={16} />
+                  <span>View Photos & Details</span>
+                </div>
               </div>
 
               <div className="project-content">
@@ -203,23 +88,37 @@ export default function ProjectsGallery() {
                     <span>{project.paverType}</span>
                   </div>
 
-                  <a
-                    href={`https://wa.me/94706972703?text=${encodeURIComponent(
-                      `Inquiry regarding your work on ${project.title} (${project.location}). We have a similar project.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="view-project-link"
+                  <button
+                    type="button"
+                    className="view-project-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedProject(project);
+                    }}
                   >
-                    <span>Inquire Similar Site</span>
+                    <span>View Project Details</span>
                     <ArrowRight size={14} />
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* See More Projects CTA Row */}
+        <div className="see-more-wrapper">
+          <Link href="/projects" className="see-more-btn">
+            <span>See More Projects</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
       </div>
+
+      {/* Interactive Project Details & Photos Popup Dialog */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
 
       <style jsx>{`
         .projects-section {
@@ -227,49 +126,44 @@ export default function ProjectsGallery() {
           border-top: 1px solid var(--surface-border);
         }
 
-        .projects-header-row {
+        /* Perfectly centered header */
+        .projects-header-centered {
+          text-align: center;
+          max-width: 820px;
+          margin: 0 auto 52px auto;
           display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          flex-wrap: wrap;
-          gap: 28px;
-          margin-bottom: 48px;
-        }
-
-        .project-filter-group {
-          display: flex;
+          flex-direction: column;
           align-items: center;
-          flex-wrap: wrap;
-          gap: 10px;
+          justify-content: center;
         }
 
-        .filter-btn {
-          padding: 8px 18px;
-          border-radius: var(--radius-full);
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: var(--stone-mid);
-          background: var(--surface-offwhite);
-          border: 1px solid var(--surface-border);
-          transition: all 0.2s ease;
+        .projects-header-centered .section-tag {
+          margin-bottom: 14px;
         }
 
-        .filter-btn:hover {
-          color: var(--primary-green-dark);
-          border-color: var(--primary-green);
+        .projects-header-centered .section-title {
+          font-family: var(--font-heading);
+          font-size: 2.25rem;
+          font-weight: 700;
+          color: var(--brand-black);
+          line-height: 1.25;
+          margin-bottom: 16px;
         }
 
-        .filter-btn.active {
-          background: var(--brand-black);
-          color: #ffffff;
-          border-color: var(--brand-black);
+        .projects-header-centered .section-desc {
+          font-size: 1.05rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+          margin: 0;
+          max-width: 740px;
         }
 
-        /* Grid */
+        /* 3-Column Grid */
         .projects-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
+          margin-bottom: 48px;
         }
 
         .project-card {
@@ -280,17 +174,19 @@ export default function ProjectsGallery() {
           box-shadow: var(--shadow-sm);
           display: flex;
           flex-direction: column;
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
+          cursor: pointer;
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
         .project-card:hover {
-          transform: translateY(-5px);
-          box-shadow: var(--shadow-lg);
+          transform: translateY(-6px);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+          border-color: rgba(24, 152, 66, 0.35);
         }
 
         .project-media {
           position: relative;
-          height: 240px;
+          height: 250px;
           background: #14171d;
           overflow: hidden;
         }
@@ -303,34 +199,42 @@ export default function ProjectsGallery() {
         }
 
         .project-card:hover .project-img {
-          transform: scale(1.05);
-        }
-
-        .project-cat-badge {
-          position: absolute;
-          top: 14px;
-          left: 14px;
-          background: rgba(12, 14, 18, 0.85);
-          color: #4ade80;
-          font-size: 0.72rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          padding: 4px 12px;
-          border-radius: var(--radius-full);
-          backdrop-filter: blur(8px);
+          transform: scale(1.06);
         }
 
         .project-area-badge {
           position: absolute;
-          bottom: 14px;
+          top: 14px;
           right: 14px;
           background: var(--primary-green);
           color: #ffffff;
           font-size: 0.76rem;
           font-weight: 700;
-          padding: 4px 10px;
-          border-radius: var(--radius-sm);
+          padding: 5px 12px;
+          border-radius: var(--radius-full);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+          z-index: 2;
+        }
+
+        .media-overlay-hint {
+          position: absolute;
+          inset: 0;
+          background: rgba(12, 14, 18, 0.55);
+          backdrop-filter: blur(2px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          color: #ffffff;
+          font-size: 0.85rem;
+          font-weight: 600;
+          opacity: 0;
+          transition: opacity 0.25s ease;
+          z-index: 3;
+        }
+
+        .project-card:hover .media-overlay-hint {
+          opacity: 1;
         }
 
         .project-content {
@@ -346,7 +250,7 @@ export default function ProjectsGallery() {
           align-items: center;
           font-size: 0.78rem;
           color: var(--stone-mid);
-          margin-bottom: 10px;
+          margin-bottom: 12px;
         }
 
         .loc-item,
@@ -366,13 +270,18 @@ export default function ProjectsGallery() {
           font-weight: 700;
           color: var(--brand-black);
           line-height: 1.35;
-          margin-bottom: 10px;
+          margin-bottom: 12px;
+          transition: color 0.2s ease;
+        }
+
+        .project-card:hover .project-title {
+          color: var(--primary-green-dark);
         }
 
         .project-excerpt {
-          font-size: 0.85rem;
+          font-size: 0.86rem;
           color: var(--text-muted);
-          line-height: 1.5;
+          line-height: 1.55;
           margin-bottom: 20px;
           flex-grow: 1;
         }
@@ -391,36 +300,84 @@ export default function ProjectsGallery() {
           gap: 6px;
           background: var(--surface-offwhite);
           border: 1px solid var(--surface-border);
-          padding: 5px 12px;
+          padding: 6px 12px;
           border-radius: var(--radius-full);
-          font-size: 0.74rem;
+          font-size: 0.76rem;
           font-weight: 600;
           color: var(--stone-dark);
         }
 
-        .view-project-link {
+        .view-project-btn {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.82rem;
+          justify-content: space-between;
+          width: 100%;
+          background: transparent;
+          border: none;
+          padding: 6px 0;
+          font-size: 0.84rem;
           font-weight: 700;
           color: var(--primary-green-dark);
-          transition: gap 0.2s ease;
+          cursor: pointer;
+          transition: all 0.2s ease;
         }
 
-        .view-project-link:hover {
+        .view-project-btn:hover {
+          color: var(--brand-black);
+          transform: translateX(4px);
+        }
+
+        /* See More Button Container */
+        .see-more-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .see-more-btn {
+          display: inline-flex;
+          align-items: center;
           gap: 10px;
+          padding: 14px 32px;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #ffffff;
+          background: var(--brand-black);
+          border: 1px solid var(--brand-black);
+          border-radius: var(--radius-full);
+          text-decoration: none;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+          transition: all 0.25s ease;
         }
 
-        @media (max-width: 1200px) {
+        .see-more-btn:hover {
+          background: var(--primary-green);
+          border-color: var(--primary-green);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(24, 152, 66, 0.35);
+        }
+
+        @media (max-width: 1100px) {
           .projects-grid {
             grid-template-columns: repeat(2, 1fr);
+          }
+
+          .projects-header-centered .section-title {
+            font-size: 1.95rem;
           }
         }
 
         @media (max-width: 768px) {
           .projects-grid {
             grid-template-columns: 1fr;
+          }
+
+          .projects-header-centered .section-title {
+            font-size: 1.65rem;
+          }
+
+          .projects-header-centered .section-desc {
+            font-size: 0.95rem;
           }
         }
       `}</style>
