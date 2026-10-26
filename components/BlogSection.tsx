@@ -1,268 +1,332 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { BookOpen, Calendar, Clock, ArrowRight, User, Sparkles } from "lucide-react";
+import { Star, CheckCircle, Quote, MapPin, Building2 } from "lucide-react";
 
-const ARTICLES = [
+interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  location: string;
+  projectScope: string;
+  rating: number;
+  date: string;
+  review: string;
+  initials: string;
+}
+
+const REVIEWS: Testimonial[] = [
   {
-    id: "top-7-benefits-interlock",
-    title: "Top 7 Benefits of Using Interlock Paving for Roads & Walkways in Sri Lanka",
-    category: "Technical Advisory",
-    date: "October 2026",
-    readTime: "5 min read",
-    author: "Senior Civil Engineer, Masakorala Group",
-    image: "/images/uni-paver.jpg",
-    excerpt:
-      "Interlock paving has become the fastest-growing solution in Sri Lanka’s civil construction industry. From residential driveways to heavy container yards, discover why interlocking concrete blocks offer unbeatable durability, monsoon drainage, and 30-year lifecycle savings over asphalt.",
-    link: "#calculator",
+    id: "review-1",
+    name: "Eng. Asantha Perera",
+    role: "Chief Civil Project Engineer",
+    company: "Phoenix Industrial Logistics",
+    location: "Biyagama Export Zone",
+    projectScope: "20,000 Sq.Ft 80mm Heavy-Duty Uni Interlock",
+    rating: 5,
+    date: "October 2024",
+    initials: "AP",
+    review:
+      "We selected Masakorala's 80mm heavy-duty Uni interlock blocks (55 MPa) for our primary container yard in Biyagama. Even under continuous 45-ton reach-stacker traffic and heavy container offloading, there has been zero surface depression or edge chipping. The compressive strength and dimensional consistency are outstanding.",
   },
   {
-    id: "residential-driveway-transformation",
-    title: "Transforming a Residential Driveway with Interlock Paving: Case Study",
-    category: "Case Study",
-    date: "September 2026",
-    readTime: "4 min read",
-    author: "Architectural Paving Team",
-    image: "/images/hero.jpg",
-    excerpt:
-      "The client required an elegant, long-lasting driveway capable of supporting heavy SUVs without surface cracking or tire staining. Learn how our 60mm Arrow and Washed Eliana blocks transformed the property curb appeal.",
-    link: "#products",
+    id: "review-2",
+    name: "Malik De Silva",
+    role: "Senior Facilities Director",
+    company: "Retail Commercial Properties",
+    location: "Katugasthota, Kandy",
+    projectScope: "14,000 Sq.Ft Supermarket Forecourt & Bays",
+    rating: 5,
+    date: "September 2024",
+    initials: "MS",
+    review:
+      "Masakorala Holdings completed our commercial supermarket car park ahead of our grand opening. The contrasting charcoal and light grey parking demarcations look sharp, and rainfall drains instantly during heavy downpours with zero puddling. Highly recommended for commercial grade paving.",
   },
   {
-    id: "commercial-complex-landscaping",
-    title: "Comprehensive Landscaping and Heavy Paving for Commercial Complexes",
-    category: "Commercial Case Study",
-    date: "August 2026",
-    readTime: "6 min read",
-    author: "Civil Engineering Advisory",
-    image: "/images/grass-paver.jpg",
-    excerpt:
-      "Large-scale commercial properties require integrated solutions for customer parking, loading bays, and green garden walkways. How we combined 80mm heavy interlocks with permeable eco-grass pavers to achieve zero surface flooding.",
-    link: "#quality",
+    id: "review-3",
+    name: "Dr. Nilmini Jayawardena",
+    role: "Private Homeowner",
+    company: "Residential Villa Project",
+    location: "Cinnamon Gardens, Colombo 07",
+    projectScope: "4,200 Sq.Ft Washed Eliana & Border Kerbs",
+    rating: 5,
+    date: "August 2024",
+    initials: "NJ",
+    review:
+      "Transformed our residential villa driveway and garden terraces using Washed Eliana exposed aggregate pavers. The textured surface is completely non-slip when wet and gave our property an elegant, luxurious entrance. Their certified laying team was polite, neat, and highly professional.",
   },
 ];
 
 export default function BlogSection() {
   return (
-    <section id="blogs" className="section-padding blog-section">
+    <section id="reviews" className="section-padding reviews-section">
+      {/* Anchor alias for backwards compatibility */}
+      <div id="blogs" style={{ position: "absolute", top: "-80px" }} />
+
       <div className="container">
-        {/* Header */}
-        <div className="text-center blog-header-wrapper">
+        {/* Centered Header */}
+        <div className="reviews-header-centered">
           <div className="section-tag">
-            <BookOpen size={14} />
-            <span>News & Industry Insights</span>
+            <span>Client Reviews</span>
           </div>
           <h2 className="section-title">
-            Read About Paving Best Practices & Case Studies
+            Trusted by Sri Lanka&apos;s Leading Contractors & Property Owners
           </h2>
-          <p className="section-desc mx-auto">
-            Practical knowledge and engineering case studies from our senior civil engineers,
-            helping clients and contractors make confident infrastructure decisions.
+          <p className="section-desc">
+            Real feedback from commercial developers, industrial logistics managers, and residential
+            homeowners on our paving stone durability, precision manufacturing, and turnkey laying services.
           </p>
         </div>
 
-        {/* Articles Grid with Images matching Senarath Group's card layout */}
-        <div className="blog-grid">
-          {ARTICLES.map((article) => (
-            <article key={article.id} className="blog-card">
-              <div className="blog-card-media">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  width={400}
-                  height={220}
-                  className="blog-img"
-                />
-                <span className="blog-cat-pill">{article.category}</span>
+        {/* 3 Fixed Testimonial Cards */}
+        <div className="reviews-grid">
+          {REVIEWS.map((rev) => (
+            <div key={rev.id} className="review-card">
+              {/* Card Header: Stars & Quote Icon */}
+              <div className="review-card-top">
+                <div className="stars-row" aria-label={`${rev.rating} out of 5 stars`}>
+                  {[...Array(rev.rating)].map((_, i) => (
+                    <Star key={i} size={17} className="star-icon filled" />
+                  ))}
+                </div>
+                <Quote size={28} className="quote-mark" />
               </div>
 
-              <div className="blog-card-body">
-                <div className="blog-meta-row">
-                  <span className="meta-time">
-                    <Clock size={12} /> {article.readTime}
-                  </span>
-                  <span>•</span>
-                  <span className="meta-date">{article.date}</span>
-                </div>
+              {/* Review Text */}
+              <p className="review-text">&ldquo;{rev.review}&rdquo;</p>
 
-                <h3 className="blog-card-title">
-                  <a href={article.link}>{article.title}</a>
-                </h3>
+              {/* Verified Project Badge */}
+              <div className="project-badge-pill">
+                <Building2 size={13} className="text-emerald" />
+                <span>{rev.projectScope}</span>
+              </div>
 
-                <p className="blog-card-excerpt">{article.excerpt}</p>
-
-                <div className="blog-card-footer">
-                  <div className="author-meta">
-                    <User size={13} className="text-emerald" />
-                    <span>{article.author}</span>
+              {/* Author Row */}
+              <div className="review-author-row">
+                <div className="author-avatar">{rev.initials}</div>
+                <div className="author-details">
+                  <div className="author-name-row">
+                    <strong className="author-name">{rev.name}</strong>
+                    <span className="verified-badge" title="Verified Project Client">
+                      <CheckCircle size={13} />
+                      <span>Verified</span>
+                    </span>
                   </div>
-
-                  <a href={article.link} className="read-more-btn">
-                    <span>View More</span>
-                    <ArrowRight size={14} />
-                  </a>
+                  <span className="author-role">{rev.role}</span>
+                  <span className="author-company">{rev.company}</span>
+                  <span className="author-location">
+                    <MapPin size={11} className="text-emerald" />
+                    <span>{rev.location}</span>
+                  </span>
                 </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>
 
       <style jsx>{`
-        .blog-section {
-          background: var(--surface-offwhite);
+        .reviews-section {
+          background: #fbfbfc;
           border-top: 1px solid var(--surface-border);
+          position: relative;
         }
 
-        .blog-header-wrapper {
-          margin-bottom: 50px;
+        .reviews-header-centered {
+          text-align: center;
+          max-width: 820px;
+          margin: 0 auto 52px auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
 
-        .blog-grid {
+        .reviews-header-centered .section-tag {
+          margin-bottom: 14px;
+        }
+
+        .reviews-header-centered .section-title {
+          font-family: var(--font-heading);
+          font-size: 2.25rem;
+          font-weight: 700;
+          color: var(--brand-black);
+          line-height: 1.25;
+          margin-bottom: 16px;
+        }
+
+        .reviews-header-centered .section-desc {
+          font-size: 1.05rem;
+          color: var(--text-muted);
+          line-height: 1.6;
+          margin: 0;
+          max-width: 740px;
+        }
+
+        /* 3-Column Fixed Grid */
+        .reviews-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
+          margin-bottom: 0;
         }
 
-        .blog-card {
+        .review-card {
           background: #ffffff;
           border: 1px solid var(--surface-border);
           border-radius: var(--radius-xl);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
+          padding: 32px 28px;
           box-shadow: var(--shadow-sm);
-          transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .blog-card:hover {
-          transform: translateY(-5px);
-          border-color: rgba(24, 152, 66, 0.4);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .blog-card-media {
-          position: relative;
-          height: 200px;
-          background: #14171d;
-          overflow: hidden;
-        }
-
-        .blog-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .blog-card:hover .blog-img {
-          transform: scale(1.05);
-        }
-
-        .blog-cat-pill {
-          position: absolute;
-          top: 14px;
-          left: 14px;
-          background: rgba(12, 14, 18, 0.85);
-          color: #4ade80;
-          font-size: 0.7rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          padding: 4px 10px;
-          border-radius: var(--radius-full);
-          backdrop-filter: blur(8px);
-        }
-
-        .blog-card-body {
-          padding: 24px;
           display: flex;
           flex-direction: column;
-          flex-grow: 1;
+          position: relative;
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        .blog-meta-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.74rem;
-          color: var(--stone-light);
-          margin-bottom: 10px;
+        .review-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+          border-color: rgba(24, 152, 66, 0.35);
         }
 
-        .meta-time {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .blog-card-title {
-          font-family: var(--font-heading);
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: var(--brand-black);
-          line-height: 1.35;
-          margin-bottom: 12px;
-          transition: color 0.2s ease;
-        }
-
-        .blog-card-title:hover {
-          color: var(--primary-green-dark);
-        }
-
-        .blog-card-excerpt {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          line-height: 1.55;
-          margin-bottom: 22px;
-          flex-grow: 1;
-        }
-
-        .blog-card-footer {
+        .review-card-top {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding-top: 16px;
-          border-top: 1px solid var(--surface-border);
+          margin-bottom: 20px;
         }
 
-        .author-meta {
+        .stars-row {
           display: flex;
+          gap: 3px;
+        }
+
+        :global(.star-icon.filled) {
+          fill: #f59e0b;
+          color: #f59e0b;
+        }
+
+        :global(.quote-mark) {
+          color: rgba(24, 152, 66, 0.2);
+          flex-shrink: 0;
+        }
+
+        .review-text {
+          font-size: 0.94rem;
+          color: var(--brand-black);
+          line-height: 1.65;
+          margin: 0 0 20px 0;
+          flex-grow: 1;
+          font-style: normal;
+        }
+
+        .project-badge-pill {
+          display: inline-flex;
           align-items: center;
           gap: 6px;
+          background: var(--surface-offwhite);
+          border: 1px solid var(--surface-border);
+          border-radius: var(--radius-full);
+          padding: 6px 12px;
           font-size: 0.74rem;
-          color: var(--stone-mid);
-          font-weight: 500;
+          font-weight: 600;
+          color: var(--stone-dark);
+          margin-bottom: 20px;
         }
 
         .text-emerald {
           color: var(--primary-green);
         }
 
-        .read-more-btn {
+        .review-author-row {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding-top: 18px;
+          border-top: 1px solid var(--surface-border);
+        }
+
+        .author-avatar {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--primary-green), #136930);
+          color: #ffffff;
+          font-size: 0.95rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 4px 10px rgba(24, 152, 66, 0.25);
+        }
+
+        .author-details {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          min-width: 0;
+        }
+
+        .author-name-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .author-name {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: var(--brand-black);
+        }
+
+        .verified-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.82rem;
+          gap: 3px;
+          font-size: 0.68rem;
           font-weight: 700;
           color: var(--primary-green-dark);
-          transition: gap 0.2s ease;
+          background: var(--primary-green-subtle);
+          padding: 2px 7px;
+          border-radius: var(--radius-full);
         }
 
-        .read-more-btn:hover {
-          gap: 9px;
+        .author-role {
+          font-size: 0.78rem;
+          color: var(--stone-dark);
+          font-weight: 500;
         }
 
-        @media (max-width: 1024px) {
-          .blog-grid {
+        .author-company {
+          font-size: 0.75rem;
+          color: var(--stone-mid);
+        }
+
+        .author-location {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 0.73rem;
+          color: var(--stone-mid);
+          margin-top: 2px;
+        }
+
+        @media (max-width: 1100px) {
+          .reviews-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
         @media (max-width: 768px) {
-          .blog-grid {
+          .reviews-grid {
             grid-template-columns: 1fr;
+          }
+
+          .reviews-header-centered .section-title {
+            font-size: 1.7rem;
           }
         }
       `}</style>

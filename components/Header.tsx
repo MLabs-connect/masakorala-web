@@ -24,7 +24,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: "products", label: "Products", href: "#products" },
   { id: "calculator", label: "Calculator", href: "#calculator", isCalc: true },
   { id: "projects", label: "Projects", href: "#projects" },
-  { id: "blogs", label: "Blogs", href: "#blogs" },
+  { id: "reviews", label: "Reviews", href: "#reviews" },
   { id: "contact", label: "Contact Us", href: "#contact" },
 ];
 
@@ -93,7 +93,7 @@ export default function Header() {
 
       const sectionIds = [
         "contact",
-        "blogs",
+        "reviews",
         "projects",
         "calculator",
         "products",

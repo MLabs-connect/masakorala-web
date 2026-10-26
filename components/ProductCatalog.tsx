@@ -6,6 +6,7 @@ import {
   Gauge,
   Ruler,
   X,
+  ChevronDown,
 } from "lucide-react";
 
 export interface ColorVariant {
@@ -165,6 +166,7 @@ export default function ProductCatalog() {
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [activeColors, setActiveColors] = useState<Record<string, string>>({});
   const [modalColor, setModalColor] = useState<string>("");
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   // Close modal on escape key
   useEffect(() => {
@@ -193,6 +195,10 @@ export default function ProductCatalog() {
     activeTab === "all"
       ? PRODUCTS
       : PRODUCTS.filter((p) => p.category === activeTab);
+
+  const displayedProducts = isExpanded
+    ? filteredProducts
+    : filteredProducts.slice(0, 3);
 
   const handleColorSelect = (productId: string, colorName: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -272,7 +278,7 @@ export default function ProductCatalog() {
 
         {/* Product Cards Grid */}
         <div className="products-grid">
-          {filteredProducts.map((product) => {
+          {displayedProducts.map((product) => {
             const currentColor = activeColors[product.id] || product.colorVariants[0]?.name || "";
             return (
               <div
@@ -359,6 +365,28 @@ export default function ProductCatalog() {
             );
           })}
         </div>
+
+        {/* Glassmorphism Expand / See More Button */}
+        {filteredProducts.length > 3 && (
+          <div className="expand-action-row">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="glass-see-more-btn"
+              aria-expanded={isExpanded}
+            >
+              <span>
+                {isExpanded
+                  ? "Show Less Products"
+                  : `See More Products (${filteredProducts.length - 3} More)`}
+              </span>
+              <ChevronDown
+                size={18}
+                className={`expand-chevron ${isExpanded ? "rotate-up" : ""}`}
+              />
+            </button>
+          </div>
+        )}
 
         {/* Specifications Modal Dialog */}
         {selectedProduct && (
@@ -545,6 +573,52 @@ export default function ProductCatalog() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 28px;
+        }
+
+        /* Glassmorphism See More Button */
+        .expand-action-row {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 40px;
+        }
+
+        .glass-see-more-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 34px;
+          border-radius: var(--radius-full);
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: var(--brand-black);
+          background: rgba(255, 255, 255, 0.65);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid rgba(255, 255, 255, 0.9);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06),
+                      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+                      0 2px 6px rgba(24, 152, 66, 0.08);
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-see-more-btn:hover {
+          background: rgba(255, 255, 255, 0.92);
+          border-color: rgba(24, 152, 66, 0.4);
+          color: var(--primary-green-dark);
+          transform: translateY(-2px);
+          box-shadow: 0 14px 36px rgba(24, 152, 66, 0.16),
+                      inset 0 1px 2px rgba(255, 255, 255, 1);
+        }
+
+        .expand-chevron {
+          transition: transform 0.3s ease;
+          color: var(--primary-green);
+        }
+
+        .expand-chevron.rotate-up {
+          transform: rotate(180deg);
         }
 
         /* Product Card */
