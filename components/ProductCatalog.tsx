@@ -6,7 +6,6 @@ import {
   Gauge,
   Ruler,
   X,
-  Sparkles,
 } from "lucide-react";
 
 export interface ColorVariant {
@@ -214,8 +213,7 @@ export default function ProductCatalog() {
         {/* Section Header */}
         <div className="text-center section-header-wrapper">
           <div className="section-tag">
-            <Sparkles size={13} className="text-emerald" />
-            <span>Our Products Portfolio</span>
+            <span>Our Products</span>
           </div>
           <h2 className="section-title">
             A Diverse Portfolio of Certified Paving Blocks

@@ -3,15 +3,11 @@
 import React, { useState } from "react";
 import {
   Calculator,
-  ArrowRight,
-  MessageCircle,
-  CheckCircle2,
-  HelpCircle,
-  Truck,
   Boxes,
   Ruler,
-  FileCheck,
-  RefreshCw,
+  Sparkles,
+  CircleDollarSign,
+  Info,
 } from "lucide-react";
 
 export interface PaverConfig {
@@ -30,7 +26,7 @@ export const PAVER_OPTIONS: PaverConfig[] = [
     thickness: "80mm",
     unitsPerSqFt: 3.7,
     estPricePerBlock: 78,
-    idealFor: "Heavy Cargo, Container Yards, Warehouses, Freight Terminals",
+    idealFor: "Heavy Cargo, Container Yards, Warehouses",
   },
   {
     id: "uni-60",
@@ -38,15 +34,7 @@ export const PAVER_OPTIONS: PaverConfig[] = [
     thickness: "60mm",
     unitsPerSqFt: 3.7,
     estPricePerBlock: 64,
-    idealFor: "Residential Driveways, Commercial Forecourts, Shopping Centers",
-  },
-  {
-    id: "washed-eliana",
-    name: "Washed Eliana 60mm [Textured]",
-    thickness: "60mm",
-    unitsPerSqFt: 9.0,
-    estPricePerBlock: 38,
-    idealFor: "Luxury Walkways, Pool Decks, Villa Entrances, Hotel Verandahs",
+    idealFor: "Residential Driveways, Commercial Forecourts",
   },
   {
     id: "arrow-60",
@@ -54,15 +42,15 @@ export const PAVER_OPTIONS: PaverConfig[] = [
     thickness: "60mm",
     unitsPerSqFt: 3.5,
     estPricePerBlock: 68,
-    idealFor: "Directional Forecourts, Office Compounds, Modern Estates",
+    idealFor: "Directional Forecourts, Plazas, Modern Estates",
   },
   {
     id: "grass-80",
     name: "Grass Paver 80mm [Permeable]",
     thickness: "80mm",
-    unitsPerSqFt: 0.58,
-    estPricePerBlock: 340,
-    idealFor: "Eco-Resorts, Grass Parking, Fire Truck Access Lanes",
+    unitsPerSqFt: 3.7,
+    estPricePerBlock: 92,
+    idealFor: "Eco-Resorts, Grass Parking, Green Pathways",
   },
   {
     id: "rhombus-60",
@@ -70,7 +58,7 @@ export const PAVER_OPTIONS: PaverConfig[] = [
     thickness: "60mm",
     unitsPerSqFt: 2.25,
     estPricePerBlock: 95,
-    idealFor: "3D Isometric Plazas, Courtyards, Architectural Promenades",
+    idealFor: "3D Isometric Plazas, Architectural Courtyards",
   },
   {
     id: "wing-60",
@@ -78,7 +66,15 @@ export const PAVER_OPTIONS: PaverConfig[] = [
     thickness: "60mm",
     unitsPerSqFt: 3.4,
     estPricePerBlock: 72,
-    idealFor: "Contoured Driveways, Pedestrian Malls, Villa Courtyards",
+    idealFor: "Contoured Driveways, Pedestrian Malls",
+  },
+  {
+    id: "washed-eliana",
+    name: "Washed Eliana 60mm [Textured]",
+    thickness: "60mm",
+    unitsPerSqFt: 9.0,
+    estPricePerBlock: 38,
+    idealFor: "Luxury Walkways, Pool Decks, Villa Entrances",
   },
 ];
 
@@ -89,9 +85,6 @@ export default function PavingCalculator() {
   const [widthInput, setWidthInput] = useState<number>(30);
   const [inputMethod, setInputMethod] = useState<"total" | "dimensions">("total");
   const [selectedPaverId, setSelectedPaverId] = useState<string>("uni-80");
-  const [includeWastage, setIncludeWastage] = useState<boolean>(true);
-  const [includeSandBed, setIncludeSandBed] = useState<boolean>(true);
-  const [includeLayingService, setIncludeLayingService] = useState<boolean>(false);
 
   // Selected configuration
   const currentPaver =
@@ -107,23 +100,9 @@ export default function PavingCalculator() {
 
   const validArea = Math.max(0, effectiveAreaSqFt || 0);
 
-  // Calculations
-  const wastageMultiplier = includeWastage ? 1.05 : 1.0;
-  const rawBlockCount = validArea * currentPaver.unitsPerSqFt;
-  const totalBlocks = Math.ceil(rawBlockCount * wastageMultiplier);
-
-  // Pallet estimates
-  const blocksPerPallet = currentPaver.id === "grass-80" ? 50 : 400;
-  const palletCount = Math.ceil(totalBlocks / blocksPerPallet);
-
-  // Bedding Sand estimate (1 cube per ~200 sq.ft at 50mm depth)
-  const sandCubes = (validArea / 200).toFixed(1);
-
-  // Estimated Material Costs (in LKR)
-  const materialCost = totalBlocks * currentPaver.estPricePerBlock;
-  const sandBedCost = includeSandBed ? parseFloat(sandCubes) * 14000 : 0;
-  const layingLaborCost = includeLayingService ? validArea * 35 : 0;
-  const totalEstimatedCost = materialCost + sandBedCost + layingLaborCost;
+  // Exact Stones & Rough Cost calculations
+  const totalBlocks = Math.ceil(validArea * currentPaver.unitsPerSqFt);
+  const roughStoneCost = totalBlocks * currentPaver.estPricePerBlock;
 
   const handleAreaChange = (val: number) => {
     setAreaInput(val);
@@ -134,38 +113,21 @@ export default function PavingCalculator() {
     setWidthInput(w);
   };
 
-  // WhatsApp Message Payload matching company hotline
-  const generateWhatsAppMessage = () => {
-    const text = `*New Paving Project Inquiry - Masakorala Holdings*
------------------------------------------
-- *Project Area:* ${validArea.toFixed(0)} Sq.Ft (${(validArea / 10.7639).toFixed(1)} Sq.M)
-- *Selected Paver:* ${currentPaver.name} (${currentPaver.thickness})
-- *Estimated Blocks:* ${totalBlocks.toLocaleString()} Units (includes ${includeWastage ? "5% cutting allowance" : "no cutting allowance"})
-- *Estimated Pallets:* ~${palletCount} Pallets (Crane Truck Delivery)
-- *Quarry Sand Bedding:* ${includeSandBed ? `${sandCubes} Cubes required` : "Excluded"}
-- *Turnkey Laying Service:* ${includeLayingService ? "Required" : "Not Required"}
-- *Estimated Budget:* LKR ${totalEstimatedCost.toLocaleString()} (Approx)
------------------------------------------
-Please provide an official quotation, delivery timeframe to our site, and sample availability.`;
-
-    return `https://wa.me/94706972703?text=${encodeURIComponent(text)}`;
-  };
-
   return (
     <section id="calculator" className="section-padding calculator-section">
       <div className="container">
         {/* Header */}
         <div className="calc-header text-center">
           <div className="section-tag">
-            <Calculator size={14} />
-            <span>Interactive Estimator Tool</span>
+            <Calculator size={14} className="text-emerald" />
+            <span>Material Estimator</span>
           </div>
           <h2 className="section-title">
-            Paving Block & Material Quantity Calculator
+            Paving Block & Quantity Calculator
           </h2>
           <p className="section-desc mx-auto">
-            Plan your residential driveway, commercial plaza, or industrial warehouse
-            flooring. Calculate exact block quantities, sand bedding requirements, and instant estimates.
+            Plan your driveway, parking yard, or commercial project. Select your paving profile
+            and specify dimensions to get instantaneous block quantities and rough cost estimates.
           </p>
         </div>
 
@@ -180,7 +142,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                 <label className="step-title">Specify Your Project Area</label>
               </div>
 
-              {/* Units Switcher */}
+              {/* Units & Method Switcher */}
               <div className="unit-toggle-row">
                 <div className="toggle-pill">
                   <button
@@ -224,7 +186,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                     type="number"
                     min="1"
                     max="500000"
-                    value={areaInput}
+                    value={areaInput || ""}
                     onChange={(e) => handleAreaChange(Number(e.target.value))}
                     className="calc-input"
                     placeholder="Enter total area..."
@@ -239,7 +201,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                     <input
                       type="number"
                       min="1"
-                      value={lengthInput}
+                      value={lengthInput || ""}
                       onChange={(e) =>
                         handleDimensionsChange(Number(e.target.value), widthInput)
                       }
@@ -255,7 +217,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                     <input
                       type="number"
                       min="1"
-                      value={widthInput}
+                      value={widthInput || ""}
                       onChange={(e) =>
                         handleDimensionsChange(lengthInput, Number(e.target.value))
                       }
@@ -268,44 +230,10 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                   </div>
                 </div>
               )}
-
-              <div className="quick-presets">
-                <span className="preset-label">Quick Presets:</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInputMethod("total");
-                    setAreaInput(500);
-                  }}
-                  className="preset-btn"
-                >
-                  500 sq.ft (Villa Car Porch)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInputMethod("total");
-                    setAreaInput(2500);
-                  }}
-                  className="preset-btn"
-                >
-                  2,500 sq.ft (Commercial Driveway)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInputMethod("total");
-                    setAreaInput(15000);
-                  }}
-                  className="preset-btn"
-                >
-                  15,000 sq.ft (Factory Yard)
-                </button>
-              </div>
             </div>
 
-            {/* Step 2: Choose Paver Pattern */}
-            <div className="calc-step-group">
+            {/* Step 2: Choose Paver Profile */}
+            <div className="calc-step-group step-2-group">
               <div className="step-label-row">
                 <span className="step-badge">Step 2</span>
                 <label className="step-title">Select Paving Block Profile</label>
@@ -317,8 +245,9 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                     key={paver.id}
                     type="button"
                     onClick={() => setSelectedPaverId(paver.id)}
-                    className={`paver-option-card ${selectedPaverId === paver.id ? "selected" : ""
-                      }`}
+                    className={`paver-option-card ${
+                      selectedPaverId === paver.id ? "selected" : ""
+                    }`}
                   >
                     <div className="paver-card-top">
                       <strong className="paver-opt-name">{paver.name}</strong>
@@ -332,164 +261,80 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                 ))}
               </div>
             </div>
-
-            {/* Step 3: Add-on Options */}
-            <div className="calc-step-group">
-              <div className="step-label-row">
-                <span className="step-badge">Step 3</span>
-                <label className="step-title">Project Engineering Parameters</label>
-              </div>
-
-              <div className="checkboxes-stack">
-                <label className="checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={includeWastage}
-                    onChange={(e) => setIncludeWastage(e.target.checked)}
-                    className="calc-checkbox"
-                  />
-                  <div>
-                    <strong>Include 5% Cutting & Wastage Margin (Recommended)</strong>
-                    <p className="check-sub">
-                      Accounts for edge trimming along curves, boundary kerbs, and inspection chambers.
-                    </p>
-                  </div>
-                </label>
-
-                <label className="checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={includeSandBed}
-                    onChange={(e) => setIncludeSandBed(e.target.checked)}
-                    className="calc-checkbox"
-                  />
-                  <div>
-                    <strong>Calculate 50mm Compacted Quarry Sand Bedding</strong>
-                    <p className="check-sub">
-                      Estimates the required volume of screened quarry dust bed prior to block laying.
-                    </p>
-                  </div>
-                </label>
-
-                <label className="checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={includeLayingService}
-                    onChange={(e) => setIncludeLayingService(e.target.checked)}
-                    className="calc-checkbox"
-                  />
-                  <div>
-                    <strong>Include Professional Masakorala Laying & Compaction Crew</strong>
-                    <p className="check-sub">
-                      Includes sub-base leveling, screeding, interlocking assembly, and plate vibrator finishing.
-                    </p>
-                  </div>
-                </label>
-              </div>
-            </div>
           </div>
 
           {/* Results Column (Right) */}
           <div className="calc-results-card">
-            <div className="results-header">
-              <div className="results-tag">Material Bill of Quantities (BOQ)</div>
-              <h3 className="results-title">Project Estimation Summary</h3>
-              <p className="results-area-confirm">
-                Based on <strong>{validArea.toFixed(0)} Sq.Ft</strong> (
-                {(validArea / 10.7639).toFixed(1)} m²) coverage for{" "}
-                <span className="highlight-paver">{currentPaver.name}</span>.
-              </p>
-            </div>
-
-            {/* Primary Highlight Numbers */}
-            <div className="metrics-cards-grid">
-              <div className="metric-box main-metric">
-                <div className="m-icon">
-                  <Boxes size={22} />
+            <div>
+              <div className="results-header">
+                <div className="results-tag">
+                  <Sparkles size={12} className="text-emerald-light" />
+                  Instant Estimation
                 </div>
-                <div>
-                  <div className="m-val">{totalBlocks.toLocaleString()}</div>
-                  <div className="m-unit">Total Paving Blocks</div>
+                <h3 className="results-title">Calculation Summary</h3>
+                <p className="results-area-confirm">
+                  For <strong>{validArea.toFixed(0)} Sq.Ft</strong> (
+                  {(validArea / 10.7639).toFixed(1)} m²) using{" "}
+                  <span className="highlight-paver">{currentPaver.name}</span>.
+                </p>
+              </div>
+
+              {/* Primary Stones Quantity Metric */}
+              <div className="result-metric-box main-metric">
+                <div className="metric-icon-wrap">
+                  <Boxes size={24} className="text-emerald-light" />
+                </div>
+                <div className="metric-details">
+                  <div className="metric-value">{totalBlocks.toLocaleString()}</div>
+                  <div className="metric-label">Total Paving Stones Needed</div>
+                  <div className="metric-subtext">
+                    Formula: {validArea.toFixed(0)} sq.ft × {currentPaver.unitsPerSqFt} blocks/sq.ft
+                  </div>
                 </div>
               </div>
 
-              <div className="metric-box">
-                <div className="m-icon">
-                  <Truck size={22} />
+              {/* Roughly Cost for Stones */}
+              <div className="result-metric-box cost-metric">
+                <div className="metric-icon-wrap">
+                  <CircleDollarSign size={24} className="text-emerald-light" />
                 </div>
-                <div>
-                  <div className="m-val">~{palletCount}</div>
-                  <div className="m-unit">Pallets (Crane Truck Transport)</div>
+                <div className="metric-details">
+                  <div className="metric-value cost-value">
+                    LKR {roughStoneCost.toLocaleString()}
+                  </div>
+                  <div className="metric-label">Rough Estimated Stone Cost</div>
+                  <div className="metric-subtext">
+                    Approx. guide at LKR {currentPaver.estPricePerBlock} / block (ex-factory rate)
+                  </div>
                 </div>
               </div>
 
-              {includeSandBed && (
-                <div className="metric-box">
-                  <div className="m-icon">
-                    <Ruler size={22} />
-                  </div>
-                  <div>
-                    <div className="m-val">{sandCubes} Cubes</div>
-                    <div className="m-unit">Quarry Dust Bedding</div>
-                  </div>
+              {/* Profile Details Bar */}
+              <div className="result-profile-specs">
+                <div className="profile-spec-item">
+                  <span className="spec-item-label">Profile</span>
+                  <strong className="spec-item-val">{currentPaver.name}</strong>
                 </div>
-              )}
-            </div>
-
-            {/* Cost Breakdown Table */}
-            <div className="cost-breakdown-box">
-              <h4 className="cost-breakdown-title">Estimated Budget Allocation:</h4>
-              <div className="breakdown-list">
-                <div className="breakdown-item">
-                  <span>Precast Paver Blocks ({totalBlocks.toLocaleString()} pcs)</span>
-                  <strong>LKR {materialCost.toLocaleString()}</strong>
+                <div className="profile-spec-divider" />
+                <div className="profile-spec-item">
+                  <span className="spec-item-label">Thickness</span>
+                  <strong className="spec-item-val">{currentPaver.thickness}</strong>
                 </div>
-
-                {includeSandBed && (
-                  <div className="breakdown-item">
-                    <span>Bedding Sand / Quarry Dust (~{sandCubes} cubes)</span>
-                    <strong>LKR {sandBedCost.toLocaleString()}</strong>
-                  </div>
-                )}
-
-                {includeLayingService && (
-                  <div className="breakdown-item">
-                    <span>Turnkey Laying, Jointing & Compaction</span>
-                    <strong>LKR {layingLaborCost.toLocaleString()}</strong>
-                  </div>
-                )}
-
-                <div className="breakdown-item total-item">
-                  <div>
-                    <strong>Estimated Investment Range</strong>
-                    <span className="tax-notice">*Ex-factory estimate, subject to site location & transport</span>
-                  </div>
-                  <div className="total-cost-num">
-                    LKR {totalEstimatedCost.toLocaleString()}
-                  </div>
+                <div className="profile-spec-divider" />
+                <div className="profile-spec-item">
+                  <span className="spec-item-label">Coverage</span>
+                  <strong className="spec-item-val">{currentPaver.unitsPerSqFt} / sq.ft</strong>
                 </div>
               </div>
             </div>
 
-            {/* Guaranteed Quotation CTAs */}
-            <div className="results-action-box">
-              <a
-                href={generateWhatsAppMessage()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary w-100 calc-whatsapp-btn"
-              >
-                <MessageCircle size={20} />
-                <span>Send to WhatsApp for Formal Quotation</span>
-              </a>
-
-              <p className="guarantee-note">
-                <CheckCircle2 size={15} className="text-emerald-500" />
-                <span>
-                  Our technical officers will verify site measurements, arrange free samples,
-                  and deliver factory-direct discounts for projects over 5,000 sq.ft.
-                </span>
-              </p>
+            {/* Advisory Note */}
+            <div className="results-note-box">
+              <Info size={15} className="note-icon" />
+              <span>
+                Estimate reflects rough ex-factory paver quantities. Actual units may vary slightly
+                depending on site geometry and edge trimming.
+              </span>
             </div>
           </div>
         </div>
@@ -506,11 +351,51 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           margin-bottom: 48px;
         }
 
+        .section-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--primary-green-dark);
+          background: var(--primary-green-subtle);
+          padding: 5px 14px;
+          border-radius: var(--radius-full);
+          border: 1px solid rgba(24, 152, 66, 0.2);
+          margin-bottom: 12px;
+        }
+
+        .text-emerald {
+          color: var(--primary-green);
+        }
+
+        .text-emerald-light {
+          color: #22c55e;
+        }
+
+        .section-title {
+          font-family: var(--font-heading);
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: var(--brand-black);
+          line-height: 1.2;
+          margin-bottom: 12px;
+        }
+
+        .section-desc {
+          font-size: 1rem;
+          color: var(--text-muted);
+          max-width: 680px;
+          line-height: 1.7;
+        }
+
         .calc-grid {
           display: grid;
-          grid-template-columns: 1.2fr 1fr;
+          grid-template-columns: 1.25fr 1fr;
           gap: 36px;
-          align-items: start;
+          align-items: stretch;
         }
 
         /* Controls Card */
@@ -519,15 +404,17 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           border: 1px solid var(--surface-border);
           border-radius: var(--radius-xl);
           padding: 32px;
+          display: flex;
+          flex-direction: column;
         }
 
         .calc-step-group {
-          margin-bottom: 32px;
-          padding-bottom: 28px;
+          margin-bottom: 28px;
+          padding-bottom: 26px;
           border-bottom: 1px solid var(--surface-border);
         }
 
-        .calc-step-group:last-child {
+        .step-2-group {
           margin-bottom: 0;
           padding-bottom: 0;
           border-bottom: none;
@@ -597,7 +484,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           position: relative;
           display: flex;
           align-items: center;
-          margin-bottom: 14px;
+          margin-bottom: 0;
         }
 
         .calc-input {
@@ -630,42 +517,17 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           display: flex;
           align-items: center;
           gap: 12px;
-          margin-bottom: 14px;
+          margin-bottom: 0;
+        }
+
+        .dimensions-inputs .input-field-wrapper {
+          flex: 1;
         }
 
         .dim-times {
           font-size: 1.4rem;
           font-weight: 700;
           color: var(--stone-mid);
-        }
-
-        .quick-presets {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .preset-label {
-          font-size: 0.78rem;
-          font-weight: 600;
-          color: var(--stone-mid);
-        }
-
-        .preset-btn {
-          font-size: 0.76rem;
-          font-weight: 600;
-          color: var(--primary-green-dark);
-          background: #ffffff;
-          border: 1px solid rgba(24, 152, 66, 0.25);
-          padding: 4px 10px;
-          border-radius: var(--radius-full);
-          transition: all 0.2s ease;
-        }
-
-        .preset-btn:hover {
-          background: var(--primary-green-subtle);
-          border-color: var(--primary-green);
         }
 
         /* Paver Selection Grid */
@@ -682,6 +544,7 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           padding: 14px;
           text-align: left;
           transition: all 0.2s ease;
+          cursor: pointer;
         }
 
         .paver-option-card:hover {
@@ -734,74 +597,47 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           color: var(--stone-light);
         }
 
-        /* Checkboxes */
-        .checkboxes-stack {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-        }
-
-        .checkbox-row {
-          display: flex;
-          gap: 12px;
-          align-items: flex-start;
-          cursor: pointer;
-        }
-
-        .calc-checkbox {
-          width: 18px;
-          height: 18px;
-          accent-color: var(--primary-green);
-          margin-top: 3px;
-          flex-shrink: 0;
-        }
-
-        .checkbox-row strong {
-          display: block;
-          font-size: 0.88rem;
-          color: var(--brand-black);
-        }
-
-        .check-sub {
-          font-size: 0.78rem;
-          color: var(--text-muted);
-          line-height: 1.4;
-          margin-top: 2px;
-        }
-
         /* Results Card (Right) */
         .calc-results-card {
-          background: linear-gradient(145deg, #12151c 0%, #0c0e12 100%);
+          background: linear-gradient(145deg, #14171d 0%, #0c0e12 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
           padding: 36px;
-          position: sticky;
-          top: 100px;
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .results-header {
+          margin-bottom: 24px;
         }
 
         .results-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
           font-size: 0.75rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           color: #4ade80;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
         }
 
         .results-title {
           font-family: var(--font-heading);
-          font-size: 1.6rem;
+          font-size: 1.7rem;
           font-weight: 700;
           color: #ffffff;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
 
         .results-area-confirm {
-          font-size: 0.85rem;
+          font-size: 0.88rem;
           color: #94a3b8;
-          margin-bottom: 24px;
+          line-height: 1.5;
         }
 
         .highlight-paver {
@@ -809,144 +645,134 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           font-weight: 600;
         }
 
-        .metrics-cards-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 14px;
-          margin-bottom: 24px;
-        }
-
-        .metric-box {
+        /* Metric Result Boxes */
+        .result-metric-box {
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-md);
-          padding: 16px 20px;
+          border-radius: 16px;
+          padding: 20px 22px;
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 18px;
+          margin-bottom: 16px;
+          transition: all 0.25s ease;
         }
 
-        .metric-box.main-metric {
-          background: rgba(24, 152, 66, 0.15);
+        .result-metric-box.main-metric {
+          background: rgba(24, 152, 66, 0.14);
           border-color: rgba(74, 222, 128, 0.35);
         }
 
-        .m-icon {
-          width: 44px;
-          height: 44px;
+        .result-metric-box.cost-metric {
+          background: rgba(255, 255, 255, 0.04);
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-icon-wrap {
+          width: 50px;
+          height: 50px;
+          border-radius: 12px;
           background: rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #4ade80;
           flex-shrink: 0;
         }
 
-        .m-val {
-          font-family: var(--font-heading);
-          font-size: 1.7rem;
-          font-weight: 700;
-          color: #ffffff;
-          line-height: 1.1;
-        }
-
-        .m-unit {
-          font-size: 0.8rem;
-          color: #94a3b8;
-          font-weight: 500;
-        }
-
-        /* Cost Breakdown Table */
-        .cost-breakdown-box {
-          background: rgba(0, 0, 0, 0.3);
-          border-radius: var(--radius-md);
-          padding: 18px;
-          margin-bottom: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .cost-breakdown-title {
-          font-size: 0.84rem;
-          color: #cbd5e1;
-          margin-bottom: 12px;
-          font-weight: 600;
-        }
-
-        .breakdown-list {
+        .metric-details {
           display: flex;
           flex-direction: column;
-          gap: 10px;
         }
 
-        .breakdown-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.82rem;
-          color: #94a3b8;
-        }
-
-        .breakdown-item strong {
-          color: #ffffff;
-        }
-
-        .breakdown-item.total-item {
-          padding-top: 14px;
-          margin-top: 4px;
-          border-top: 1px dashed rgba(255, 255, 255, 0.15);
-          align-items: flex-end;
-        }
-
-        .breakdown-item.total-item strong {
-          font-size: 0.92rem;
-          color: #ffffff;
-          display: block;
-        }
-
-        .tax-notice {
-          font-size: 0.7rem;
-          color: #64748b;
-          display: block;
-        }
-
-        .total-cost-num {
+        .metric-value {
           font-family: var(--font-heading);
-          font-size: 1.45rem;
+          font-size: 2rem;
           font-weight: 800;
+          color: #ffffff;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+        }
+
+        .cost-value {
           color: #4ade80;
         }
 
-        .results-action-box {
+        .metric-label {
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: #e2e8f0;
+          margin-top: 4px;
+        }
+
+        .metric-subtext {
+          font-size: 0.74rem;
+          color: #94a3b8;
+          margin-top: 2px;
+        }
+
+        /* Profile Details Bar */
+        .result-profile-specs {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr auto 1fr;
+          align-items: center;
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 12px;
+          padding: 14px 16px;
+          margin-top: 8px;
+          margin-bottom: 24px;
+        }
+
+        .profile-spec-item {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          align-items: center;
+          text-align: center;
         }
 
-        .calc-whatsapp-btn {
-          padding: 15px;
-          font-size: 0.98rem;
+        .profile-spec-divider {
+          width: 1px;
+          height: 32px;
+          background: rgba(255, 255, 255, 0.1);
         }
 
-        .guarantee-note {
+        .spec-item-label {
+          font-size: 0.7rem;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .spec-item-val {
+          font-size: 0.82rem;
+          color: #ffffff;
+          margin-top: 3px;
+        }
+
+        /* Advisory Note */
+        .results-note-box {
           display: flex;
-          gap: 8px;
+          gap: 10px;
           align-items: flex-start;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 10px;
+          padding: 12px 14px;
           font-size: 0.78rem;
           color: #94a3b8;
-          line-height: 1.45;
+          line-height: 1.5;
         }
 
-        .text-emerald-500 {
-          color: #10b981;
+        :global(.note-icon) {
+          flex-shrink: 0;
+          color: #4ade80;
+          margin-top: 2px;
         }
 
         @media (max-width: 992px) {
           .calc-grid {
             grid-template-columns: 1fr;
-          }
-          .calc-results-card {
-            position: static;
+            gap: 28px;
           }
         }
 
@@ -959,6 +785,21 @@ Please provide an official quotation, delivery timeframe to our site, and sample
           }
           .calc-results-card {
             padding: 24px 20px;
+          }
+          .metric-value {
+            font-size: 1.65rem;
+          }
+          .result-profile-specs {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          .profile-spec-divider {
+            display: none;
+          }
+          .profile-spec-item {
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
           }
         }
       `}</style>
