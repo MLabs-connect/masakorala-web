@@ -174,7 +174,7 @@ export const PRODUCTS: ProductItem[] = [
   },
   {
     id: "wing-paver",
-    name: "Wing Paving [Smooth Finished]",
+    name: "Wing Paver [Smooth Finished]",
     finish: "Wing Fluted Profile",
     category: "geometric",
     categoryLabel: "Directional & Geometric",
@@ -227,7 +227,7 @@ export default function ProductCatalog() {
             A Diverse Portfolio of Certified Paving Blocks
           </h2>
           <p className="section-desc mx-auto">
-            Masakorala Paving manufactures high-density interlocking pavers, washed aggregate
+            Masakorala Holdings manufactures high-density interlocking pavers, washed aggregate
             stones, and permeable grass systems engineered to SLS 1425 & ISO 9001 standards.
           </p>
 
@@ -418,9 +418,8 @@ export default function ProductCatalog() {
                           key={i}
                           type="button"
                           onClick={() => setActiveColor(c.name)}
-                          className={`swatch-picker-dot ${
-                            activeColor === c.name ? "selected" : ""
-                          }`}
+                          className={`swatch-picker-dot ${activeColor === c.name ? "selected" : ""
+                            }`}
                           style={{ backgroundColor: c.hex }}
                           title={c.name}
                         />

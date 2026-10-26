@@ -74,7 +74,7 @@ export const PAVER_OPTIONS: PaverConfig[] = [
   },
   {
     id: "wing-60",
-    name: "Wing Paving 60mm [Smooth]",
+    name: "Wing Paver 60mm [Smooth]",
     thickness: "60mm",
     unitsPerSqFt: 3.4,
     estPricePerBlock: 72,
@@ -102,8 +102,8 @@ export default function PavingCalculator() {
     inputMethod === "dimensions"
       ? lengthInput * widthInput * (unitMode === "sqm" ? 10.7639 : 1)
       : unitMode === "sqm"
-      ? areaInput * 10.7639
-      : areaInput;
+        ? areaInput * 10.7639
+        : areaInput;
 
   const validArea = Math.max(0, effectiveAreaSqFt || 0);
 
@@ -317,9 +317,8 @@ Please provide an official quotation, delivery timeframe to our site, and sample
                     key={paver.id}
                     type="button"
                     onClick={() => setSelectedPaverId(paver.id)}
-                    className={`paver-option-card ${
-                      selectedPaverId === paver.id ? "selected" : ""
-                    }`}
+                    className={`paver-option-card ${selectedPaverId === paver.id ? "selected" : ""
+                      }`}
                   >
                     <div className="paver-card-top">
                       <strong className="paver-opt-name">{paver.name}</strong>

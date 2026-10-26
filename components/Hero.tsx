@@ -15,7 +15,7 @@ const SLIDES = [
     tag: "35+ Years of Construction Legacy",
     title: "Your Trusted Partner for Quality Paving Work",
     subtitle:
-      "Masakorala Paving offers durable, high-density CS1-graded paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
+      "Masakorala Holdings offers durable, high-density CS1-graded paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
     badge: "SLS 1425 & ISO 9001:2015 Certified",
     image: "/images/hero.jpg",
   },
