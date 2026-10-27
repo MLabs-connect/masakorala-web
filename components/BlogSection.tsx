@@ -323,10 +323,29 @@ export default function BlogSection() {
         @media (max-width: 768px) {
           .reviews-grid {
             grid-template-columns: 1fr;
+            gap: 20px;
+          }
+
+          .reviews-header-centered {
+            margin-bottom: 36px;
           }
 
           .reviews-header-centered .section-title {
-            font-size: 1.7rem;
+            font-size: clamp(1.7rem, 6.5vw, 2.15rem);
+          }
+
+          .reviews-header-centered .section-desc {
+            font-size: 0.95rem;
+          }
+
+          .review-card {
+            padding: 24px 18px;
+            border-radius: 18px;
+          }
+
+          .review-text {
+            font-size: 0.92rem;
+            line-height: 1.6;
           }
         }
       `}</style>

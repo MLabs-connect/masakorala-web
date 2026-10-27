@@ -17,8 +17,8 @@ export default function AboutSection() {
           <div className="about-media-col">
             <div className="about-image-card">
               <Image
-                src="/images/uni-paver.jpg"
-                alt="Masakorala CS1-graded heavy duty interlocking paving blocks"
+                src="/images/hero.jpg"
+                alt="Masakorala Holdings 35-year manufacturing heritage and engineering plant"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="about-main-img"
@@ -296,19 +296,29 @@ export default function AboutSection() {
 
         @media (max-width: 640px) {
           .about-image-card {
-            min-height: 250px;
-            height: 280px;
+            min-height: 220px;
+            height: clamp(220px, 55vw, 290px);
           }
           .about-headline {
-            font-size: 2rem;
+            font-size: clamp(1.75rem, 6.5vw, 2.2rem);
           }
           .about-sub-years {
-            font-size: 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+          }
+          .about-lead-para {
+            font-size: 0.92rem;
+            line-height: 1.65;
+          }
+          .about-sub-para {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 18px;
           }
           .about-stats-banner {
             grid-template-columns: 1fr;
-            gap: 16px;
-            padding: 18px;
+            gap: 12px;
+            padding: 14px 16px;
           }
           .stat-banner-divider {
             display: none;
@@ -316,7 +326,7 @@ export default function AboutSection() {
           .stat-banner-item {
             flex-direction: row;
             text-align: left;
-            gap: 14px;
+            gap: 12px;
             padding: 0;
           }
           .stat-icon-wrap {
@@ -327,7 +337,7 @@ export default function AboutSection() {
             align-items: flex-start;
           }
           .stat-number {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
           }
         }
       `}</style>

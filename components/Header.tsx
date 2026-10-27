@@ -540,6 +540,8 @@ export default function Header() {
           display: flex;
           flex-direction: column;
           padding: 22px 20px 24px;
+          padding-top: max(22px, env(safe-area-inset-top));
+          padding-bottom: max(24px, env(safe-area-inset-bottom));
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
           animation: drawerSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -623,6 +625,7 @@ export default function Header() {
           background: transparent;
           transition: all 0.18s ease;
           border: 1px solid transparent;
+          min-height: 44px;
         }
 
         .mobile-nav-item:hover {

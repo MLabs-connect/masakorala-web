@@ -1091,45 +1091,74 @@ export default function ProductCatalog() {
         @media (max-width: 640px) {
           .products-grid {
             grid-template-columns: 1fr;
+            gap: 20px;
           }
           .section-title {
-            font-size: 2rem;
+            font-size: clamp(1.75rem, 6.5vw, 2.2rem);
+          }
+          .section-desc {
+            font-size: 0.95rem;
           }
           .filter-nav-pills {
-            gap: 6px;
-            margin-top: 18px;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            gap: 8px;
+            margin: 18px -16px 28px -16px;
+            padding: 4px 16px 8px 16px;
+          }
+          .filter-nav-pills::-webkit-scrollbar {
+            display: none;
           }
           .filter-pill {
-            padding: 6px 14px;
-            font-size: 0.8rem;
+            flex-shrink: 0;
+            white-space: nowrap;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            min-height: 40px;
           }
           .modal-overlay {
-            padding: 12px;
+            padding: 10px;
           }
           .modal-card {
-            padding: 24px 18px;
+            padding: 22px 16px;
             border-radius: 18px;
-            max-height: 94vh;
+            max-height: 92vh;
+            width: 100%;
           }
           .modal-close-btn {
-            top: 16px;
-            right: 16px;
-            width: 34px;
-            height: 34px;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
           }
           .modal-title {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
+            padding-right: 36px;
           }
           .specs-table-row {
             grid-template-columns: 1fr;
-            gap: 4px;
-            padding: 10px 14px;
+            gap: 3px;
+            padding: 10px 12px;
+          }
+          .modal-color-pills-row {
+            gap: 6px;
+          }
+          .modal-color-pill {
+            padding: 6px 12px;
+            font-size: 0.8rem;
           }
         }
 
         @media (max-width: 400px) {
           .section-title {
-            font-size: 1.7rem;
+            font-size: 1.65rem;
+          }
+          .modal-title {
+            font-size: 1.2rem;
           }
         }
       `}</style>

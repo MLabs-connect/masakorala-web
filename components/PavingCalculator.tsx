@@ -6,6 +6,7 @@ import {
   Sparkles,
   CircleDollarSign,
   Info,
+  MessageCircle,
 } from "lucide-react";
 
 export interface PaverConfig {
@@ -331,6 +332,21 @@ export default function PavingCalculator() {
                 Estimate reflects rough ex-factory paver quantities. Actual units may vary slightly
                 depending on site geometry and edge trimming.
               </span>
+            </div>
+
+            {/* Direct WhatsApp Quote Action */}
+            <div className="calc-cta-row">
+              <a
+                href={`https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20used%20your%20calculator%20for%20${encodeURIComponent(
+                  currentPaver.name
+                )}%20(${Math.round(validArea)}%20${unitMode === "sqm" ? "m²" : "sq.ft"}).%20Estimated%20Blocks:%20${totalBlocks.toLocaleString()}.%20Please%20send%20me%20an%20official%20quote.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="calc-wa-action-btn"
+              >
+                <MessageCircle size={18} />
+                <span>Get Official Quote on WhatsApp</span>
+              </a>
             </div>
           </div>
         </div>
@@ -778,16 +794,47 @@ export default function PavingCalculator() {
           }
         }
 
+        .calc-cta-row {
+          margin-top: 18px;
+        }
+
+        .calc-wa-action-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: 100%;
+          padding: 13px 18px;
+          background: #25d366;
+          color: #ffffff;
+          font-weight: 700;
+          font-size: 0.92rem;
+          border-radius: var(--radius-md);
+          text-decoration: none;
+          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+          transition: all 0.25s ease;
+          min-height: 48px;
+        }
+
+        .calc-wa-action-btn:hover {
+          background: #20ba59;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        }
+
         @media (max-width: 640px) {
           .section-title {
-            font-size: 2rem;
+            font-size: clamp(1.75rem, 6.5vw, 2.2rem);
+          }
+          .section-desc {
+            font-size: 0.95rem;
           }
           .calc-controls-card {
-            padding: 22px 18px;
+            padding: 20px 16px;
             border-radius: 18px;
           }
           .calc-results-card {
-            padding: 22px 18px;
+            padding: 20px 16px;
             border-radius: 18px;
             background: linear-gradient(145deg, #0e1726 0%, #0c0e12 100%);
             border: 1px solid rgba(24, 152, 66, 0.3);
@@ -808,11 +855,13 @@ export default function PavingCalculator() {
             text-align: center;
             justify-content: center;
             font-size: 0.78rem;
-            padding: 7px 10px;
+            padding: 9px 10px;
+            min-height: 42px;
           }
           .calc-input {
             font-size: 1.1rem;
             padding: 12px 72px 12px 14px;
+            min-height: 48px;
           }
           .paver-selection-grid {
             grid-template-columns: 1fr;
@@ -823,20 +872,20 @@ export default function PavingCalculator() {
             border-radius: 12px;
           }
           .results-title {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
           }
           .result-metric-box {
             padding: 16px 14px;
             border-radius: 12px;
-            gap: 14px;
+            gap: 12px;
           }
           .metric-value {
-            font-size: 1.65rem;
+            font-size: 1.6rem;
           }
           .result-profile-specs {
             grid-template-columns: 1fr;
             gap: 8px;
-            padding: 14px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: 12px;
           }
@@ -847,6 +896,9 @@ export default function PavingCalculator() {
             flex-direction: row;
             justify-content: space-between;
             width: 100%;
+          }
+          .calc-wa-action-btn {
+            font-size: 0.88rem;
           }
         }
       `}</style>

@@ -370,14 +370,30 @@ export default function ProjectsGallery() {
         @media (max-width: 768px) {
           .projects-grid {
             grid-template-columns: 1fr;
+            gap: 22px;
+          }
+
+          .projects-header-centered {
+            margin-bottom: 36px;
           }
 
           .projects-header-centered .section-title {
-            font-size: 1.65rem;
+            font-size: clamp(1.7rem, 6.5vw, 2.15rem);
           }
 
           .projects-header-centered .section-desc {
             font-size: 0.95rem;
+          }
+
+          .project-media {
+            height: clamp(190px, 52vw, 230px);
+          }
+
+          .see-more-btn {
+            width: 100%;
+            justify-content: center;
+            min-height: 48px;
+            font-size: 0.92rem;
           }
         }
       `}</style>

@@ -191,14 +191,30 @@ export default function ContactSection() {
         @media (max-width: 768px) {
           .locations-grid {
             grid-template-columns: 1fr;
+            gap: 18px;
+          }
+
+          .contact-header-centered {
+            margin-bottom: 34px;
           }
 
           .contact-header-centered .section-title {
-            font-size: 1.75rem;
+            font-size: clamp(1.7rem, 6.5vw, 2.15rem);
           }
 
           .contact-header-centered .section-desc {
             font-size: 0.95rem;
+          }
+
+          .loc-card {
+            padding: 20px 16px;
+            gap: 14px;
+            border-radius: 18px;
+          }
+
+          .loc-icon-wrapper {
+            width: 42px;
+            height: 42px;
           }
         }
       `}</style>

@@ -557,23 +557,27 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           }
 
           .specs-meta-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
           }
         }
 
         @media (max-width: 640px) {
-          .modal-window {
-            margin: 10px;
-            max-height: 95vh;
+          .modal-backdrop {
+            padding: 10px;
+          }
+
+          .modal-card {
+            max-height: 94vh;
             border-radius: 18px;
+            width: 100%;
           }
 
-          .modal-top-bar {
-            padding: 14px 16px;
-          }
-
-          .modal-heading {
-            font-size: 1.2rem;
+          .modal-close-btn {
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
           }
 
           .modal-body-grid {
@@ -582,12 +586,45 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           }
 
           .main-photo-wrapper {
-            height: 210px;
+            height: 220px;
+            border-radius: 14px;
           }
 
-          .photo-nav-arrow {
-            width: 36px;
-            height: 36px;
+          .project-detail-title {
+            font-size: 1.35rem;
+            line-height: 1.25;
+            padding-right: 36px;
+          }
+
+          .specs-meta-grid {
+            grid-template-columns: 1fr;
+            gap: 8px;
+          }
+
+          .meta-box {
+            padding: 10px 14px;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .gallery-nav-btn {
+            width: 34px;
+            height: 34px;
+          }
+
+          .modal-whatsapp-btn {
+            padding: 13px 18px;
+            font-size: 0.88rem;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .project-detail-title {
+            font-size: 1.2rem;
+          }
+          .main-photo-wrapper {
+            height: 190px;
           }
         }
       `}</style>

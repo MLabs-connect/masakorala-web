@@ -7,12 +7,10 @@ import {
   Phone,
   Mail,
   MapPin,
-  ShieldCheck,
-  Check,
+  MessageCircle,
 } from "lucide-react";
 
 export default function Footer() {
-
   return (
     <>
       {/* High-Impact CTA Banner: Contact Us For Enquiries */}
@@ -31,6 +29,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="enquiry-btn-wa"
               >
+                <MessageCircle size={18} />
                 <span>WhatsApp: (+94) 70 697 2703</span>
               </a>
             </div>
@@ -38,25 +37,31 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Main Footer with Symmetrical 4-Column Layout */}
+      {/* Main Footer with Perfectly Aligned 3-Column Layout */}
       <footer className="site-footer">
         <div className="container">
           <div className="footer-main-grid">
-            {/* Column 1: Company Profile & Newsletter */}
-            <div className="footer-col-1">
+            {/* Column 1: Company Profile */}
+            <div className="footer-col footer-col-profile">
               <div className="footer-logo-wrapper">
                 <Logo variant="light" />
               </div>
               <p className="footer-company-desc">
-                With 35+ years of excellence, Masakorala Holdings specializes in
-                heavy-duty interlocking paving, washed architectural stone, and eco-permeable
-                concrete solutions, ensuring certified quality and sustainable innovation across Sri Lanka.
+                With 35+ years of excellence, Masakorala Holdings is Sri Lanka&apos;s
+                CS1-graded paving manufacturer, delivering high-density interlocking blocks,
+                permeable grass grids, and architectural exposed aggregates engineered to
+                SLS 1425 and ISO 9001:2015 specifications.
               </p>
+              <div className="footer-cert-tags">
+                <span className="footer-cert-badge">SLS 1425 Certified</span>
+                <span className="footer-cert-badge">ISO 9001:2015</span>
+                <span className="footer-cert-badge">CS1 Specialty Grade</span>
+              </div>
             </div>
 
             {/* Column 2: Direct Contact Info */}
-            <div className="footer-col">
-              <h4 className="footer-col-title">Contact Info</h4>
+            <div className="footer-col footer-col-contact">
+              <h4 className="footer-col-title">Factory & Sales Inquiries</h4>
               <div className="footer-contact-list">
                 <div className="contact-item">
                   <MapPin size={16} className="text-emerald icon-flex" />
@@ -68,11 +73,11 @@ export default function Footer() {
                 </div>
                 <div className="contact-item">
                   <Phone size={16} className="text-emerald icon-flex" />
-                  <a href="tel:+94706972703">(+94) 70 697 2703</a>
+                  <a href="tel:+94706972703">(+94) 70 697 2703 (Hotline)</a>
                 </div>
                 <div className="contact-item">
                   <Phone size={16} className="text-emerald icon-flex" />
-                  <a href="tel:+94372288940">(+94) 37 228 8940</a>
+                  <a href="tel:+94372288940">(+94) 37 228 8940 (Plant)</a>
                 </div>
                 <div className="contact-item">
                   <Mail size={16} className="text-emerald icon-flex" />
@@ -122,50 +127,17 @@ export default function Footer() {
             </div>
 
             {/* Column 3: Quick Navigation Links */}
-            <div className="footer-col">
-              <h4 className="footer-col-title">Quick Links</h4>
+            <div className="footer-col footer-col-links">
+              <h4 className="footer-col-title">Quick Navigation</h4>
               <ul className="footer-links-list">
-                <li><a href="#">Home</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#products">Catalog</a></li>
-                <li><a href="#calculator">Calculator</a></li>
-                <li><a href="#projects">Our Projects</a></li>
+                <li><a href="#products">Products Catalog</a></li>
+                <li><a href="#calculator">Material Calculator</a></li>
+                <li><a href="#projects">Landmark Projects</a></li>
                 <li><a href="#reviews">Client Reviews</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#contact">Contact Factory</a></li>
               </ul>
-            </div>
-
-            {/* Column 4: Quality Rigor & Plant Facilities */}
-            <div className="footer-col">
-              <h4 className="footer-col-title">Standards & Plants</h4>
-              <div className="footer-standards-list">
-                <div className="std-item">
-                  <ShieldCheck size={16} className="text-emerald" />
-                  <span>SLS 1425 Specification for Concrete Paving</span>
-                </div>
-                <div className="std-item">
-                  <ShieldCheck size={16} className="text-emerald" />
-                  <span>ISO 9001:2015 Quality Management Certified</span>
-                </div>
-                <div className="std-item">
-                  <ShieldCheck size={16} className="text-emerald" />
-                  <span>CIDA CS1 Highest Construction Grading</span>
-                </div>
-                <div className="std-item">
-                  <Check size={15} className="text-emerald" />
-                  <span>In-House 2000 kN Destruction Load Frame</span>
-                </div>
-                <div className="std-item">
-                  <Check size={15} className="text-emerald" />
-                  <span>Boom Crane Direct Islandwide Delivery</span>
-                </div>
-              </div>
-
-              <div className="cert-strip-footer">
-                <span className="cert-mini-badge">SLS 1425</span>
-                <span className="cert-mini-badge">ISO 9001:2015</span>
-                <span className="cert-mini-badge">CIDA CS1</span>
-              </div>
             </div>
           </div>
         </div>
@@ -223,20 +195,13 @@ export default function Footer() {
         .enquiry-actions {
           display: flex;
           justify-content: center;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 16px;
-        }
-
-        .enquiry-btn {
-          padding: 14px 28px;
         }
 
         .enquiry-btn-wa {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          padding: 14px 32px;
+          padding: 14px 28px;
           background: #25d366;
           color: #ffffff;
           border: 1px solid #25d366;
@@ -246,6 +211,7 @@ export default function Footer() {
           text-decoration: none;
           box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
           transition: all 0.25s ease;
+          min-height: 48px;
         }
 
         .enquiry-btn-wa:hover {
@@ -259,94 +225,78 @@ export default function Footer() {
         .site-footer {
           background: #090c10;
           color: #cbd5e1;
-          padding: 70px 0 0;
+          padding: 72px 0 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .footer-main-grid {
           display: grid;
-          grid-template-columns: 1.35fr 1.15fr 0.9fr 1.1fr;
-          gap: 40px;
+          grid-template-columns: 1.4fr 1.25fr 0.85fr;
+          gap: 52px;
           margin-bottom: 56px;
+          align-items: start;
         }
 
         .footer-logo-wrapper {
-          margin-bottom: 16px;
+          margin-bottom: 18px;
+          display: inline-block;
         }
 
         .footer-company-desc {
-          font-size: 0.84rem;
-          line-height: 1.65;
+          font-size: 0.88rem;
+          line-height: 1.7;
           color: #94a3b8;
-          margin-bottom: 22px;
+          margin-bottom: 20px;
+          max-width: 440px;
         }
 
-        /* Newsletter */
-        .newsletter-label {
-          display: block;
-          font-size: 0.78rem;
-          font-weight: 600;
-          color: #f1f5f9;
-          margin-bottom: 8px;
-        }
-
-        .newsletter-form {
+        .footer-cert-tags {
           display: flex;
-          max-width: 320px;
-        }
-
-        .newsletter-input {
-          flex-grow: 1;
-          padding: 10px 14px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          border-right: none;
-          background: rgba(255, 255, 255, 0.06);
-          color: #ffffff;
-          font-size: 0.84rem;
-          outline: none;
-          border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-        }
-
-        .newsletter-input:focus {
-          border-color: var(--primary-green);
-        }
-
-        .newsletter-btn {
-          background: var(--primary-green);
-          color: #ffffff;
-          padding: 10px 16px;
-          border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 0.2s ease;
-        }
-
-        .newsletter-btn:hover {
-          background: var(--primary-green-dark);
-        }
-
-        .subscribe-success {
-          display: flex;
-          align-items: center;
+          flex-wrap: wrap;
           gap: 8px;
-          font-size: 0.82rem;
+        }
+
+        .footer-cert-badge {
+          display: inline-flex;
+          align-items: center;
+          font-size: 0.72rem;
+          font-weight: 700;
           color: #4ade80;
+          background: rgba(24, 152, 66, 0.12);
+          border: 1px solid rgba(74, 222, 128, 0.25);
+          padding: 4px 10px;
+          border-radius: var(--radius-sm);
+          letter-spacing: 0.02em;
         }
 
         /* Column Topics */
         .footer-col-title {
           font-family: var(--font-heading);
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           font-weight: 700;
           color: #ffffff;
           margin-bottom: 18px;
+          letter-spacing: 0.01em;
+          position: relative;
+          padding-bottom: 10px;
+        }
+
+        .footer-col-title::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 32px;
+          height: 2px;
+          background: var(--primary-green);
+          border-radius: 2px;
         }
 
         .footer-contact-list {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          font-size: 0.82rem;
+          font-size: 0.85rem;
           color: #94a3b8;
           margin-bottom: 20px;
         }
@@ -355,7 +305,7 @@ export default function Footer() {
           display: flex;
           align-items: flex-start;
           gap: 10px;
-          line-height: 1.45;
+          line-height: 1.5;
         }
 
         .contact-item a {
@@ -383,15 +333,15 @@ export default function Footer() {
         }
 
         .social-icon-btn {
-          width: 32px;
-          height: 32px;
+          width: 34px;
+          height: 34px;
           border-radius: var(--radius-sm);
           background: rgba(255, 255, 255, 0.08);
           color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.76rem;
+          font-size: 0.78rem;
           font-weight: 700;
           text-transform: uppercase;
           transition: all 0.2s ease;
@@ -403,7 +353,7 @@ export default function Footer() {
         }
 
         .social-icon-btn.wa {
-          background: rgba(37, 211, 102, 0.25);
+          background: rgba(37, 211, 102, 0.22);
           color: #4ade80;
         }
 
@@ -412,11 +362,11 @@ export default function Footer() {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 11px;
         }
 
         .footer-links-list a {
-          font-size: 0.84rem;
+          font-size: 0.86rem;
           color: #94a3b8;
           transition: color 0.2s ease, transform 0.2s ease;
           display: inline-block;
@@ -427,43 +377,10 @@ export default function Footer() {
           transform: translateX(3px);
         }
 
-        /* Standards List */
-        .footer-standards-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          margin-bottom: 18px;
-        }
-
-        .std-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 0.8rem;
-          color: #cbd5e1;
-          line-height: 1.4;
-        }
-
-        .cert-strip-footer {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-        }
-
-        .cert-mini-badge {
-          background: rgba(24, 152, 66, 0.15);
-          border: 1px solid rgba(74, 222, 128, 0.3);
-          color: #4ade80;
-          font-size: 0.68rem;
-          font-weight: 700;
-          padding: 3px 8px;
-          border-radius: var(--radius-sm);
-        }
-
         /* Bottom Bar */
         .footer-bottom-bar {
-          background: #06080b;
-          padding: 18px 0;
+          background: #05070a;
+          padding: 20px 0;
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
@@ -471,10 +388,14 @@ export default function Footer() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 0.78rem;
+          font-size: 0.8rem;
           color: #64748b;
           flex-wrap: wrap;
-          gap: 12px;
+          gap: 14px;
+        }
+
+        .copyright-text {
+          color: #94a3b8;
         }
 
         .crafted-by-wrapper {
@@ -505,23 +426,50 @@ export default function Footer() {
           transform: scale(1.05);
         }
 
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
           .footer-main-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 36px;
+          }
+          .footer-col-profile {
+            grid-column: 1 / -1;
+          }
+          .footer-company-desc {
+            max-width: 100%;
           }
         }
 
         @media (max-width: 640px) {
+          .site-footer {
+            padding: 52px 0 0;
+          }
           .footer-main-grid {
             grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 38px;
+          }
+          .footer-col-profile {
+            grid-column: auto;
+          }
+          .footer-col-title {
+            margin-bottom: 14px;
+            font-size: 1rem;
           }
           .footer-bottom-container {
             flex-direction: column;
             text-align: center;
+            gap: 12px;
+          }
+          .enquiry-cta-banner {
+            padding: 44px 0;
           }
           .enquiry-title {
             font-size: 1.7rem;
+          }
+          .enquiry-sub {
+            font-size: 0.92rem;
+            margin-bottom: 22px;
           }
         }
 
@@ -529,7 +477,7 @@ export default function Footer() {
           .enquiry-btn-wa {
             width: 100%;
             justify-content: center;
-            padding: 13px 20px;
+            padding: 13px 18px;
             font-size: 0.88rem;
           }
           .copyright-text {

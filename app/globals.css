@@ -56,11 +56,15 @@ html {
   color: var(--text-main);
   background-color: var(--surface-offwhite);
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
   overflow-x: hidden;
   line-height: 1.6;
+  width: 100%;
+  position: relative;
 }
 
 a {
@@ -89,13 +93,25 @@ button {
   }
 }
 
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
 .section-padding {
   padding: 96px 0;
 }
 
 @media (max-width: 768px) {
   .section-padding {
-    padding: 64px 0;
+    padding: 56px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-padding {
+    padding: 48px 0;
   }
 }
 
