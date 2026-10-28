@@ -291,46 +291,33 @@ export default function Header() {
                 );
               })}
             </div>
-
-            {/* Drawer Bottom Actions */}
-            <div className="mobile-drawer-footer">
-              <a
-                href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mobile-wa-btn"
-              >
-                <MessageCircle size={18} />
-                <span>WhatsApp: (+94) 71 866 5665</span>
-              </a>
-
-              <a href="tel:+94706972703" className="mobile-call-link">
-                <Phone size={15} />
-                <span>Call Plant Direct: (+94) 71 866 5665</span>
-              </a>
-
-              <div className="mobile-factory-info">
-                <span>Pannala & Kurunegala Plants</span>
-                <span>Islandwide Delivery</span>
-              </div>
-            </div>
           </div>
         </div>
       )}
 
       <style jsx>{`
         .site-header {
-          position: sticky;
-          top: 0;
+          position: relative;
           z-index: 1200;
           background: #ffffff;
           transition: all 0.3s ease;
           border-bottom: 1px solid var(--surface-border);
         }
 
-        .site-header.scrolled {
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-          background: rgba(255, 255, 255, 0.98);
+        /* Desktop Sticky Header - Always fixed at top when scrolling in desktop view */
+        @media (min-width: 1025px) {
+          .site-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+          }
+
+          .site-header.scrolled {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+          }
         }
 
         /* Top Bar - Brand Emerald */
