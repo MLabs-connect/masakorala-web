@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  MessageCircle,
 } from "lucide-react";
 import { ProjectItem } from "@/data/projectsData";
 
@@ -183,21 +182,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Inquiry Action */}
-            <div className="modal-cta-row">
-              <a
-                href={`https://wa.me/94706972703?text=${encodeURIComponent(
-                  `Hello Masakorala Holdings, I am reviewing your project "${project.title}" (${project.location}, ${project.area}) and would like to inquire about similar interlocking paving solutions for our site.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="modal-whatsapp-btn"
-              >
-                <MessageCircle size={18} />
-                <span>Inquire for Similar Project</span>
-              </a>
             </div>
           </div>
         </div>
@@ -496,34 +480,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           margin-top: 2px;
         }
 
-        .modal-cta-row {
-          margin-top: 6px;
-          padding-top: 18px;
-          border-top: 1px solid var(--surface-border);
-        }
 
-        .modal-whatsapp-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          width: 100%;
-          padding: 14px 24px;
-          background: #25d366;
-          color: #ffffff;
-          font-size: 0.92rem;
-          font-weight: 700;
-          border-radius: var(--radius-lg);
-          transition: all 0.25s ease;
-          text-decoration: none;
-          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
-        }
-
-        .modal-whatsapp-btn:hover {
-          background: #20ba59;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
 
         @keyframes fadeIn {
           from {

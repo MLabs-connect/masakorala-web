@@ -331,37 +331,45 @@ export default function ProjectsGallery() {
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-top: 40px;
+          margin-top: 44px;
         }
 
         .see-more-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 14px 36px;
+          padding: 15px 42px;
           border-radius: var(--radius-full);
-          font-size: 0.95rem;
+          font-size: 0.96rem;
           font-weight: 700;
+          letter-spacing: 0.01em;
           color: var(--brand-black);
-          background: rgba(255, 255, 255, 0.65);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1.5px solid rgba(255, 255, 255, 0.9);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06),
-                      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-                      0 2px 6px rgba(24, 152, 66, 0.08);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.75) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1.5px solid rgba(15, 23, 42, 0.14);
+          box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.08),
+                      0 2px 8px rgba(24, 152, 66, 0.08),
+                      inset 0 1.5px 1px #ffffff,
+                      inset 0 -1px 2px rgba(0, 0, 0, 0.04);
           text-decoration: none;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .see-more-btn:hover {
-          background: rgba(255, 255, 255, 0.92);
-          border-color: rgba(24, 152, 66, 0.4);
+          background: linear-gradient(135deg, #ffffff 0%, rgba(235, 248, 240, 0.9) 100%);
+          border-color: var(--primary-green);
           color: var(--primary-green-dark);
-          transform: translateY(-2px);
-          box-shadow: 0 14px 36px rgba(24, 152, 66, 0.16),
-                      inset 0 1px 2px rgba(255, 255, 255, 1);
+          transform: translateY(-3px);
+          box-shadow: 0 16px 36px -4px rgba(24, 152, 66, 0.22),
+                      0 4px 12px rgba(0, 0, 0, 0.04),
+                      inset 0 1.5px 2px #ffffff;
+        }
+
+        .see-more-btn:active {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 16px rgba(24, 152, 66, 0.18);
         }
 
         @media (max-width: 1100px) {
