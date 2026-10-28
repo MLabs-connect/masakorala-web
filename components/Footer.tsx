@@ -140,7 +140,13 @@ export default function Footer() {
             <p className="copyright-text">
               © Copyright 2026 Masakorala Holdings (Pvt) Ltd. All Rights Reserved.
             </p>
-            <div className="crafted-by-wrapper">
+            <a
+              href="https://www.facebook.com/share/1CiBQZcfML/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="crafted-by-wrapper"
+              aria-label="Crafted by MLabs"
+            >
               <span className="crafted-text">Crafted by</span>
               <Image
                 src="/mlabs.png"
@@ -149,7 +155,7 @@ export default function Footer() {
                 height={26}
                 className="crafted-logo"
               />
-            </div>
+            </a>
           </div>
         </div>
       </footer>
@@ -394,12 +400,20 @@ export default function Footer() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
+          text-decoration: none;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
         }
 
         .crafted-text {
           font-size: 0.76rem;
           color: #94a3b8;
           font-weight: 500;
+          transition: color 0.2s ease;
+        }
+
+        .crafted-by-wrapper:hover .crafted-text {
+          color: #ffffff;
         }
 
         :global(.crafted-logo) {

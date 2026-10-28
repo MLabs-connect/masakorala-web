@@ -11,8 +11,6 @@ import {
   ArrowRight,
   Maximize2,
   ChevronRight,
-  MessageCircle,
-  Phone,
 } from "lucide-react";
 import { ALL_PROJECTS, ProjectItem } from "@/data/projectsData";
 import ProjectModal from "@/components/ProjectModal";
@@ -121,34 +119,6 @@ export default function ProjectsFullList() {
               </div>
             ))}
           </div>
-
-          {/* Bottom Consultation Banner */}
-          <div className="projects-cta-banner">
-            <div className="cta-banner-text">
-              <h3 className="cta-banner-title">
-                Planning a Commercial, Industrial, or Infrastructure Project?
-              </h3>
-              <p className="cta-banner-desc">
-                Consult with our civil engineering technical team for compressive load calculations,
-                sub-base preparation guidance, and customized unit estimations.
-              </p>
-            </div>
-            <div className="cta-banner-actions">
-              <a
-                href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20consult%20with%20an%20engineer%20regarding%20an%20upcoming%20paving%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="banner-wa-btn"
-              >
-                <MessageCircle size={18} />
-                <span>WhatsApp Engineer</span>
-              </a>
-              <a href="tel:+94706972703" className="banner-call-btn">
-                <Phone size={18} />
-                <span>Call Hotline</span>
-              </a>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -162,13 +132,13 @@ export default function ProjectsFullList() {
         .projects-page-wrapper {
           background: #fbfbfc;
           min-height: 100vh;
-          padding-top: 100px;
+          padding-top: 0;
         }
 
         .projects-hero {
           background: #ffffff;
           border-bottom: 1px solid var(--surface-border);
-          padding: 40px 0 56px 0;
+          padding: 32px 0 44px 0;
         }
 
         .breadcrumb-nav {
@@ -176,7 +146,7 @@ export default function ProjectsFullList() {
           align-items: center;
           gap: 8px;
           font-size: 0.85rem;
-          margin-bottom: 28px;
+          margin-bottom: 20px;
         }
 
         .crumb-link {
@@ -238,7 +208,7 @@ export default function ProjectsFullList() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 30px;
-          margin-bottom: 64px;
+          margin-bottom: 0;
         }
 
         .project-card {
@@ -402,83 +372,6 @@ export default function ProjectsFullList() {
           transform: translateX(4px);
         }
 
-        /* Bottom Consultation Banner */
-        .projects-cta-banner {
-          background: #14171d;
-          border-radius: var(--radius-2xl);
-          padding: 44px 48px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 32px;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .cta-banner-text {
-          max-width: 640px;
-        }
-
-        .cta-banner-title {
-          font-family: var(--font-heading);
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #ffffff;
-          line-height: 1.3;
-          margin-bottom: 10px;
-        }
-
-        .cta-banner-desc {
-          font-size: 0.95rem;
-          color: #cbd5e1;
-          line-height: 1.55;
-          margin: 0;
-        }
-
-        .cta-banner-actions {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          flex-shrink: 0;
-        }
-
-        .banner-wa-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 13px 24px;
-          background: #25d366;
-          color: #ffffff;
-          font-size: 0.92rem;
-          font-weight: 700;
-          border-radius: var(--radius-full);
-          text-decoration: none;
-          transition: all 0.2s ease;
-        }
-
-        .banner-wa-btn:hover {
-          background: #20ba59;
-          transform: translateY(-2px);
-        }
-
-        .banner-call-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 13px 22px;
-          background: rgba(255, 255, 255, 0.1);
-          color: #ffffff;
-          font-size: 0.92rem;
-          font-weight: 600;
-          border-radius: var(--radius-full);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          text-decoration: none;
-          transition: all 0.2s ease;
-        }
-
-        .banner-call-btn:hover {
-          background: rgba(255, 255, 255, 0.2);
-        }
-
         @media (max-width: 1100px) {
           .projects-full-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -487,21 +380,26 @@ export default function ProjectsFullList() {
           .hero-title {
             font-size: 2.2rem;
           }
-
-          .projects-cta-banner {
-            flex-direction: column;
-            text-align: center;
-            padding: 36px 28px;
-          }
-
-          .cta-banner-actions {
-            justify-content: center;
-          }
         }
 
         @media (max-width: 768px) {
+          .projects-hero {
+            padding: 20px 0 32px 0;
+          }
+
+          .breadcrumb-nav {
+            margin-bottom: 16px;
+          }
+
+          .grid-section {
+            padding-top: 36px;
+            padding-bottom: 56px;
+          }
+
           .projects-full-grid {
             grid-template-columns: 1fr;
+            gap: 22px;
+            margin-bottom: 0;
           }
 
           .hero-title {
@@ -510,17 +408,6 @@ export default function ProjectsFullList() {
 
           .hero-desc {
             font-size: 0.95rem;
-          }
-
-          .cta-banner-actions {
-            flex-direction: column;
-            width: 100%;
-          }
-
-          .banner-wa-btn,
-          .banner-call-btn {
-            width: 100%;
-            justify-content: center;
           }
         }
       `}</style>
