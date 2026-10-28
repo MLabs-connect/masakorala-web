@@ -7,6 +7,7 @@ import {
   Ruler,
   X,
   ChevronDown,
+  SlidersHorizontal,
 } from "lucide-react";
 
 export interface ColorVariant {
@@ -358,7 +359,8 @@ export default function ProductCatalog() {
                     }}
                     className="specs-btn"
                   >
-                    Specifications
+                    <SlidersHorizontal size={16} />
+                    <span>Specifications</span>
                   </button>
                 </div>
               </div>
@@ -811,24 +813,35 @@ export default function ProductCatalog() {
 
         /* Specifications Button */
         .specs-btn {
-          background: #ffffff;
-          border: 1.5px solid #e2e8f0;
-          color: #0f172a;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          background: var(--primary-green);
+          border: 1px solid var(--primary-green);
+          color: #ffffff;
           font-size: 0.92rem;
           font-weight: 700;
           border-radius: 12px;
-          padding: 11px 16px;
+          padding: 12px 18px;
           width: 100%;
           text-align: center;
           cursor: pointer;
-          transition: all 0.2s ease;
+          box-shadow: 0 4px 14px rgba(24, 152, 66, 0.22);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .specs-btn:hover {
-          background: var(--surface-offwhite);
-          border-color: var(--primary-green);
-          color: var(--primary-green);
-          box-shadow: 0 2px 8px rgba(24, 152, 66, 0.1);
+          background: var(--primary-green-dark);
+          border-color: var(--primary-green-dark);
+          color: #ffffff;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(24, 152, 66, 0.35);
+        }
+
+        .specs-btn:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 8px rgba(24, 152, 66, 0.2);
         }
 
         /* Modal Overlay */
@@ -1119,6 +1132,11 @@ export default function ProductCatalog() {
             padding: 8px 16px;
             font-size: 0.82rem;
             min-height: 40px;
+          }
+          .specs-btn {
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            min-height: 44px;
           }
           .modal-overlay {
             padding: 10px;

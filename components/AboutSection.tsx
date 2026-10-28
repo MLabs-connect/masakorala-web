@@ -294,26 +294,42 @@ export default function AboutSection() {
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+          .about-content-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+          }
+          .about-badge-wrap {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+          }
           .about-image-card {
             min-height: 220px;
             height: clamp(220px, 55vw, 290px);
           }
           .about-headline {
             font-size: clamp(1.75rem, 6.5vw, 2.2rem);
+            text-align: center;
           }
           .about-sub-years {
             font-size: 0.95rem;
             margin-bottom: 14px;
+            text-align: center;
           }
           .about-lead-para {
             font-size: 0.92rem;
             line-height: 1.65;
+            text-align: center;
           }
           .about-sub-para {
             font-size: 0.88rem;
             line-height: 1.6;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            text-align: center;
           }
           .about-stats-banner {
             display: grid;
@@ -324,6 +340,7 @@ export default function AboutSection() {
             padding: 0;
             box-shadow: none;
             align-items: stretch;
+            width: 100%;
           }
 
           .about-stats-banner:hover {
