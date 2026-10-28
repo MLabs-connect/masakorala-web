@@ -626,10 +626,10 @@ export default function ProductCatalog() {
         /* Product Card */
         .product-card {
           background: #ffffff;
-          border: 1px solid #eef2f6;
+          border: 1px solid #0c0e12;
           border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
           display: flex;
           flex-direction: column;
           cursor: pointer;
@@ -638,8 +638,8 @@ export default function ProductCatalog() {
 
         .product-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.09);
-          border-color: #cbd5e1;
+          box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.12);
+          border-color: var(--primary-green);
         }
 
         /* Image Box */
