@@ -161,19 +161,19 @@ export default function Hero() {
           {/* Key Advantages Chips */}
           <div className="hero-chips-row">
             <span className="h-chip">
-              <CheckCircle size={15} className="text-emerald" />
+              <CheckCircle size={13} className="text-emerald" />
               <span>55+ MPa Load Bearing</span>
             </span>
             <span className="h-chip">
-              <CheckCircle size={15} className="text-emerald" />
+              <CheckCircle size={13} className="text-emerald" />
               <span>In-House SLS Lab Rigor</span>
             </span>
             <span className="h-chip">
-              <CheckCircle size={15} className="text-emerald" />
+              <CheckCircle size={13} className="text-emerald" />
               <span>Turnkey Laying & Leveling</span>
             </span>
             <span className="h-chip">
-              <CheckCircle size={15} className="text-emerald" />
+              <CheckCircle size={13} className="text-emerald" />
               <span>Crane-Truck Islandwide Delivery</span>
             </span>
           </div>
@@ -193,9 +193,6 @@ export default function Hero() {
                 <span className="slide-dot-inner" />
               </button>
             ))}
-          </div>
-          <div className="slide-status-text">
-            <span>Slide 0{currentSlide + 1}</span> / 0{SLIDES.length}
           </div>
         </div>
       </div>
@@ -348,19 +345,19 @@ export default function Hero() {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
-          gap: 12px 14px;
+          gap: 8px 10px;
         }
 
         .h-chip {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          font-size: 0.84rem;
+          gap: 6px;
+          font-size: 0.76rem;
           color: #f1f5f9;
           font-weight: 600;
           background: rgba(255, 255, 255, 0.08);
           border: 1px solid rgba(255, 255, 255, 0.16);
-          padding: 7px 14px;
+          padding: 5px 12px;
           border-radius: var(--radius-full);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
@@ -375,7 +372,7 @@ export default function Hero() {
         .hero-controls-bar {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
           padding-top: 16px;
           border-top: 1px solid rgba(255, 255, 255, 0.12);
         }
@@ -399,13 +396,6 @@ export default function Hero() {
         .slide-dot.active {
           width: 54px;
           background: #4ade80;
-        }
-
-        .slide-status-text {
-          font-size: 0.82rem;
-          color: #94a3b8;
-          font-weight: 600;
-          letter-spacing: 0.04em;
         }
 
         /* ========================================================
@@ -567,30 +557,13 @@ export default function Hero() {
             background: #4ade80;
           }
 
-          /* 2-Column Mobile Chips */
+          /* Hide Advantage Chips on Mobile */
           .hero-chips-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            width: 100%;
-          }
-
-          .h-chip {
-            padding: 8px 10px;
-            font-size: 0.76rem;
-            border-radius: 10px;
-            gap: 6px;
-            justify-content: flex-start;
+            display: none !important;
           }
 
           .hero-controls-bar {
             display: none;
-          }
-        }
-
-        @media (max-width: 440px) {
-          .hero-chips-row {
-            grid-template-columns: 1fr;
           }
         }
       `}</style>
