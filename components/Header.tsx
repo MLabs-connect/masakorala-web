@@ -297,27 +297,21 @@ export default function Header() {
 
       <style jsx>{`
         .site-header {
-          position: relative;
+          position: -webkit-sticky;
+          position: sticky;
+          top: 0;
+          width: 100%;
           z-index: 1200;
           background: #ffffff;
           transition: all 0.3s ease;
           border-bottom: 1px solid var(--surface-border);
         }
 
-        /* Desktop Sticky Header - Always fixed at top when scrolling in desktop view */
-        @media (min-width: 1025px) {
-          .site-header {
-            position: sticky;
-            top: 0;
-            width: 100%;
-          }
-
-          .site-header.scrolled {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-          }
+        .site-header.scrolled {
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
         }
 
         /* Top Bar - Brand Emerald */
@@ -503,7 +497,7 @@ export default function Header() {
           background: rgba(12, 14, 18, 0.65);
           backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
-          z-index: 1100;
+          z-index: 1300;
           display: flex;
           justify-content: flex-end;
           animation: fadeInBackdrop 0.22s ease-out forwards;
