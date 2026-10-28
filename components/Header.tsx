@@ -175,7 +175,7 @@ export default function Header() {
             <a href="tel:+94706972703" className="top-contact-link">
               <Phone size={13} />
               <span className="contact-label">HOTLINE:</span>
-              <strong>(+94) 71 866 5665</strong>
+              <strong>(+94)71 866 5665</strong>
             </a>
           </div>
         </div>
