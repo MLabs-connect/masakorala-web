@@ -88,25 +88,6 @@ export default function Hero() {
 
       <div className="container hero-content-container">
         <div className="hero-slide-content">
-          {/* Trust Badge Pill */}
-          <div className="hero-pill-badge">
-            <span className="pill-dot animate-pulse-glow" />
-            <span className="pill-text">{slide.tag}</span>
-            <span className="pill-tag">{slide.badge}</span>
-          </div>
-
-          <h1 className="hero-slider-title">{slide.title}</h1>
-
-          <p className="hero-slider-desc">{slide.subtitle}</p>
-
-          {/* Action Buttons Row */}
-          <div className="hero-actions-row">
-            <a href="#products" className="btn-primary hero-main-btn">
-              <Layers size={18} />
-              <span>Explore Pavers</span>
-            </a>
-          </div>
-
           {/* Dedicated Mobile Interactive Visual Showcase Card */}
           <div className="hero-mobile-visual-card">
             <div className="mobile-card-media-wrap">
@@ -156,6 +137,25 @@ export default function Hero() {
                 />
               ))}
             </div>
+          </div>
+
+          {/* Trust Badge Pill */}
+          <div className="hero-pill-badge">
+            <span className="pill-dot animate-pulse-glow" />
+            <span className="pill-text">{slide.tag}</span>
+            <span className="pill-tag">{slide.badge}</span>
+          </div>
+
+          <h1 className="hero-slider-title">{slide.title}</h1>
+
+          <p className="hero-slider-desc">{slide.subtitle}</p>
+
+          {/* Action Buttons Row */}
+          <div className="hero-actions-row">
+            <a href="#products" className="btn-primary hero-main-btn">
+              <Layers size={18} />
+              <span>Explore Pavers</span>
+            </a>
           </div>
 
           {/* Key Advantages Chips */}
