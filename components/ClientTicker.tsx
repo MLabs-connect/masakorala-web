@@ -1,26 +1,17 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Building2 } from "lucide-react";
+import Image from "next/image";
 
-const CLIENTS = [
-  { name: "Road Development Authority (RDA)", category: "National Highways" },
-  { name: "Maga Engineering", category: "Tier-1 Contractor" },
-  { name: "Access Engineering PLC", category: "Infrastructure" },
-  { name: "Colombo Port City Logistics", category: "Maritime Corridor" },
-  { name: "Sanken Construction", category: "Commercial Developments" },
-  { name: "International Construction Consortium (ICC)", category: "Highways & Bridges" },
-  { name: "MAS Active & Fabric Parks", category: "Industrial Zones" },
-  { name: "Brandix Eco-Tech Apparel Parks", category: "Green Factories" },
-  { name: "Hayleys Advantis Logistic Hubs", category: "Heavy Cargo Terminals" },
-  { name: "John Keells Properties", category: "Residential Enclaves" },
-];
-
-const CERTIFICATIONS = [
-  { code: "SLS 1425", title: "Specification for Concrete Paving Blocks" },
-  { code: "ISO 9001:2015", title: "Quality Management Systems Certified" },
-  { code: "CIDA CS1", title: "Highest Specialty Construction Rating" },
-  { code: "GBCSL", title: "Green Building Council Sri Lanka Material Affiliate" },
+const CLIENT_LOGOS = [
+  { name: "John Keells Properties", src: "/images/clients/keells.webp" },
+  { name: "Access Engineering", src: "/images/clients/client-2.webp" },
+  { name: "Road Development Authority (RDA)", src: "/images/clients/rda.webp" },
+  { name: "Maga Engineering", src: "/images/clients/client-4.webp" },
+  { name: "NEM Construction", src: "/images/clients/nem-construction.webp" },
+  { name: "Construction Partner", src: "/images/clients/client-6.webp" },
+  { name: "MAS Active & Brandix", src: "/images/clients/client-7.webp" },
+  { name: "Sri Lanka Ports Authority (SLPA)", src: "/images/clients/slpa-ports.webp" },
 ];
 
 export default function ClientTicker() {
@@ -28,29 +19,23 @@ export default function ClientTicker() {
     <section className="ticker-section">
       <div className="container ticker-top-row">
         <span className="ticker-label">
-          Trusted by Sri Lanka&apos;s Major Infrastructure Developers & Engineering Giants:
+          Our Trusted Partners
         </span>
-        <div className="cert-badges-inline">
-          {CERTIFICATIONS.map((cert) => (
-            <div key={cert.code} className="cert-pill" title={cert.title}>
-              <ShieldCheck size={13} className="text-emerald" />
-              <strong>{cert.code}</strong>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Infinite Scrolling Ticker */}
+      {/* Infinite Scrolling Logo Carousel */}
       <div className="ticker-marquee-wrapper">
         <div className="ticker-track">
           {/* Repeating list twice for smooth seamless loop */}
-          {[...CLIENTS, ...CLIENTS].map((client, idx) => (
-            <div key={`${client.name}-${idx}`} className="client-badge">
-              <Building2 size={16} className="client-icon" />
-              <div className="client-text-group">
-                <span className="client-name">{client.name}</span>
-                <span className="client-cat">{client.category}</span>
-              </div>
+          {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
+            <div key={`${logo.name}-${idx}`} className="client-logo-item">
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={150}
+                height={60}
+                className="client-logo-img"
+              />
             </div>
           ))}
         </div>
@@ -59,17 +44,16 @@ export default function ClientTicker() {
       <style jsx>{`
         .ticker-section {
           background: #ffffff;
-          padding: 24px 0 32px;
+          padding: 24px 0 30px;
           border-bottom: 1px solid var(--surface-border);
           overflow: hidden;
         }
 
         .ticker-top-row {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          flex-wrap: wrap;
-          gap: 16px;
+          justify-content: center;
+          text-align: center;
           margin-bottom: 20px;
         }
 
@@ -79,29 +63,7 @@ export default function ClientTicker() {
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--stone-mid);
-        }
-
-        .cert-badges-inline {
-          display: flex;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-
-        .cert-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: var(--surface-offwhite);
-          border: 1px solid var(--surface-border);
-          padding: 4px 10px;
-          border-radius: var(--radius-full);
-          font-size: 0.74rem;
-          color: var(--brand-black);
-        }
-
-        .text-emerald {
-          color: var(--primary-green);
+          text-align: center;
         }
 
         .ticker-marquee-wrapper {
@@ -111,84 +73,53 @@ export default function ClientTicker() {
           mask-image: linear-gradient(
             to right,
             transparent 0%,
-            black 10%,
-            black 90%,
+            black 6%,
+            black 94%,
             transparent 100%
           );
         }
 
-        .client-badge {
+        .client-logo-item {
           display: inline-flex;
           align-items: center;
-          gap: 12px;
-          background: var(--surface-offwhite);
-          border: 1px solid var(--surface-border);
-          padding: 10px 20px;
-          border-radius: var(--radius-md);
-          margin-right: 18px;
-          white-space: nowrap;
-          transition: border-color 0.2s ease, transform 0.2s ease;
+          justify-content: center;
+          margin: 0 32px;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          padding: 0;
         }
 
-        .client-badge:hover {
-          border-color: var(--primary-green);
-          transform: translateY(-2px);
-          background: #ffffff;
+        :global(.client-logo-img) {
+          height: 52px;
+          width: auto;
+          max-width: 150px;
+          object-fit: contain;
+          opacity: 0.95;
+          transition: transform 0.25s ease, opacity 0.25s ease;
         }
 
-        .client-icon {
-          color: var(--primary-green);
-          flex-shrink: 0;
-        }
-
-        .client-text-group {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .client-name {
-          font-size: 0.88rem;
-          font-weight: 700;
-          color: var(--brand-black);
-        }
-
-        .client-cat {
-          font-size: 0.7rem;
-          color: var(--stone-light);
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
+        .client-logo-item:hover :global(.client-logo-img) {
+          opacity: 1;
+          transform: scale(1.06);
         }
 
         @media (max-width: 640px) {
           .ticker-section {
-            padding: 18px 0 24px;
+            padding: 16px 0 22px;
           }
 
           .ticker-top-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
             margin-bottom: 14px;
           }
 
-          .cert-badges-inline {
-            gap: 6px;
+          .client-logo-item {
+            margin: 0 18px;
           }
 
-          .cert-pill {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-          }
-
-          .client-badge {
-            padding: 8px 14px;
-            gap: 8px;
-            margin-right: 12px;
-          }
-
-          .client-name {
-            font-size: 0.82rem;
+          :global(.client-logo-img) {
+            height: 38px;
+            max-width: 110px;
           }
         }
       `}</style>
