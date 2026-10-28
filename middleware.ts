@@ -71,6 +71,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|_next/webpack-hmr|images/|logo\\.png|company-logo\\.png|favicon\\.ico).*)",
+    "/((?!_next/static|_next/image|_next/webpack-hmr|images/|logo\\.png|company-logo\\.png|mlabs\\.png|favicon\\.ico).*)",
   ],
 };

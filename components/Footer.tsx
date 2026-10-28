@@ -143,9 +143,9 @@ export default function Footer() {
             <div className="crafted-by-wrapper">
               <span className="crafted-text">Crafted by</span>
               <Image
-                src="/company-logo.png"
-                alt="Company Logo"
-                width={80}
+                src="/mlabs.png"
+                alt="MLabs"
+                width={88}
                 height={26}
                 className="crafted-logo"
               />

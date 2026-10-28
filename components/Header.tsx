@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import Logo from "./Logo";
 import {
@@ -35,6 +36,11 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -154,7 +160,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
+    <>
+      <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
       {/* Top Banner Bar - Brand Green Bar with Balanced Alignment */}
       <div className="header-top-bar">
         <div className="container top-bar-container">
@@ -234,9 +241,12 @@ export default function Header() {
           </div>
         </div>
       </nav>
+    </header>
 
-      {/* Mobile Drawer Navigation with Fullscreen Backdrop */}
-      {mobileMenuOpen && (
+    {/* Mobile Drawer Navigation with Fullscreen Backdrop Portalled to Body */}
+    {mounted &&
+      mobileMenuOpen &&
+      createPortal(
         <div
           className="mobile-backdrop"
           onClick={() => setMobileMenuOpen(false)}
@@ -253,7 +263,11 @@ export default function Header() {
               <div
                 className="drawer-brand"
                 onClick={(e) => {
-                  handleNavClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, "home", "#home");
+                  handleNavClick(
+                    e as unknown as React.MouseEvent<HTMLAnchorElement>,
+                    "home",
+                    "#home"
+                  );
                 }}
               >
                 <Logo variant="dark" height={38} />
@@ -268,13 +282,7 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Cert badge pill */}
-            <div className="drawer-trust-banner">
-              <ShieldCheck size={15} className="text-emerald" />
-              <span>SLS 1425 & CS1 Grade Certified</span>
-            </div>
-
-            {/* Nav list */}
+            {/* Nav list - SLS trust banner removed in mobile view */}
             <div className="mobile-nav-list">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;
@@ -292,7 +300,8 @@ export default function Header() {
               })}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       <style jsx>{`
@@ -310,8 +319,13 @@ export default function Header() {
         .site-header.scrolled {
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
           background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+        }
+
+        @media (min-width: 1025px) {
+          .site-header.scrolled {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+          }
         }
 
         /* Top Bar - Brand Emerald */
@@ -356,6 +370,11 @@ export default function Header() {
           color: #ffffff;
           transition: opacity 0.2s ease;
           font-size: 0.8rem;
+          white-space: nowrap;
+        }
+
+        .top-contact-link strong {
+          white-space: nowrap;
         }
 
         .top-contact-link:hover {
@@ -369,6 +388,7 @@ export default function Header() {
 
         .top-sep {
           color: rgba(255, 255, 255, 0.35);
+          flex-shrink: 0;
         }
 
         /* Nav Container */
@@ -491,13 +511,14 @@ export default function Header() {
         }
 
         /* Mobile Backdrop Overlay */
-        .mobile-backdrop {
+        .mobile-backdrop,
+        :global(.mobile-backdrop) {
           position: fixed;
           inset: 0;
           background: rgba(12, 14, 18, 0.65);
           backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
-          z-index: 1300;
+          z-index: 9999;
           display: flex;
           justify-content: flex-end;
           animation: fadeInBackdrop 0.22s ease-out forwards;
@@ -513,7 +534,8 @@ export default function Header() {
         }
 
         /* Mobile Drawer Container */
-        .mobile-drawer {
+        .mobile-drawer,
+        :global(.mobile-drawer) {
           width: min(340px, 86vw);
           height: 100%;
           background: #ffffff;
@@ -537,7 +559,8 @@ export default function Header() {
           }
         }
 
-        .drawer-header {
+        .drawer-header,
+        :global(.drawer-header) {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -546,13 +569,15 @@ export default function Header() {
           margin-bottom: 14px;
         }
 
-        .drawer-brand {
+        .drawer-brand,
+        :global(.drawer-brand) {
           cursor: pointer;
           display: inline-flex;
           align-items: center;
         }
 
-        .drawer-close-btn {
+        .drawer-close-btn,
+        :global(.drawer-close-btn) {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -566,27 +591,15 @@ export default function Header() {
           cursor: pointer;
         }
 
-        .drawer-close-btn:hover {
+        .drawer-close-btn:hover,
+        :global(.drawer-close-btn:hover) {
           background: #fee2e2;
           color: #ef4444;
           border-color: #fca5a5;
         }
 
-        .drawer-trust-banner {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: var(--primary-green-subtle);
-          border: 1px solid rgba(24, 152, 66, 0.2);
-          padding: 8px 12px;
-          border-radius: 10px;
-          font-size: 0.76rem;
-          font-weight: 700;
-          color: var(--primary-green-dark);
-          margin-bottom: 18px;
-        }
-
-        .mobile-nav-list {
+        .mobile-nav-list,
+        :global(.mobile-nav-list) {
           display: flex;
           flex-direction: column;
           gap: 8px;
@@ -594,7 +607,8 @@ export default function Header() {
           margin-bottom: 24px;
         }
 
-        .mobile-nav-item {
+        .mobile-nav-item,
+        :global(.mobile-nav-item) {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -609,32 +623,38 @@ export default function Header() {
           min-height: 44px;
         }
 
-        .mobile-nav-item:hover {
+        .mobile-nav-item:hover,
+        :global(.mobile-nav-item:hover) {
           background: #f8fafc;
           border-color: var(--surface-border);
           color: var(--primary-green-dark);
         }
 
-        .mobile-nav-item.active {
+        .mobile-nav-item.active,
+        :global(.mobile-nav-item.active) {
           background: var(--primary-green-subtle);
           border-color: rgba(24, 152, 66, 0.25);
           color: var(--primary-green-dark);
           font-weight: 700;
         }
 
-        .nav-item-title {
+        .nav-item-title,
+        :global(.nav-item-title) {
           display: inline-flex;
           align-items: center;
           gap: 6px;
         }
 
-        .nav-item-chevron {
+        .nav-item-chevron,
+        :global(.nav-item-chevron) {
           color: #94a3b8;
           transition: transform 0.2s ease;
         }
 
         .mobile-nav-item:hover .nav-item-chevron,
-        .mobile-nav-item.active .nav-item-chevron {
+        .mobile-nav-item.active .nav-item-chevron,
+        :global(.mobile-nav-item:hover .nav-item-chevron),
+        :global(.mobile-nav-item.active .nav-item-chevron) {
           color: var(--primary-green-dark);
           transform: translateX(3px);
         }
@@ -704,19 +724,47 @@ export default function Header() {
           .mobile-toggle {
             display: inline-flex;
           }
+          .top-cert-badge {
+            display: none !important;
+          }
         }
 
         @media (max-width: 768px) {
           .top-cert-badge {
             display: none;
           }
+          .contact-label {
+            display: none;
+          }
           .top-bar-container {
             justify-content: center;
+            padding-left: 10px;
+            padding-right: 10px;
           }
           .top-actions-right {
             width: 100%;
             justify-content: center;
-            gap: 14px;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: clamp(6px, 1.8vw, 12px);
+          }
+          .top-contact-link {
+            font-size: clamp(0.66rem, 2.7vw, 0.78rem);
+            white-space: nowrap;
+            flex-shrink: 0;
+            gap: 4px;
+          }
+          .top-contact-link strong {
+            white-space: nowrap;
+          }
+          .top-contact-link :global(svg) {
+            flex-shrink: 0;
+            width: 12px;
+            height: 12px;
+          }
+          .top-sep {
+            margin: 0 2px;
+            flex-shrink: 0;
           }
           .header-wa-btn {
             display: none;
@@ -724,14 +772,19 @@ export default function Header() {
         }
 
         @media (max-width: 480px) {
-          .contact-label {
-            display: none;
+          .header-top-bar {
+            padding: 6px 0;
+          }
+          .top-bar-container {
+            padding-left: 6px;
+            padding-right: 6px;
           }
           .top-actions-right {
-            gap: 10px;
+            gap: 6px;
           }
           .top-contact-link {
-            font-size: 0.76rem;
+            font-size: clamp(0.64rem, 2.8vw, 0.74rem);
+            gap: 4px;
           }
           .header-main-nav {
             padding: 10px 0;
@@ -740,7 +793,21 @@ export default function Header() {
             height: 38px !important;
           }
         }
+
+        @media (max-width: 360px) {
+          .top-actions-right {
+            gap: 4px;
+          }
+          .top-contact-link {
+            font-size: 0.62rem;
+            gap: 3px;
+          }
+          .top-contact-link :global(svg) {
+            width: 11px;
+            height: 11px;
+          }
+        }
       `}</style>
-    </header>
+    </>
   );
 }
