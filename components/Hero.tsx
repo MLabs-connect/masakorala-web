@@ -3,10 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  ArrowRight,
   CheckCircle,
   Layers,
-  MessageCircle,
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
@@ -106,17 +104,6 @@ export default function Hero() {
             <a href="#products" className="btn-primary hero-main-btn">
               <Layers size={18} />
               <span>Explore Pavers</span>
-              <ArrowRight size={18} />
-            </a>
-
-            <a
-              href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation%20for%20paving%20blocks."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-wa-hero"
-            >
-              <MessageCircle size={18} />
-              <span>Instant Quotation</span>
             </a>
           </div>
 
@@ -351,29 +338,6 @@ export default function Hero() {
           min-height: 48px;
         }
 
-        .btn-wa-hero {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 14px 24px;
-          background: #25d366;
-          color: #ffffff;
-          font-size: 0.98rem;
-          font-weight: 700;
-          border-radius: var(--radius-md);
-          text-decoration: none;
-          min-height: 48px;
-          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-          transition: all 0.25s ease;
-        }
-
-        .btn-wa-hero:hover {
-          background: #20ba59;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 22px rgba(37, 211, 102, 0.45);
-        }
-
         /* Mobile Visual Card (Hidden on Desktop, Visible on Mobile) */
         .hero-mobile-visual-card {
           display: none;
@@ -490,15 +454,12 @@ export default function Hero() {
           }
 
           .hero-actions-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            display: flex;
             margin-bottom: 22px;
             width: 100%;
           }
 
-          .hero-main-btn,
-          .btn-wa-hero {
+          .hero-main-btn {
             width: 100%;
             justify-content: center;
             padding: 12px 14px;
@@ -628,9 +589,6 @@ export default function Hero() {
         }
 
         @media (max-width: 440px) {
-          .hero-actions-row {
-            grid-template-columns: 1fr;
-          }
           .hero-chips-row {
             grid-template-columns: 1fr;
           }
