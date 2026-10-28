@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, CheckCircle, Quote, MapPin, Building2 } from "lucide-react";
+import { Star, Quote, MapPin, Building2 } from "lucide-react";
 
 interface Testimonial {
   id: string;
@@ -104,15 +104,8 @@ export default function BlogSection() {
 
               {/* Author Row */}
               <div className="review-author-row">
-                <div className="author-avatar">{rev.initials}</div>
                 <div className="author-details">
-                  <div className="author-name-row">
-                    <strong className="author-name">{rev.name}</strong>
-                    <span className="verified-badge" title="Verified Project Client">
-                      <CheckCircle size={13} />
-                      <span>Verified</span>
-                    </span>
-                  </div>
+                  <strong className="author-name">{rev.name}</strong>
                   <span className="author-role">{rev.role}</span>
                   <span className="author-company">{rev.company}</span>
                   <span className="author-location">
@@ -247,51 +240,18 @@ export default function BlogSection() {
           border-top: 1px solid var(--surface-border);
         }
 
-        .author-avatar {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--primary-green), #136930);
-          color: #ffffff;
-          font-size: 0.95rem;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          box-shadow: 0 4px 10px rgba(24, 152, 66, 0.25);
-        }
-
         .author-details {
           display: flex;
           flex-direction: column;
           gap: 2px;
           min-width: 0;
-        }
-
-        .author-name-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-wrap: wrap;
+          width: 100%;
         }
 
         .author-name {
           font-size: 0.95rem;
           font-weight: 700;
           color: var(--brand-black);
-        }
-
-        .verified-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 3px;
-          font-size: 0.68rem;
-          font-weight: 700;
-          color: var(--primary-green-dark);
-          background: var(--primary-green-subtle);
-          padding: 2px 7px;
-          border-radius: var(--radius-full);
         }
 
         .author-role {
