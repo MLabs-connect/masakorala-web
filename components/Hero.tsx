@@ -408,22 +408,22 @@ export default function Hero() {
             background: #0c0e12;
           }
 
-          /* Increase background image visibility with lowered overlay opacity on mobile */
+          /* Mobile background: refined darker overlay for contrast while keeping image visible */
           .desktop-only-bg {
-            opacity: 1;
+            opacity: 0.9;
           }
 
           .hero-overlay {
             background: linear-gradient(
               180deg,
-              rgba(12, 14, 18, 0.45) 0%,
-              rgba(12, 14, 18, 0.28) 40%,
-              rgba(12, 14, 18, 0.72) 100%
+              rgba(12, 14, 18, 0.76) 0%,
+              rgba(12, 14, 18, 0.54) 40%,
+              rgba(12, 14, 18, 0.88) 100%
             );
           }
 
           :global(.hero-slide-img) {
-            filter: brightness(0.8) contrast(1.05) !important;
+            filter: brightness(0.68) contrast(1.08) !important;
           }
 
           .hero-content-container {
