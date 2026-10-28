@@ -24,7 +24,7 @@ export default function Footer() {
             </p>
             <div className="enquiry-actions">
               <a
-                href="https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation."
+                href="https://wa.me/94718665665?text=Hello%20Masakorala%20Holdings,%20I%20would%20like%20to%20get%20a%20quotation."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="enquiry-btn-wa"
@@ -107,7 +107,7 @@ export default function Footer() {
                   in
                 </a>
                 <a
-                  href="https://wa.me/94706972703"
+                  href="https://wa.me/94718665665"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon-btn wa"
