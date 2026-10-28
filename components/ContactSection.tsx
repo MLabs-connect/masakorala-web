@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, Building2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -24,50 +24,17 @@ export default function ContactSection() {
           </p>
         </div>
 
-        {/* 3 Factory & Engineering Hubs in Grid */}
-        <div className="locations-grid">
+        {/* Centered Factory Location Card */}
+        <div className="location-container">
           <div className="loc-card">
             <div className="loc-icon-wrapper">
-              <Building2 size={22} />
+              <Building2 size={24} />
             </div>
             <div className="loc-body">
-              <strong className="loc-title">Pannala Mega Manufacturing Plant</strong>
+              <strong className="loc-title">Matara Manufacturing Plant</strong>
               <p className="loc-address">
-                Industrial Zone, Kurunegala Road, Pannala, Sri Lanka
+                No13 Sarananda Rd, Matara 81000
               </p>
-              <span className="loc-detail">
-                Automated Vibro-Press Bays & Internal Testing Lab
-              </span>
-            </div>
-          </div>
-
-          <div className="loc-card">
-            <div className="loc-icon-wrapper">
-              <Building2 size={22} />
-            </div>
-            <div className="loc-body">
-              <strong className="loc-title">Kurunegala Regional Curing Facility</strong>
-              <p className="loc-address">
-                Dambulla Road, Kurunegala, North Western Province
-              </p>
-              <span className="loc-detail">
-                High-Volume Palletized Buffer Stocks & Crane Dispatch
-              </span>
-            </div>
-          </div>
-
-          <div className="loc-card">
-            <div className="loc-icon-wrapper">
-              <MapPin size={22} />
-            </div>
-            <div className="loc-body">
-              <strong className="loc-title">Colombo Engineering & Sample Hub</strong>
-              <p className="loc-address">
-                Nawala Road, Rajagiriya / Colombo Metro Area
-              </p>
-              <span className="loc-detail">
-                Architectural Sample Display & Consultant Consultations
-              </span>
             </div>
           </div>
         </div>
@@ -110,23 +77,25 @@ export default function ContactSection() {
           max-width: 740px;
         }
 
-        /* 3-Column Locations Grid */
-        .locations-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px;
-          margin-bottom: 0;
+        /* Centered Location Container */
+        .location-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
         }
 
         .loc-card {
           display: flex;
-          align-items: flex-start;
-          gap: 18px;
+          align-items: center;
+          gap: 20px;
           background: #fbfbfc;
-          padding: 28px 24px;
+          padding: 24px 32px;
           border-radius: var(--radius-xl);
           border: 1px solid var(--surface-border);
-          box-shadow: var(--shadow-sm);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+          max-width: 520px;
+          width: 100%;
           transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
@@ -137,8 +106,8 @@ export default function ContactSection() {
         }
 
         .loc-icon-wrapper {
-          width: 48px;
-          height: 48px;
+          width: 52px;
+          height: 52px;
           background: var(--primary-green-subtle);
           color: var(--primary-green-dark);
           border-radius: var(--radius-lg);
@@ -156,44 +125,21 @@ export default function ContactSection() {
 
         .loc-title {
           font-family: var(--font-heading);
-          font-size: 1.05rem;
+          font-size: 1.15rem;
           font-weight: 700;
           color: var(--brand-black);
-          margin-bottom: 6px;
+          margin-bottom: 4px;
           line-height: 1.3;
         }
 
         .loc-address {
-          font-size: 0.85rem;
+          font-size: 0.92rem;
           color: var(--text-muted);
           line-height: 1.45;
-          margin: 0 0 8px 0;
-        }
-
-        .loc-detail {
-          display: inline-block;
-          font-size: 0.76rem;
-          color: var(--primary-green-dark);
-          font-weight: 600;
-          background: #ffffff;
-          border: 1px solid rgba(24, 152, 66, 0.2);
-          padding: 4px 10px;
-          border-radius: var(--radius-full);
-          align-self: flex-start;
-        }
-
-        @media (max-width: 1100px) {
-          .locations-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          margin: 0;
         }
 
         @media (max-width: 768px) {
-          .locations-grid {
-            grid-template-columns: 1fr;
-            gap: 18px;
-          }
-
           .contact-header-centered {
             margin-bottom: 34px;
           }
@@ -207,14 +153,22 @@ export default function ContactSection() {
           }
 
           .loc-card {
-            padding: 20px 16px;
-            gap: 14px;
+            padding: 20px 18px;
+            gap: 16px;
             border-radius: 18px;
           }
 
           .loc-icon-wrapper {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
+          }
+
+          .loc-title {
+            font-size: 1.05rem;
+          }
+
+          .loc-address {
+            font-size: 0.88rem;
           }
         }
       `}</style>

@@ -30,7 +30,7 @@ export default function Footer() {
                 className="enquiry-btn-wa"
               >
                 <MessageCircle size={18} />
-                <span>WhatsApp: (+94) 70 697 2703</span>
+                <span>WhatsApp: (+94) 71 866 5665</span>
               </a>
             </div>
           </div>
@@ -65,23 +65,15 @@ export default function Footer() {
               <div className="footer-contact-list">
                 <div className="contact-item">
                   <MapPin size={16} className="text-emerald icon-flex" />
-                  <p>Head Office: 123/10 Negombo Road, Kurunegala</p>
-                </div>
-                <div className="contact-item">
-                  <MapPin size={16} className="text-emerald icon-flex" />
-                  <p>Pannala Mega Plant: No. 925, Maddumamulla Estate, Pannala</p>
+                  <p>Head Office: No13 Sarananda Rd, Matara 81000</p>
                 </div>
                 <div className="contact-item">
                   <Phone size={16} className="text-emerald icon-flex" />
-                  <a href="tel:+94706972703">(+94) 70 697 2703 (Hotline)</a>
-                </div>
-                <div className="contact-item">
-                  <Phone size={16} className="text-emerald icon-flex" />
-                  <a href="tel:+94372288940">(+94) 37 228 8940 (Plant)</a>
+                  <a href="tel:+94706972703">(+94) 71 866 5665 (Hotline)</a>
                 </div>
                 <div className="contact-item">
                   <Mail size={16} className="text-emerald icon-flex" />
-                  <a href="mailto:paving@masakoralagroup.lk">paving@masakoralagroup.lk</a>
+                  <a href="mailto:masakoralaholdings@gmail.com">masakoralaholdings@gmail.com</a>
                 </div>
               </div>
 
@@ -134,9 +126,9 @@ export default function Footer() {
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#products">Products Catalog</a></li>
                 <li><a href="#calculator">Material Calculator</a></li>
-                <li><a href="#projects">Landmark Projects</a></li>
+                <li><a href="#projects">Our Projects</a></li>
                 <li><a href="#reviews">Client Reviews</a></li>
-                <li><a href="#contact">Contact Factory</a></li>
+                <li><a href="#contact">Contact Us</a></li>
               </ul>
             </div>
           </div>

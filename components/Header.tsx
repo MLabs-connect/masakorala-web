@@ -164,10 +164,10 @@ export default function Header() {
           </div>
 
           <div className="top-actions-right">
-            <a href="mailto:paving@masakoralagroup.lk" className="top-contact-link">
+            <a href="mailto:masakoralaholdings@gmail.com" className="top-contact-link">
               <Mail size={13} />
               <span className="contact-label">EMAIL:</span>
-              <strong>paving@masakoralagroup.lk</strong>
+              <strong>masakoralaholdings@gmail.com</strong>
             </a>
 
             <span className="top-sep">|</span>
@@ -175,7 +175,7 @@ export default function Header() {
             <a href="tel:+94706972703" className="top-contact-link">
               <Phone size={13} />
               <span className="contact-label">HOTLINE:</span>
-              <strong>(+94) 70 697 2703</strong>
+              <strong>(+94) 71 866 5665</strong>
             </a>
           </div>
         </div>
@@ -301,12 +301,12 @@ export default function Header() {
                 className="mobile-wa-btn"
               >
                 <MessageCircle size={18} />
-                <span>WhatsApp: (+94) 70 697 2703</span>
+                <span>WhatsApp: (+94) 71 866 5665</span>
               </a>
 
               <a href="tel:+94706972703" className="mobile-call-link">
                 <Phone size={15} />
-                <span>Call Plant Direct: (+94) 70 697 2703</span>
+                <span>Call Plant Direct: (+94) 71 866 5665</span>
               </a>
 
               <div className="mobile-factory-info">
