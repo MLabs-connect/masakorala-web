@@ -6,7 +6,6 @@ import {
   Sparkles,
   CircleDollarSign,
   Info,
-  MessageCircle,
 } from "lucide-react";
 
 export interface PaverConfig {
@@ -121,7 +120,7 @@ export default function PavingCalculator() {
             <span>Material Estimator</span>
           </div>
           <h2 className="section-title">
-            Paving Block & Quantity Calculator
+            Quantity Calculator
           </h2>
           <p className="section-desc mx-auto">
             Plan your driveway, parking yard, or commercial project. Select your paving profile
@@ -262,66 +261,64 @@ export default function PavingCalculator() {
 
           {/* Results Column (Right) */}
           <div className="calc-results-card">
-            <div>
-              <div className="results-header">
-                <div className="results-tag">
-                  <Sparkles size={12} className="text-emerald-light" />
-                  Instant Estimation
-                </div>
-                <h3 className="results-title">Calculation Summary</h3>
-                <p className="results-area-confirm">
-                  For <strong>{validArea.toFixed(0)} Sq.Ft</strong> (
-                  {(validArea / 10.7639).toFixed(1)} m²) using{" "}
-                  <span className="highlight-paver">{currentPaver.name}</span>.
-                </p>
+            <div className="results-header">
+              <div className="results-tag">
+                <Sparkles size={12} className="text-emerald-light" />
+                Instant Estimation
               </div>
+              <h3 className="results-title">Calculation Summary</h3>
+              <p className="results-area-confirm">
+                For <strong>{validArea.toFixed(0)} Sq.Ft</strong> (
+                {(validArea / 10.7639).toFixed(1)} m²) using{" "}
+                <span className="highlight-paver">{currentPaver.name}</span>.
+              </p>
+            </div>
 
-              {/* Primary Stones Quantity Metric */}
-              <div className="result-metric-box main-metric">
-                <div className="metric-icon-wrap">
-                  <Boxes size={24} className="text-emerald-light" />
-                </div>
-                <div className="metric-details">
-                  <div className="metric-value">{totalBlocks.toLocaleString()}</div>
-                  <div className="metric-label">Total Paving Stones Needed</div>
-                  <div className="metric-subtext">
-                    Formula: {validArea.toFixed(0)} sq.ft × {currentPaver.unitsPerSqFt} blocks/sq.ft
-                  </div>
+            {/* Primary Stones Quantity Metric */}
+            <div className="result-metric-box main-metric">
+              <div className="metric-icon-wrap">
+                <Boxes size={24} className="text-emerald-light" />
+              </div>
+              <div className="metric-details">
+                <div className="metric-value">{totalBlocks.toLocaleString()}</div>
+                <div className="metric-label">Total Paving Stones Needed</div>
+                <div className="metric-subtext">
+                  Formula: {validArea.toFixed(0)} sq.ft × {currentPaver.unitsPerSqFt} blocks/sq.ft
                 </div>
               </div>
+            </div>
 
-              {/* Roughly Cost for Stones */}
-              <div className="result-metric-box cost-metric">
-                <div className="metric-icon-wrap">
-                  <CircleDollarSign size={24} className="text-emerald-light" />
+            {/* Roughly Cost for Stones */}
+            <div className="result-metric-box cost-metric">
+              <div className="metric-icon-wrap">
+                <CircleDollarSign size={24} className="text-emerald-light" />
+              </div>
+              <div className="metric-details">
+                <div className="metric-value cost-value">
+                  LKR {roughStoneCost.toLocaleString()}
                 </div>
-                <div className="metric-details">
-                  <div className="metric-value cost-value">
-                    LKR {roughStoneCost.toLocaleString()}
-                  </div>
-                  <div className="metric-label">Rough Estimated Stone Cost</div>
-                  <div className="metric-subtext">
-                    Approx. guide at LKR {currentPaver.estPricePerBlock} / block (ex-factory rate)
-                  </div>
+                <div className="metric-label">Rough Estimated Stone Cost</div>
+                <div className="metric-subtext">
+                  Approx. guide at LKR {currentPaver.estPricePerBlock} / block (ex-factory rate)
                 </div>
               </div>
+            </div>
 
-              {/* Profile Details Bar */}
-              <div className="result-profile-specs">
-                <div className="profile-spec-item">
-                  <span className="spec-item-label">Profile</span>
-                  <strong className="spec-item-val">{currentPaver.name}</strong>
-                </div>
-                <div className="profile-spec-divider" />
-                <div className="profile-spec-item">
-                  <span className="spec-item-label">Thickness</span>
-                  <strong className="spec-item-val">{currentPaver.thickness}</strong>
-                </div>
-                <div className="profile-spec-divider" />
-                <div className="profile-spec-item">
-                  <span className="spec-item-label">Coverage</span>
-                  <strong className="spec-item-val">{currentPaver.unitsPerSqFt} / sq.ft</strong>
-                </div>
+            {/* Profile Details Bar */}
+            <div className="result-profile-specs">
+              <div className="profile-spec-item">
+                <span className="spec-item-label">Profile</span>
+                <strong className="spec-item-val">{currentPaver.name}</strong>
+              </div>
+              <div className="profile-spec-divider" />
+              <div className="profile-spec-item">
+                <span className="spec-item-label">Thickness</span>
+                <strong className="spec-item-val">{currentPaver.thickness}</strong>
+              </div>
+              <div className="profile-spec-divider" />
+              <div className="profile-spec-item">
+                <span className="spec-item-label">Coverage</span>
+                <strong className="spec-item-val">{currentPaver.unitsPerSqFt} / sq.ft</strong>
               </div>
             </div>
 
@@ -332,21 +329,6 @@ export default function PavingCalculator() {
                 Estimate reflects rough ex-factory paver quantities. Actual units may vary slightly
                 depending on site geometry and edge trimming.
               </span>
-            </div>
-
-            {/* Direct WhatsApp Quote Action */}
-            <div className="calc-cta-row">
-              <a
-                href={`https://wa.me/94706972703?text=Hello%20Masakorala%20Holdings,%20I%20used%20your%20calculator%20for%20${encodeURIComponent(
-                  currentPaver.name
-                )}%20(${Math.round(validArea)}%20${unitMode === "sqm" ? "m²" : "sq.ft"}).%20Estimated%20Blocks:%20${totalBlocks.toLocaleString()}.%20Please%20send%20me%20an%20official%20quote.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="calc-wa-action-btn"
-              >
-                <MessageCircle size={18} />
-                <span>Get Official Quote on WhatsApp</span>
-              </a>
             </div>
           </div>
         </div>
@@ -413,12 +395,12 @@ export default function PavingCalculator() {
         /* Controls Card */
         .calc-controls-card {
           background: #ffffff;
-          border: 1px solid var(--surface-border);
-          border-radius: var(--radius-xl);
+          border: 1px solid #0c0e12;
+          border-radius: 20px;
           padding: 32px;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
         }
 
         .calc-step-group {
@@ -557,23 +539,33 @@ export default function PavingCalculator() {
 
         .paver-option-card {
           background: #ffffff;
-          border: 2px solid var(--surface-border);
-          border-radius: var(--radius-md);
-          padding: 14px;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 14px;
+          padding: 14px 16px;
           text-align: left;
-          transition: all 0.2s ease;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
         }
 
         .paver-option-card:hover {
-          border-color: rgba(24, 152, 66, 0.4);
+          border-color: rgba(24, 152, 66, 0.45);
           transform: translateY(-2px);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         }
 
         .paver-option-card.selected {
           border-color: var(--primary-green);
-          background: rgba(24, 152, 66, 0.04);
-          box-shadow: 0 4px 12px rgba(24, 152, 66, 0.12);
+          background: rgba(24, 152, 66, 0.05);
+          box-shadow: 0 4px 14px rgba(24, 152, 66, 0.14);
+        }
+
+        /* 7th item neatly spans both columns so grid is balanced */
+        .paver-option-card:last-child:nth-child(odd) {
+          grid-column: span 2;
         }
 
         .paver-card-top {
@@ -581,6 +573,7 @@ export default function PavingCalculator() {
           justify-content: space-between;
           align-items: flex-start;
           margin-bottom: 6px;
+          gap: 8px;
         }
 
         .paver-opt-name {
@@ -596,6 +589,7 @@ export default function PavingCalculator() {
           padding: 2px 6px;
           border-radius: var(--radius-sm);
           color: var(--stone-dark);
+          flex-shrink: 0;
         }
 
         .paver-option-card.selected .paver-opt-badge {
@@ -619,17 +613,17 @@ export default function PavingCalculator() {
         .calc-results-card {
           background: linear-gradient(145deg, #14171d 0%, #0c0e12 100%);
           color: #ffffff;
-          border-radius: var(--radius-xl);
-          padding: 36px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 20px;
+          padding: 32px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
           box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          gap: 16px;
         }
 
         .results-header {
-          margin-bottom: 24px;
+          margin-bottom: 4px;
         }
 
         .results-tag {
@@ -794,34 +788,6 @@ export default function PavingCalculator() {
           }
         }
 
-        .calc-cta-row {
-          margin-top: 18px;
-        }
-
-        .calc-wa-action-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          width: 100%;
-          padding: 13px 18px;
-          background: #25d366;
-          color: #ffffff;
-          font-weight: 700;
-          font-size: 0.92rem;
-          border-radius: var(--radius-md);
-          text-decoration: none;
-          box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
-          transition: all 0.25s ease;
-          min-height: 48px;
-        }
-
-        .calc-wa-action-btn:hover {
-          background: #20ba59;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-        }
-
         @media (max-width: 640px) {
           .section-title {
             font-size: clamp(1.75rem, 6.5vw, 2.2rem);
@@ -867,6 +833,9 @@ export default function PavingCalculator() {
             grid-template-columns: 1fr;
             gap: 10px;
           }
+          .paver-option-card:last-child:nth-child(odd) {
+            grid-column: span 1;
+          }
           .paver-option-card {
             padding: 12px 14px;
             border-radius: 12px;
@@ -896,9 +865,6 @@ export default function PavingCalculator() {
             flex-direction: row;
             justify-content: space-between;
             width: 100%;
-          }
-          .calc-wa-action-btn {
-            font-size: 0.88rem;
           }
         }
       `}</style>
