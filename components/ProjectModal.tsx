@@ -521,36 +521,50 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         @media (max-width: 640px) {
           .modal-backdrop {
-            padding: 10px;
+            padding: 12px 10px;
+            align-items: flex-start;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
 
           .modal-card {
-            max-height: 94vh;
-            border-radius: 18px;
+            max-height: calc(100dvh - 24px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            border-radius: 20px;
             width: 100%;
+            margin: auto 0;
           }
 
           .modal-close-btn {
             top: 12px;
             right: 12px;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--surface-border);
+            z-index: 20;
           }
 
           .modal-body-grid {
-            padding: 16px;
-            gap: 18px;
+            padding: 18px 14px;
+            gap: 16px;
           }
 
           .main-photo-wrapper {
-            height: 220px;
+            height: 210px;
             border-radius: 14px;
           }
 
+          .project-detail-header {
+            padding-right: 42px;
+          }
+
           .project-detail-title {
-            font-size: 1.35rem;
-            line-height: 1.25;
-            padding-right: 36px;
+            font-size: 1.25rem;
+            line-height: 1.3;
           }
 
           .specs-meta-grid {
@@ -565,23 +579,32 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             align-items: center;
           }
 
+          .thumbnails-row {
+            gap: 8px;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .thumb-btn {
+            width: 70px;
+            height: 52px;
+            border-radius: 8px;
+          }
+
           .gallery-nav-btn {
             width: 34px;
             height: 34px;
-          }
-
-          .modal-whatsapp-btn {
-            padding: 13px 18px;
-            font-size: 0.88rem;
           }
         }
 
         @media (max-width: 400px) {
           .project-detail-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
           }
           .main-photo-wrapper {
-            height: 190px;
+            height: 180px;
+          }
+          .modal-body-grid {
+            padding: 16px 12px;
           }
         }
       `}</style>

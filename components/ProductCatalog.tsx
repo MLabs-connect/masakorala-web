@@ -1139,28 +1139,79 @@ export default function ProductCatalog() {
             min-height: 44px;
           }
           .modal-overlay {
-            padding: 10px;
+            padding: 12px 10px;
+            align-items: flex-start;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
           .modal-card {
             padding: 22px 16px;
-            border-radius: 18px;
-            max-height: 92vh;
+            border-radius: 20px;
+            max-height: calc(100dvh - 24px);
             width: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            margin: auto 0;
           }
           .modal-close-btn {
             top: 14px;
             right: 14px;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            border: 1px solid #e2e8f0;
+            z-index: 20;
+          }
+          .modal-header {
+            padding-right: 44px;
+            margin-bottom: 16px;
           }
           .modal-title {
-            font-size: 1.3rem;
-            padding-right: 36px;
+            font-size: 1.25rem;
+            line-height: 1.3;
+          }
+          .modal-grid {
+            gap: 18px;
+          }
+          .modal-img-card {
+            min-height: 180px;
+            height: 190px;
+            padding: 16px 12px;
+            border-radius: 14px;
+          }
+          :global(.modal-product-img) {
+            max-height: 150px !important;
+          }
+          .strength-card {
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            border-radius: 10px;
+          }
+          .modal-description {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            margin-bottom: 16px;
+          }
+          .specs-table-box {
+            margin-bottom: 16px;
+            border-radius: 12px;
           }
           .specs-table-row {
             grid-template-columns: 1fr;
             gap: 3px;
-            padding: 10px 12px;
+            padding: 9px 12px;
+          }
+          .table-label {
+            font-size: 0.78rem;
+          }
+          .table-value {
+            font-size: 0.85rem;
+          }
+          .modal-colors-title {
+            font-size: 0.82rem;
+            margin-bottom: 8px;
           }
           .modal-color-pills-row {
             gap: 6px;
@@ -1176,7 +1227,10 @@ export default function ProductCatalog() {
             font-size: 1.65rem;
           }
           .modal-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+          }
+          .modal-card {
+            padding: 18px 12px;
           }
         }
       `}</style>
