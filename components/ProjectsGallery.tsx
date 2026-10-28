@@ -109,7 +109,6 @@ export default function ProjectsGallery() {
         <div className="see-more-wrapper">
           <Link href="/projects" className="see-more-btn">
             <span>See More Projects</span>
-            <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -332,29 +331,37 @@ export default function ProjectsGallery() {
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 40px;
         }
 
         .see-more-btn {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          padding: 14px 32px;
+          justify-content: center;
+          padding: 14px 36px;
+          border-radius: var(--radius-full);
           font-size: 0.95rem;
           font-weight: 700;
-          color: #ffffff;
-          background: var(--brand-black);
-          border: 1px solid var(--brand-black);
-          border-radius: var(--radius-full);
+          color: var(--brand-black);
+          background: rgba(255, 255, 255, 0.65);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid rgba(255, 255, 255, 0.9);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06),
+                      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+                      0 2px 6px rgba(24, 152, 66, 0.08);
           text-decoration: none;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-          transition: all 0.25s ease;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .see-more-btn:hover {
-          background: var(--primary-green);
-          border-color: var(--primary-green);
+          background: rgba(255, 255, 255, 0.92);
+          border-color: rgba(24, 152, 66, 0.4);
+          color: var(--primary-green-dark);
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(24, 152, 66, 0.35);
+          box-shadow: 0 14px 36px rgba(24, 152, 66, 0.16),
+                      inset 0 1px 2px rgba(255, 255, 255, 1);
         }
 
         @media (max-width: 1100px) {
@@ -390,10 +397,13 @@ export default function ProjectsGallery() {
           }
 
           .see-more-btn {
-            width: 100%;
+            width: auto;
+            min-width: 220px;
+            max-width: 100%;
             justify-content: center;
             min-height: 48px;
             font-size: 0.92rem;
+            padding: 13px 28px;
           }
         }
       `}</style>

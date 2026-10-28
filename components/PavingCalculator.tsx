@@ -6,6 +6,7 @@ import {
   Sparkles,
   CircleDollarSign,
   Info,
+  ChevronDown,
 } from "lucide-react";
 
 export interface PaverConfig {
@@ -233,17 +234,47 @@ export default function PavingCalculator() {
             <div className="calc-step-group step-2-group">
               <div className="step-label-row">
                 <span className="step-badge">Step 2</span>
-                <label className="step-title">Select Paving Block Profile</label>
+                <label className="step-title" htmlFor="paver-profile-select">
+                  Select Paving Block Profile
+                </label>
               </div>
 
+              {/* Mobile View: Dropdown Selector */}
+              <div className="paver-mobile-select-wrap">
+                <div className="custom-select-container">
+                  <select
+                    id="paver-profile-select"
+                    value={selectedPaverId}
+                    onChange={(e) => setSelectedPaverId(e.target.value)}
+                    className="paver-dropdown"
+                  >
+                    {PAVER_OPTIONS.map((paver) => (
+                      <option key={paver.id} value={paver.id}>
+                        {paver.name} ({paver.thickness})
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown size={18} className="select-chevron" />
+                </div>
+                <div className="mobile-selected-paver-info">
+                  <span className="info-badge">{currentPaver.thickness}</span>
+                  <div className="info-meta">
+                    <strong>{currentPaver.unitsPerSqFt} blocks / sq.ft</strong>
+                    <span>{currentPaver.idealFor}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop View: Grid Selection */}
               <div className="paver-selection-grid">
                 {PAVER_OPTIONS.map((paver) => (
                   <button
                     key={paver.id}
                     type="button"
                     onClick={() => setSelectedPaverId(paver.id)}
-                    className={`paver-option-card ${selectedPaverId === paver.id ? "selected" : ""
-                      }`}
+                    className={`paver-option-card ${
+                      selectedPaverId === paver.id ? "selected" : ""
+                    }`}
                   >
                     <div className="paver-card-top">
                       <strong className="paver-opt-name">{paver.name}</strong>
@@ -395,12 +426,12 @@ export default function PavingCalculator() {
         /* Controls Card */
         .calc-controls-card {
           background: #ffffff;
-          border: 1px solid #0c0e12;
+          border: 1px solid var(--surface-border);
           border-radius: 20px;
           padding: 32px;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
         }
 
         .calc-step-group {
@@ -528,6 +559,11 @@ export default function PavingCalculator() {
           font-size: 1.4rem;
           font-weight: 700;
           color: var(--stone-mid);
+        }
+
+        /* Mobile Paver Select (hidden on desktop) */
+        .paver-mobile-select-wrap {
+          display: none;
         }
 
         /* Paver Selection Grid */
@@ -830,15 +866,80 @@ export default function PavingCalculator() {
             min-height: 48px;
           }
           .paver-selection-grid {
-            grid-template-columns: 1fr;
+            display: none !important;
+          }
+          .paver-mobile-select-wrap {
+            display: flex;
+            flex-direction: column;
             gap: 10px;
+            width: 100%;
           }
-          .paver-option-card:last-child:nth-child(odd) {
-            grid-column: span 1;
+          .custom-select-container {
+            position: relative;
+            width: 100%;
           }
-          .paver-option-card {
-            padding: 12px 14px;
+          .paver-dropdown {
+            width: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            background: #f8fafc;
+            border: 2px solid var(--surface-border);
             border-radius: 12px;
+            padding: 13px 44px 13px 14px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--brand-black);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+          }
+          .paver-dropdown:focus {
+            border-color: var(--primary-green);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(24, 152, 66, 0.12);
+          }
+          :global(.select-chevron) {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--stone-mid);
+            pointer-events: none;
+          }
+          .mobile-selected-paver-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(24, 152, 66, 0.05);
+            border: 1px solid rgba(24, 152, 66, 0.18);
+            border-radius: 12px;
+          }
+          .info-badge {
+            background: var(--primary-green);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+            flex-shrink: 0;
+          }
+          .info-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+          }
+          .info-meta strong {
+            font-size: 0.8rem;
+            color: var(--brand-black);
+          }
+          .info-meta span {
+            font-size: 0.72rem;
+            color: var(--stone-mid);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .results-title {
             font-size: 1.35rem;
