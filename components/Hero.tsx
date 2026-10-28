@@ -405,12 +405,25 @@ export default function Hero() {
           .hero-slider-section {
             min-height: auto;
             padding: 42px 0 36px;
-            background: linear-gradient(180deg, #090c10 0%, #10151e 100%);
+            background: #0c0e12;
           }
 
-          /* Soften background image on mobile so it acts as subtle atmospheric texture */
+          /* Increase background image visibility with lowered overlay opacity on mobile */
           .desktop-only-bg {
-            opacity: 0.35;
+            opacity: 1;
+          }
+
+          .hero-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(12, 14, 18, 0.45) 0%,
+              rgba(12, 14, 18, 0.28) 40%,
+              rgba(12, 14, 18, 0.72) 100%
+            );
+          }
+
+          :global(.hero-slide-img) {
+            filter: brightness(0.8) contrast(1.05) !important;
           }
 
           .hero-content-container {
@@ -434,13 +447,15 @@ export default function Hero() {
             font-size: clamp(1.85rem, 7vw, 2.45rem);
             line-height: 1.22;
             margin-bottom: 16px;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
           }
 
           .hero-slider-desc {
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 22px;
-            color: #cbd5e1;
+            color: #f1f5f9;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
           }
 
           .hero-actions-row {
