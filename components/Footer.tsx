@@ -10,6 +10,34 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12.031 2C6.495 2 2 6.495 2 12.031c0 1.948.557 3.765 1.523 5.304L2 22l4.82-1.488a9.98 9.98 0 005.211 1.455h.004c5.534 0 10.029-4.495 10.029-10.033C22.064 6.495 17.568 2 12.031 2zm0 18.36a8.318 8.318 0 01-4.243-1.16l-.304-.18-3.155.973.99-3.076-.197-.315a8.337 8.337 0 1115.227-4.571 8.358 8.358 0 01-8.318 8.329zm4.561-6.223c-.25-.125-1.478-.73-1.707-.812-.23-.083-.396-.125-.563.125-.166.25-.646.812-.792.98-.146.166-.292.187-.542.062s-1.055-.389-2.01-1.242c-.744-.663-1.246-1.482-1.392-1.732s-.016-.385.11-.51c.112-.112.25-.292.375-.438s.167-.25.25-.417c.083-.167.042-.313-.02-.438s-.563-1.354-.771-1.854c-.203-.487-.41-.421-.563-.429l-.479-.008c-.167 0-.438.063-.667.313s-.875.854-.875 2.083.896 2.417 1.021 2.583c.125.167 1.764 2.694 4.274 3.777.597.258 1.064.412 1.427.528.6.191 1.146.164 1.578.101.481-.071 1.478-.604 1.687-1.188.208-.583.208-1.083.146-1.188-.063-.104-.23-.166-.479-.291z" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <>
@@ -69,7 +97,7 @@ export default function Footer() {
                 </div>
                 <div className="contact-item">
                   <Phone size={16} className="text-emerald icon-flex" />
-                  <a href="tel:+94706972703">(+94) 71 866 5665 (Hotline)</a>
+                  <a href="tel:+94718665665">(+94) 71 866 5665 (Hotline)</a>
                 </div>
                 <div className="contact-item">
                   <Mail size={16} className="text-emerald icon-flex" />
@@ -77,34 +105,16 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Social Media Links */}
+              {/* Social Media Links: WhatsApp & Facebook Only */}
               <div className="social-links-row">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/1Dvnj5yiUd/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-icon-btn"
+                  className="social-icon-btn fb"
                   aria-label="Facebook"
                 >
-                  f
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon-btn"
-                  aria-label="Instagram"
-                >
-                  ig
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon-btn"
-                  aria-label="LinkedIn"
-                >
-                  in
+                  <FacebookIcon size={18} />
                 </a>
                 <a
                   href="https://wa.me/94718665665"
@@ -113,7 +123,7 @@ export default function Footer() {
                   className="social-icon-btn wa"
                   aria-label="WhatsApp"
                 >
-                  wa
+                  <WhatsAppIcon size={18} />
                 </a>
               </div>
             </div>
@@ -327,32 +337,39 @@ export default function Footer() {
         .social-links-row {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
+          margin-top: 4px;
         }
 
         .social-icon-btn {
-          width: 34px;
-          height: 34px;
-          border-radius: var(--radius-sm);
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
           background: rgba(255, 255, 255, 0.08);
-          color: #ffffff;
-          display: flex;
+          color: #cbd5e1;
+          display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.78rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          transition: all 0.2s ease;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          text-decoration: none;
         }
 
         .social-icon-btn:hover {
-          background: var(--primary-green);
           transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
         }
 
-        .social-icon-btn.wa {
-          background: rgba(37, 211, 102, 0.22);
-          color: #4ade80;
+        .social-icon-btn.fb:hover {
+          background: #1877f2;
+          border-color: #1877f2;
+          color: #ffffff;
+        }
+
+        .social-icon-btn.wa:hover {
+          background: #25d366;
+          border-color: #25d366;
+          color: #ffffff;
         }
 
         /* Links List */
