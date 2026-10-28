@@ -91,7 +91,7 @@ export default function Hero() {
       <div className="container hero-content-container">
         <div className="hero-slide-content">
           {/* Trust Badge Pill */}
-          <div className={`hero-pill-badge ${slide.id === 3 ? "hide-mobile-slide-3" : ""}`}>
+          <div className="hero-pill-badge">
             <span className="pill-dot animate-pulse-glow" />
             <span className="pill-text">{slide.tag}</span>
             <span className="pill-tag">{slide.badge}</span>
@@ -464,12 +464,6 @@ export default function Hero() {
           }
 
           .hero-pill-badge {
-            margin-bottom: 16px;
-            padding: 5px 12px;
-            font-size: 0.78rem;
-          }
-
-          .hero-pill-badge.hide-mobile-slide-3 {
             display: none !important;
           }
 
