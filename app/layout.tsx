@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://masakoralagroup.lk"),
   title: "Masakorala Holdings | Premier Paving & Infrastructure Solutions",
   description:
-    "Sri Lanka's leading CS1-graded manufacturer of heavy-duty interlocking pavers, grass pavers, washed pavers, and precast concrete solutions. Engineered to SLS & ISO 9001 standards.",
+    "Sri Lanka's leading manufacturer of heavy-duty interlocking pavers, grass pavers, washed pavers, and precast concrete solutions. Engineered to premium industrial standards.",
   keywords: [
     "Masakorala Holdings",
     "paving blocks Sri Lanka",

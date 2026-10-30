@@ -167,7 +167,7 @@ export default function Header() {
         <div className="container top-bar-container">
           <div className="top-cert-badge">
             <ShieldCheck size={15} className="text-emerald-light" />
-            <span>Sri Lanka&apos;s CS1-Graded Paving Block Manufacturer | SLS 1425 & ISO 9001:2015</span>
+            <span>Sri Lanka&apos;s Premier Paving Block Manufacturer</span>
           </div>
 
           <div className="top-actions-right">
@@ -282,7 +282,7 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Nav list - SLS trust banner removed in mobile view */}
+            {/* Nav list */}
             <div className="mobile-nav-list">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;

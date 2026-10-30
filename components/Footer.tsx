@@ -76,15 +76,10 @@ export default function Footer() {
               </div>
               <p className="footer-company-desc">
                 With 35+ years of excellence, Masakorala Holdings is Sri Lanka&apos;s
-                CS1-graded paving manufacturer, delivering high-density interlocking blocks,
+                leading paving manufacturer, delivering high-density interlocking blocks,
                 permeable grass grids, and architectural exposed aggregates engineered to
-                SLS 1425 and ISO 9001:2015 specifications.
+                the highest quality and structural specifications.
               </p>
-              <div className="footer-cert-tags">
-                <span className="footer-cert-badge">SLS 1425 Certified</span>
-                <span className="footer-cert-badge">ISO 9001:2015</span>
-                <span className="footer-cert-badge">CS1 Specialty Grade</span>
-              </div>
             </div>
 
             {/* Column 2: Direct Contact Info */}
@@ -254,27 +249,8 @@ export default function Footer() {
           font-size: 0.88rem;
           line-height: 1.7;
           color: #94a3b8;
-          margin-bottom: 20px;
+          margin-bottom: 0px;
           max-width: 440px;
-        }
-
-        .footer-cert-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .footer-cert-badge {
-          display: inline-flex;
-          align-items: center;
-          font-size: 0.72rem;
-          font-weight: 700;
-          color: #4ade80;
-          background: rgba(24, 152, 66, 0.12);
-          border: 1px solid rgba(74, 222, 128, 0.25);
-          padding: 4px 10px;
-          border-radius: var(--radius-sm);
-          letter-spacing: 0.02em;
         }
 
         /* Column Topics */

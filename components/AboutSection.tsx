@@ -45,7 +45,7 @@ export default function AboutSection() {
             </p>
 
             <p className="about-lead-para">
-              At <strong>Masakorala Holdings</strong>, we are proud to be Sri Lanka&apos;s CS1-graded
+              At <strong>Masakorala Holdings</strong>, we are proud to be Sri Lanka&apos;s leading
               paving manufacturer — a premier recognition that reflects our unwavering dedication
               to quality, structural integrity, and long-term value. With over 35 years of
               experience, we have become the trusted manufacturing partner for the nation&apos;s
@@ -55,8 +55,7 @@ export default function AboutSection() {
 
             <p className="about-sub-para">
               From the compressive density of our aggregates to the laser-guided precision of our
-              molds, every detail matters. That is why we are <strong>SLS 1425</strong> and{" "}
-              <strong>ISO 9001:2015</strong> certified, operating our own in-house computerized
+              molds, every detail matters. We operate our own in-house computerized
               laboratories to verify compressive strength, water absorption (&lt;4.8%), and skid
               resistance on every batch.
             </p>
@@ -68,8 +67,8 @@ export default function AboutSection() {
                   <Award size={18} className="text-emerald" />
                 </div>
                 <div className="stat-content">
-                  <span className="stat-number">CS1</span>
-                  <span className="stat-label">Highest Specialty Grade</span>
+                  <span className="stat-number">Top</span>
+                  <span className="stat-label">Industrial Grade</span>
                 </div>
               </div>
 

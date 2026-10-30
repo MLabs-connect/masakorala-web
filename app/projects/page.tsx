@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Paving Projects Portfolio | Masakorala Holdings",
     description:
-      "Engineered interlock paving installations delivered to SLS 1425 and RDA standards across Sri Lanka.",
+      "Engineered interlock paving installations delivered to rigorous industrial and RDA standards across Sri Lanka.",
     images: [{ url: "/images/projects/warehouse-hub.jpg" }],
   },
 };

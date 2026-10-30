@@ -227,7 +227,7 @@ export default function ProductCatalog() {
           </h2>
           <p className="section-desc mx-auto">
             Masakorala Holdings manufactures high-density interlocking pavers, washed aggregate
-            stones, and permeable grass systems engineered to SLS 1425 & ISO 9001 standards.
+            stones, and permeable grass systems engineered to the highest industrial quality standards.
           </p>
 
           {/* Filter Navigation Tabs */}

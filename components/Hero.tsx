@@ -16,14 +16,14 @@ const SLIDES = [
     tag: "35+ Years of Construction Legacy",
     title: "Your Trusted Partner for Quality Paving Work",
     subtitle:
-      "Masakorala Holdings offers durable, high-density CS1-graded paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
-    badge: "SLS 1425 & ISO 9001:2015 Certified",
+      "Masakorala Holdings offers durable, high-density engineered paving solutions, backed by 35 years of engineering expertise in infrastructure development and civil construction.",
+    badge: "Heavy-Duty Quality Tested",
     image: "/images/projects/waterfront-port.jpg",
     mobileHighlight: "Landmark Marine & Port Infrastructure",
   },
   {
     id: 2,
-    tag: "CS1 Industrial Heavy Traffic Rating",
+    tag: "Industrial Heavy Traffic Rating",
     title: "Heavy-Duty Interlock Blocks Engineered for 55+ MPa",
     subtitle:
       "Formulated with washed crushed granite and OPC 52.5N cement to withstand 40-ton laden container trucks, port logistics, and high-frequency commercial haulage.",
@@ -166,7 +166,7 @@ export default function Hero() {
             </span>
             <span className="h-chip">
               <CheckCircle size={13} className="text-emerald" />
-              <span>In-House SLS Lab Rigor</span>
+              <span>In-House QA Lab Rigor</span>
             </span>
             <span className="h-chip">
               <CheckCircle size={13} className="text-emerald" />
